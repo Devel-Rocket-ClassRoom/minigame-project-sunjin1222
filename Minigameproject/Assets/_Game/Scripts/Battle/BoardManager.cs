@@ -1,16 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 
 public class BoardManager : MonoBehaviour
 {
-    private const int Width = 3;
-    private const int Height = 4;
+    public const int Width = 3;
+    public const int Height = 4;
 
     private CardData[] placedCards = new CardData[Width * Height];
+    private int[] cardOrigin;
     public GameObject[] gridCells;
 
-    private bool CanPlace(CardData card, int startIndex)
+
+    private void Awake()
+    {
+        cardOrigin = new int[Width * Height];
+        for (int i = 0; i < cardOrigin.Length; i++)
+            cardOrigin[i] = -1;
+    }
+
+    public bool CanPlace(CardData card, int startIndex)
     {
         int startRow = startIndex / Width;
         int startCol = startIndex % Width;
@@ -36,7 +45,7 @@ public class BoardManager : MonoBehaviour
         return true;
     }
 
-    private bool PlaceCard(CardData card, int startIndex)
+    public bool PlaceCard(CardData card, int startIndex)
     {
         if (!CanPlace(card, startIndex))
         {
@@ -52,22 +61,33 @@ public class BoardManager : MonoBehaviour
             int targetIndex = targetCol + targetRow * Width;
 
             placedCards[targetIndex] = card;
+            cardOrigin[targetIndex] = startIndex;
         }
 
         return true;
     }
 
-    private void ClearBoard()
+    public void ClearBoard()
     {
         for (int i = 0; i < placedCards.Length; i++)
         {
             placedCards[i] = null;
+            cardOrigin[i] = -1;
+            GameObject cell = gridCells != null && i < gridCells.Length ? gridCells[i] : null;
+            if (cell != null)
+            {
+                for (int c = cell.transform.childCount - 1; c >= 0; c--)
+                {
+                    Destroy(cell.transform.GetChild(c).gameObject);
+                }
+            }
         }
     }
 
-    private List<CardData> GetActivationOrder()
+    public List<CardData> GetActivationOrder()
     {
         List<CardData> result = new List<CardData>();
+        HashSet<int> seenOrigins = new HashSet<int>();
 
         for (int i = 0; i < placedCards.Length; i++)
         {
@@ -76,8 +96,9 @@ public class BoardManager : MonoBehaviour
             if (card == null)
                 continue;
 
-            // 다칸 카드 중복 방지
-            if (result.Contains(card))
+            int origin = cardOrigin[i];
+
+            if (!seenOrigins.Add(origin))
                 continue;
 
             result.Add(card);
@@ -85,4 +106,5 @@ public class BoardManager : MonoBehaviour
 
         return result;
     }
+
 }
