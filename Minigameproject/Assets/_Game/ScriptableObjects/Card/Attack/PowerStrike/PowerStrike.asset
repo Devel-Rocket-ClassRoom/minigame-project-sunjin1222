@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: PowerStrike
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "\uAC15\uD55C\uACF5\uACA9"
+  cardName: PowerStrike
   cardType: 0
   tileShape:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 0, y: 1}
   power: 10
-  description: 
-  icon: {fileID: 0}
+  description: ssssss
+  icon: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
+  previewPrefab: {fileID: 6856548126514726630, guid: 537fb2262bc95bf4ebc95c1757c3e13e, type: 3}
