@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: BasicAttack
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "\uAE30\uBCF8\uACF5\uACA9"
+  cardName: BasicAttack
   cardType: 0
   tileShape:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   power: 5
-  description: 
-  icon: {fileID: 0}
+  description: aaaaa
+  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  gameObject: {fileID: 1425349239620973160, guid: 18b0987da987cba46b8745b2d5a5a778, type: 3}

@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 6470728394722627618}
   - component: {fileID: 6147345105409419711}
   m_Layer: 5
-  m_Name: Card
+  m_Name: BasicAttackCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,8 +293,8 @@ MonoBehaviour:
   boardManager: {fileID: 0}
   handManager: {fileID: 0}
   deckManager: {fileID: 0}
-  tilePreviewPrefab: {fileID: 7626688296723452720, guid: 29b0b3484e32b03448b46a073352f412, type: 3}
-  placedTilePrefab: {fileID: 7626688296723452720, guid: 29b0b3484e32b03448b46a073352f412, type: 3}
+  tilePreviewPrefab: {fileID: 9033979231753158312, guid: 43bfef98cbbacae4d88f8303f797610a, type: 3}
+  placedTilePrefab: {fileID: 9033979231753158312, guid: 43bfef98cbbacae4d88f8303f797610a, type: 3}
 --- !u!1 &2030507584709720423
 GameObject:
   m_ObjectHideFlags: 0

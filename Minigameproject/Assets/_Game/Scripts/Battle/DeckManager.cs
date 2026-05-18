@@ -4,11 +4,10 @@ using System.Collections.Generic;
 public class DeckManager : MonoBehaviour
 {
     private List<CardData> deck = new List<CardData>();
-    public List<CardData> handCards = new List<CardData>();
     private List<CardData> discardPile = new List<CardData>();
     public List<CardData> startDeck;
     private const int StartHand = 6;
-
+    public HandManager handManager;
 
     private void Start()
     {
@@ -20,8 +19,16 @@ public class DeckManager : MonoBehaviour
     private void InitializeDeck()
     {
         deck.Clear();
+
+        if (startDeck == null || startDeck.Count == 0)
+        {
+            Debug.LogWarning("[DeckManager] startDeck이 비어있거나 미할당입니다. 덱이 빈 상태로 시작합니다.");
+            return;
+        }
+
         foreach (CardData card in startDeck)
         {
+            if (card == null) continue;
             deck.Add(card);
         }
         ShuffleDeck(deck);
@@ -29,11 +36,23 @@ public class DeckManager : MonoBehaviour
 
     private void DrawCards(int count)
     {
+  
+        if (handManager == null)
+        {
+            Debug.LogError("[DeckManager] handManager 참조가 비어있습니다.");
+            return;
+        }
+
         for (int i = 0; i < count; i++)
         {
-            // 덱 소진 시 버리기 파일 재활용
             if (deck.Count == 0)
             {
+                if (discardPile.Count == 0)
+                {
+                    Debug.Log("[DeckManager] 덱과 버린 더미가 모두 비어 더 이상 카드를 뽑을 수 없습니다.");
+                    break;
+                }
+
                 deck.AddRange(discardPile);
                 discardPile.Clear();
                 ShuffleDeck(deck);
@@ -41,7 +60,7 @@ public class DeckManager : MonoBehaviour
 
             if (deck.Count > 0)
             {
-                handCards.Add(deck[0]);
+                handManager.AddCard(deck[0]);
                 deck.RemoveAt(0);
             }
         }
@@ -62,7 +81,6 @@ public class DeckManager : MonoBehaviour
 
     public void DiscardCard(CardData card)
     {
-        handCards.Remove(card);
         discardPile.Add(card);
     }
 

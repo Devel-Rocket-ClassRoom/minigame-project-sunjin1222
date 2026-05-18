@@ -480,6 +480,7 @@ GameObject:
   - component: {fileID: 97494695}
   - component: {fileID: 97494694}
   - component: {fileID: 97494693}
+  - component: {fileID: 97494696}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -561,6 +562,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &97494696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97494692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &241322394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 677, y: 593}
+  m_AnchoredPosition: {x: 950, y: 850}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1072763926
@@ -1361,6 +1406,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1177024331}
   - component: {fileID: 1177024330}
+  - component: {fileID: 1177024332}
+  - component: {fileID: 1177024334}
+  - component: {fileID: 1177024333}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1380,7 +1428,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cbd3c6e1f58774c882a8dd0d52fc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckManager
-  handCards: []
   startDeck:
   - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
   - {fileID: 11400000, guid: 5ec9da625fd9a2443bf5bf9297168ea2, type: 2}
@@ -1392,6 +1439,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
   - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
   - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
+  handManager: {fileID: 1177024332}
 --- !u!4 &1177024331
 Transform:
   m_ObjectHideFlags: 0
@@ -1407,6 +1455,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1177024332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177024329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064d52ff5f64c6042b4f9f655bccfb1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandManager
+  cardPrefab: {fileID: 1425349239620973160, guid: ba3eb1d52373e6b4a94158300aa8532d, type: 3}
+  boardManager: {fileID: 1177024334}
+  handArea: {fileID: 1991445182}
+  deckManager: {fileID: 1177024330}
+  cardSpacing: 80
+--- !u!114 &1177024333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177024329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111067de00d8d694b9e13ec577635a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardDragHandler
+  boardManager: {fileID: 1177024334}
+  handManager: {fileID: 1177024332}
+  deckManager: {fileID: 1177024330}
+  tilePreviewPrefab: {fileID: 9033979231753158312, guid: 43bfef98cbbacae4d88f8303f797610a, type: 3}
+  placedTilePrefab: {fileID: 9033979231753158312, guid: 43bfef98cbbacae4d88f8303f797610a, type: 3}
+--- !u!114 &1177024334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177024329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f17f78c0afe29b4284501a231d0091d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoardManager
+  gridCells:
+  - {fileID: 817880147}
+  - {fileID: 1897544056}
+  - {fileID: 1749933635}
+  - {fileID: 1962899423}
+  - {fileID: 5777303}
+  - {fileID: 1835963414}
+  - {fileID: 241322394}
+  - {fileID: 1011417920}
+  - {fileID: 1613872473}
+  - {fileID: 1722858467}
+  - {fileID: 2113534999}
+  - {fileID: 2119458313}
 --- !u!1 &1186278063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2798,6 +2905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991445182}
   - component: {fileID: 1991445183}
+  - component: {fileID: 1991445185}
   m_Layer: 5
   m_Name: Hand
   m_TagString: Untagged
@@ -2819,9 +2927,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1655477621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -1000, y: 370}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 370}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1991445183
@@ -2850,6 +2958,14 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &1991445185
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991445181}
+  m_CullTransparentMesh: 1
 --- !u!1 &2076222504
 GameObject:
   m_ObjectHideFlags: 0

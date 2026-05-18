@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: BasicSkill
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "\uAE30\uBCF8\uBC29\uC5B4"
+  cardName: BasicSkill
   cardType: 1
   tileShape:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   power: 5
-  description: 
-  icon: {fileID: 0}
+  description: dddddd
+  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
