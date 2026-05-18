@@ -149,6 +149,8 @@ GameObject:
   - component: {fileID: 2816699869539033955}
   - component: {fileID: 5556656883568370161}
   - component: {fileID: 6032631234794983242}
+  - component: {fileID: 6470728394722627618}
+  - component: {fileID: 6147345105409419711}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -261,6 +263,38 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6470728394722627618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425349239620973160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966cab4e4dad9294cab0ed251248a961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardView
+  cardName: {fileID: 3839080713004967719}
+  cardImage: {fileID: 7585540869703829804}
+  cardDescription: {fileID: 5607711998097051215}
+--- !u!114 &6147345105409419711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425349239620973160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111067de00d8d694b9e13ec577635a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardDragHandler
+  boardManager: {fileID: 0}
+  handManager: {fileID: 0}
+  deckManager: {fileID: 0}
+  tilePreviewPrefab: {fileID: 7626688296723452720, guid: 29b0b3484e32b03448b46a073352f412, type: 3}
+  placedTilePrefab: {fileID: 7626688296723452720, guid: 29b0b3484e32b03448b46a073352f412, type: 3}
 --- !u!1 &2030507584709720423
 GameObject:
   m_ObjectHideFlags: 0
