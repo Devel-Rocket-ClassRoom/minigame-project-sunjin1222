@@ -21,4 +21,4 @@ MonoBehaviour:
   power: 10
   description: ssssss
   icon: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
-  gameObject: {fileID: 1425349239620973160, guid: a4f8bffc771899a40a5a4fd6a12f67e2, type: 3}
+  previewPrefab: {fileID: 6856548126514726630, guid: 537fb2262bc95bf4ebc95c1757c3e13e, type: 3}

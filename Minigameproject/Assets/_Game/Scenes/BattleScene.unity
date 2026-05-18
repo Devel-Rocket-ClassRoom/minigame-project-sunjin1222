@@ -1486,9 +1486,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardDragHandler
   boardManager: {fileID: 1177024334}
   handManager: {fileID: 1177024332}
-  deckManager: {fileID: 1177024330}
-  tilePreviewPrefab: {fileID: 9033979231753158312, guid: 43bfef98cbbacae4d88f8303f797610a, type: 3}
-  placedTilePrefab: {fileID: 9033979231753158312, guid: 43bfef98cbbacae4d88f8303f797610a, type: 3}
 --- !u!114 &1177024334
 MonoBehaviour:
   m_ObjectHideFlags: 0
