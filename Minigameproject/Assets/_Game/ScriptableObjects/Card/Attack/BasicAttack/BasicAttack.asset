@@ -20,4 +20,4 @@ MonoBehaviour:
   power: 5
   description: aaaaa
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  gameObject: {fileID: 1425349239620973160, guid: 18b0987da987cba46b8745b2d5a5a778, type: 3}
+  previewPrefab: {fileID: 4002301574871131506, guid: 9ee2f78f06d41e645a4c930269bbeeca, type: 3}

@@ -51,7 +51,7 @@ public class HandManager : MonoBehaviour
         dragHandler.Setup(data);
         dragHandler.boardManager = boardManager;
         dragHandler.handManager = this;
-        dragHandler.deckManager = deckManager;
+       
         ArrangeHand();
 
     }

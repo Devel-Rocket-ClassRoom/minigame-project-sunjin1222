@@ -107,4 +107,15 @@ public class BoardManager : MonoBehaviour
         return result;
     }
 
+    public void RemoveCard(CardData card)
+    {
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            if (placedCards[i] == card)
+            {
+                placedCards[i] = null;
+                cardOrigin[i] = -1;
+            }
+        }
+    }
 }
