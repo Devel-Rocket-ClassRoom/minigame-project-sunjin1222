@@ -1,4 +1,6 @@
+
 using UnityEngine;
+
 
 public enum CardType
 {
@@ -17,4 +19,6 @@ public class CardData : ScriptableObject
     public int power;
     [TextArea] public string description;
     public Sprite icon;
+
+    public GameObject  tile;
 }
