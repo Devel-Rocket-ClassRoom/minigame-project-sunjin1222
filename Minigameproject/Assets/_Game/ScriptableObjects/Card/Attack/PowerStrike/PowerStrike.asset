@@ -21,4 +21,5 @@ MonoBehaviour:
   power: 10
   description: "\uB370\uBBF8\uC9C0 10"
   icon: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
-  previewPrefab: {fileID: 6856548126514726630, guid: 537fb2262bc95bf4ebc95c1757c3e13e, type: 3}
+  floatingPreviewPrefab: {fileID: 6856548126514726630, guid: 537fb2262bc95bf4ebc95c1757c3e13e, type: 3}
+  boardPreviewPrefab: {fileID: 6856548126514726630, guid: 537fb2262bc95bf4ebc95c1757c3e13e, type: 3}

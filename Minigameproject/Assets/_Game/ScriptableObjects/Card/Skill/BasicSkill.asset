@@ -16,8 +16,9 @@ MonoBehaviour:
   cardType: 1
   tileShape:
   - {x: 0, y: 0}
-  - {x: 1, y: 0}
+  - {x: 0, y: 1}
   power: 5
   description: "\uBC29\uC5B4 5"
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  previewPrefab: {fileID: 6856548126514726630, guid: 9a6d3b85ed619af4eb8e804009a17194, type: 3}
+  floatingPreviewPrefab: {fileID: 1100, guid: 9a6d3b85ed619af4eb8e804009a17194, type: 3}
+  boardPreviewPrefab: {fileID: 1100, guid: 9a6d3b85ed619af4eb8e804009a17194, type: 3}

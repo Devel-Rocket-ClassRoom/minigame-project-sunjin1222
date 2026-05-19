@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
@@ -14,6 +15,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public BoardManager boardManager;
     public HandManager handManager;
+    public CardView cardView;
 
     private List<GameObject> previewTiles = new List<GameObject>();
     private int currentPreviewId;
@@ -56,6 +58,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
 
         CreateBoardPreview(cellIndex);
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -73,22 +76,16 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         if (success)
         {
-            Debug.Log($"{cardData.cardName} 배치 성공 : {cellIndex}");
+            ResetPreviewColor();
 
-            // 프리뷰 오브젝트는 보드에 그대로 남김
             previewTiles.Clear();
 
-            // 손패에서 제거
-            handManager.RemoveCard(GetComponent<CardView>());
+            handManager.RemoveCard(cardView);
 
-            // 손패 카드 UI 숨김
-            canvasGroup.alpha = 0f;
-            canvasGroup.blocksRaycasts = false;
+            Destroy(gameObject);
         }
         else
         {
-            Debug.Log($"{cardData.cardName} 배치 실패");
-
             DestroyPreview();
             ReturnToHand();
         }
@@ -105,76 +102,127 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         DestroyPreview();
 
-        if (cardData == null || cardData.previewPrefab == null)
+        if (cardData == null || cardData.floatingPreviewPrefab == null)
             return;
 
         RectTransform canvasRect = canvas.transform as RectTransform;
 
-        Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasRect,
             screenPosition,
             canvas.worldCamera,
-            out localPoint
+            out Vector2 localPoint
         );
 
-        float tileSize = 64f;
+        // 프리팹 1번만 생성 (이미 전체 타일 모양을 담고 있음)
+        GameObject preview = Instantiate(cardData.floatingPreviewPrefab, canvasRect);
+        RectTransform previewRect = preview.GetComponent<RectTransform>();
+        previewRect.anchoredPosition = localPoint;
 
-        foreach (Vector2Int offset in cardData.tileShape)
-        {
-            GameObject preview = Instantiate(cardData.previewPrefab, canvasRect);
-
-            RectTransform previewRect = preview.GetComponent<RectTransform>();
-
-            previewRect.anchoredPosition =
-                localPoint + new Vector2(offset.x * tileSize, -offset.y * tileSize);
-
-            previewRect.sizeDelta = new Vector2(tileSize, tileSize);
-
-            previewTiles.Add(preview);
-        }
+        previewTiles.Add(preview);
     }
 
     private void CreateBoardPreview(int cellIndex)
     {
         DestroyPreview();
 
-        if (cardData == null || cardData.previewPrefab == null)
+        if (cardData == null || cardData.boardPreviewPrefab == null)
             return;
 
-        int startRow = cellIndex / 3;
-        int startCol = cellIndex % 3;
+        if (boardManager == null || boardManager.gridCells == null)
+            return;
 
-        foreach (Vector2Int offset in cardData.tileShape)
+        if (cellIndex < 0 || cellIndex >= boardManager.gridCells.Length)
+            return;
+
+        // 배치 가능 여부 저장
+        bool canPlace = boardManager.CanPlace(cardData, cellIndex);
+
+        RectTransform canvasRect =
+            canvas.transform as RectTransform;
+
+        RectTransform cellRect =
+            boardManager.gridCells[cellIndex].GetComponent<RectTransform>();
+
+        // 칸의 월드 좌표 가져오기
+        Vector3[] corners = new Vector3[4];
+        cellRect.GetWorldCorners(corners);
+
+        // corners[1] = 왼쪽 위
+        Vector2 screenPos =
+            RectTransformUtility.WorldToScreenPoint(
+                canvas.worldCamera,
+                corners[1]
+            );
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect,
+            screenPos,
+            canvas.worldCamera,
+            out Vector2 localPos
+        );
+
+        // 프리뷰 생성
+        GameObject preview =
+            Instantiate(cardData.boardPreviewPrefab, canvasRect);
+
+        RectTransform previewRect =
+            preview.GetComponent<RectTransform>();
+
+        previewRect.anchorMin = new Vector2(0.5f, 0.5f);
+        previewRect.anchorMax = new Vector2(0.5f, 0.5f);
+
+        // 왼쪽 위 기준
+        previewRect.pivot = new Vector2(0f, 1f);
+
+        // 칸 위치로 이동
+        previewRect.anchoredPosition = localPos;
+
+        // 색상 변경
+        Image[] images = preview.GetComponentsInChildren<Image>();
+
+        foreach (Image image in images)
         {
-            int targetCol = startCol + offset.x;
-            int targetRow = startRow + offset.y;
-
-            if (targetCol < 0 || targetCol >= 3 ||
-                targetRow < 0 || targetRow >= 4)
+            if (!image.name.Contains("Border"))
                 continue;
 
-            int targetIndex = targetCol + targetRow * 3;
+            Color color = image.color;
 
-            GameObject cell = boardManager.gridCells[targetIndex];
-
-            GameObject preview = Instantiate(cardData.previewPrefab, cell.transform);
-
-            RectTransform previewRect = preview.GetComponent<RectTransform>();
-
-            previewRect.anchorMin = Vector2.zero;
-            previewRect.anchorMax = Vector2.one;
-            previewRect.offsetMin = Vector2.zero;
-            previewRect.offsetMax = Vector2.zero;
-
-            PlacedTile placedTile = preview.GetComponent<PlacedTile>();
-            if (placedTile != null)
+            if (canPlace)
             {
-                placedTile.Setup(cardData, boardManager, handManager, currentPreviewId);
+                image.color = new Color(
+                    0f,
+                    1f,
+                    0f,
+                    color.a
+                );
             }
-
-            previewTiles.Add(preview);
+            else
+            {
+                image.color = new Color(
+                    1f,
+                    0f,
+                    0f,
+                    color.a
+                );
+            }
         }
+
+        PlacedTile placedTile =
+            preview.GetComponent<PlacedTile>();
+
+        if (placedTile != null)
+        {
+            placedTile.Setup(
+                cardData,
+                boardManager,
+                handManager,
+                currentPreviewId
+            );
+        }
+
+        previewTiles.Add(preview);
+
     }
 
     private void DestroyPreview()
@@ -223,5 +271,24 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             return -1;
 
         return nearestIndex;
+    }
+    private void ResetPreviewColor()
+    {
+        foreach (GameObject preview in previewTiles)
+        {
+            if (preview == null)
+                continue;
+
+            Image[] images = preview.GetComponentsInChildren<Image>();
+
+            foreach (Image image in images)
+            {
+                if (!image.name.Contains("Border"))
+                    continue;
+
+                Color color = image.color;
+                image.color = new Color(1f, 1f, 1f, color.a);
+            }
+        }
     }
 }
