@@ -118,4 +118,41 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+
+    public void ReturnAllToHand(HandManager handManager)
+    {
+        if (handManager == null)
+        {
+            Debug.LogError("[BoardManager] ReturnAllToHand에 handManager가 null입니다.");
+            return;
+        }
+
+        // 1) 보드 위의 모든 PlacedTile GameObject 파괴
+        //    (placedTile은 canvasRect의 자식이라 gridCells 순회로는 못 잡음)
+        PlacedTile[] allTiles = FindObjectsByType<PlacedTile>(FindObjectsSortMode.None);
+        foreach (PlacedTile tile in allTiles)
+        {
+            if (tile != null && tile.IsActivePlacement)
+                Destroy(tile.gameObject);
+        }
+        // 2) cardOrigin으로 중복 제거하면서 카드만 핸드로 복귀
+        HashSet<int> seenOrigins = new HashSet<int>();
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            CardData card = placedCards[i];
+            if (card == null) continue;
+
+            int origin = cardOrigin[i];
+            if (!seenOrigins.Add(origin)) continue;
+
+            handManager.AddCard(card);
+        }
+
+        // 3) 보드 상태 초기화
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            placedCards[i] = null;
+            cardOrigin[i] = -1;
+        }
+    }
 }

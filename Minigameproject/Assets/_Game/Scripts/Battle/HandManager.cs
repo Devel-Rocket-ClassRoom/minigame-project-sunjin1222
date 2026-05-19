@@ -51,21 +51,31 @@ public class HandManager : MonoBehaviour
         dragHandler.Setup(data);
         dragHandler.boardManager = boardManager;
         dragHandler.handManager = this;
-       
+
         ArrangeHand();
 
     }
 
     public void RemoveCard(CardView cardView)
     {
-        handCards.Remove(cardView);
+        if (cardView != null)
+        {
+            handCards.Remove(cardView);
+        }
+
+        handCards.RemoveAll(card => card == null);
+
         ArrangeHand();
     }
 
     public void ArrangeHand()
     {
+        handCards.RemoveAll(card => card == null);
+
         int cardCount = handCards.Count;
         if (cardCount == 0) return;
+
+
 
         LayoutGroup layoutGroup = handArea != null
             ? handArea.GetComponent<LayoutGroup>()
