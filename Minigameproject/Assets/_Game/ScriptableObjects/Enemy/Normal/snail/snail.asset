@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cef257310d4b344a8fdb49aa1fd6f3e, type: 3}
+  m_Name: snail
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: "\uC57D\uD55C \uB2EC\uD33D\uC774"
+  enemyType: 0
+  maxHealth: 50
+  description: 
+  patterns:
+  - actionType: 0
+    value: 16
+  - actionType: 0
+    value: 8
+  portrait: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
+  prefab: {fileID: 5004707697418747743, guid: e1de73ca135cbbb49a1f4b1c40b09462, type: 3}
