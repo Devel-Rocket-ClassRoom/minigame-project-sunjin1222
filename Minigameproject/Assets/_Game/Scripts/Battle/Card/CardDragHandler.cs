@@ -77,11 +77,12 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (success)
         {
             ResetPreviewColor();
-
+            foreach (GameObject tile in previewTiles)
+            {
+                boardManager.RegisterPlacedTile(tile);
+            }
             previewTiles.Clear();
-
             handManager.RemoveCard(cardView);
-
             Destroy(gameObject);
         }
         else
@@ -217,7 +218,8 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 cardData,
                 boardManager,
                 handManager,
-                currentPreviewId
+                currentPreviewId,
+                cellIndex   
             );
         }
 

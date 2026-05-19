@@ -12,6 +12,39 @@ public class BoardManager : MonoBehaviour
     public GameObject[] gridCells;
 
 
+
+    private List<GameObject> placedTileObjects = new List<GameObject>();
+
+    public void RegisterPlacedTile(GameObject tile)
+    {
+        if (tile != null) placedTileObjects.Add(tile);
+    }
+
+    public void ReturnAllToHand(HandManager handManager)
+    {
+        // 등록된 placed tile만 파괴 — 다른 PlacedTile은 절대 건드리지 않음
+        foreach (GameObject tile in placedTileObjects)
+        {
+            if (tile != null) Destroy(tile);
+        }
+        placedTileObjects.Clear();
+
+        // 카드 수거 (cardOrigin으로 중복 제거)
+        HashSet<int> seenOrigins = new HashSet<int>();
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            if (placedCards[i] == null) continue;
+            if (!seenOrigins.Add(cardOrigin[i])) continue;
+            handManager.AddCard(placedCards[i]);
+        }
+
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            placedCards[i] = null;
+            cardOrigin[i] = -1;
+        }
+    }
+
     private void Awake()
     {
         cardOrigin = new int[Width * Height];
@@ -73,14 +106,6 @@ public class BoardManager : MonoBehaviour
         {
             placedCards[i] = null;
             cardOrigin[i] = -1;
-            GameObject cell = gridCells != null && i < gridCells.Length ? gridCells[i] : null;
-            if (cell != null)
-            {
-                for (int c = cell.transform.childCount - 1; c >= 0; c--)
-                {
-                    Destroy(cell.transform.GetChild(c).gameObject);
-                }
-            }
         }
     }
 
@@ -107,52 +132,28 @@ public class BoardManager : MonoBehaviour
         return result;
     }
 
-    public void RemoveCard(CardData card)
+    public void RemoveCard(int originIndex)
     {
+        if (originIndex < 0) return;
+
         for (int i = 0; i < placedCards.Length; i++)
         {
-            if (placedCards[i] == card)
+            if (cardOrigin[i] == originIndex)
             {
                 placedCards[i] = null;
                 cardOrigin[i] = -1;
             }
         }
     }
-    public void ReturnAllToHand(HandManager handManager)
-{
-    if (handManager == null)
+    public void ClearBoardOnly()
     {
-        Debug.LogError("[BoardManager] ReturnAllToHand에 handManager가 null입니다.");
-        return;
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            placedCards[i] = null;
+            cardOrigin[i] = -1;
+        }
+
+        Debug.Log("보드 데이터만 초기화 완료");
     }
 
-    // 1) 보드 위의 모든 PlacedTile GameObject 파괴
-    //    (placedTile은 canvasRect의 자식이라 gridCells 순회로는 못 잡음)
-    PlacedTile[] allTiles = FindObjectsByType<PlacedTile>(FindObjectsSortMode.None);
-    foreach (PlacedTile tile in allTiles)
-    {
-        if (tile != null)
-            Destroy(tile.gameObject);
-    }
-
-    // 2) cardOrigin으로 중복 제거하면서 카드만 핸드로 복귀
-    HashSet<int> seenOrigins = new HashSet<int>();
-    for (int i = 0; i < placedCards.Length; i++)
-    {
-        CardData card = placedCards[i];
-        if (card == null) continue;
-
-        int origin = cardOrigin[i];
-        if (!seenOrigins.Add(origin)) continue;
-
-        handManager.AddCard(card);
-    }
-
-    // 3) 보드 상태 초기화
-    for (int i = 0; i < placedCards.Length; i++)
-    {
-        placedCards[i] = null;
-        cardOrigin[i] = -1;
-    }
-}
 }
