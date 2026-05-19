@@ -20,6 +20,8 @@ public class CardData : ScriptableObject
     [TextArea] public string description;
     public Sprite icon;
 
-    public GameObject previewPrefab;
+
+    public GameObject floatingPreviewPrefab; 
+    public GameObject boardPreviewPrefab;
 
 }
