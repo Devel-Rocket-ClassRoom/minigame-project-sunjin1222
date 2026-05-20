@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class DeckManager : MonoBehaviour
 {
@@ -8,13 +9,16 @@ public class DeckManager : MonoBehaviour
     public List<CardData> startDeck;
     private const int StartHand = 6;
     public HandManager handManager;
+    
+    public TextMeshProUGUI Deckcount;
+
+        public TextMeshProUGUI DisCardcount;
 
     private void Start()
     {
         InitializeDeck();
         DrawCards(StartHand);
     }
-
 
     private void InitializeDeck()
     {
@@ -36,7 +40,6 @@ public class DeckManager : MonoBehaviour
 
     public void DrawCards(int count)
     {
-
         if (handManager == null)
         {
             Debug.LogError("[DeckManager] handManager 참조가 비어있습니다.");
@@ -47,11 +50,7 @@ public class DeckManager : MonoBehaviour
         {
             if (deck.Count == 0)
             {
-                if (discardPile.Count == 0)
-                {
-                    break;
-                }
-
+                if (discardPile.Count == 0) break;
                 deck.AddRange(discardPile);
                 discardPile.Clear();
                 ShuffleDeck(deck);
@@ -63,15 +62,14 @@ public class DeckManager : MonoBehaviour
                 deck.RemoveAt(0);
             }
         }
+        counter();
     }
 
     private void ShuffleDeck(List<CardData> list)
     {
-
         for (int i = 0; i < list.Count; i++)
         {
             int rand = Random.Range(i, list.Count);
-
             CardData temp = list[i];
             list[i] = list[rand];
             list[rand] = temp;
@@ -88,5 +86,9 @@ public class DeckManager : MonoBehaviour
         deck.Add(card);
     }
 
-
+    public void counter()
+    {
+        Deckcount.text=deck.Count.ToString();
+        DisCardcount.text=discardPile.Count.ToString();
+    }
 }
