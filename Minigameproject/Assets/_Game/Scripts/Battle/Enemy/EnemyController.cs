@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     {
         currentHealth = enemyData.maxHealth;
         enemyUI.UpdateUI(currentHealth, enemyData.maxHealth);
+        UpdateIntent();
     }
 
     public void DoTurn()
@@ -41,6 +42,7 @@ public class EnemyController : MonoBehaviour
             }
 
             patternIndex = (patternIndex + 1) % enemyData.patterns.Length;
+            UpdateIntent();
         }
     }
 
@@ -57,6 +59,11 @@ public class EnemyController : MonoBehaviour
         {
             Die();
         }
+    }
+    private void UpdateIntent()
+    {
+        if (enemyData.patterns == null || enemyData.patterns.Length == 0) return;
+        enemyUI.UpdateIntent(enemyData.patterns[patternIndex]);
     }
 
     private void Die()
