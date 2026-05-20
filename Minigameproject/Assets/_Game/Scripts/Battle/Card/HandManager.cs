@@ -67,6 +67,18 @@ public class HandManager : MonoBehaviour
 
         ArrangeHand();
     }
+    public void DiscardAll()
+    {
+        foreach (CardView card in handCards)
+        {
+            if (card != null)
+            {
+                deckManager.DiscardCard(card.GetCardData());
+                Destroy(card.gameObject);
+            }
+        }
+        handCards.Clear();
+    }
 
     public void ArrangeHand()
     {

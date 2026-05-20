@@ -34,9 +34,9 @@ public class DeckManager : MonoBehaviour
         ShuffleDeck(deck);
     }
 
-    private void DrawCards(int count)
+    public void DrawCards(int count)
     {
-  
+
         if (handManager == null)
         {
             Debug.LogError("[DeckManager] handManager 참조가 비어있습니다.");
@@ -49,7 +49,6 @@ public class DeckManager : MonoBehaviour
             {
                 if (discardPile.Count == 0)
                 {
-                    Debug.Log("[DeckManager] 덱과 버린 더미가 모두 비어 더 이상 카드를 뽑을 수 없습니다.");
                     break;
                 }
 
@@ -84,6 +83,10 @@ public class DeckManager : MonoBehaviour
         discardPile.Add(card);
     }
 
+    public void AddCardToDeck(CardData card)
+    {
+        deck.Add(card);
+    }
 
 
 }

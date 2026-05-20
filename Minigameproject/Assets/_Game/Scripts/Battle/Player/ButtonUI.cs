@@ -1,11 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
-public class ButtonUI : MonoBehaviour
+
+public class BattleController : MonoBehaviour
 {
     public BoardManager boardManager;
     public HandManager handManager;
+    public EnemyController enemyController;
+    public PlayerController playerController;
+    public DeckManager deckManager;
 
-    public EnemyController  enemyController;
     public void OnResetClicked()
     {
         if (boardManager == null || handManager == null)
@@ -16,39 +19,35 @@ public class ButtonUI : MonoBehaviour
 
         boardManager.ReturnAllToHand(handManager);
     }
-    public void OnUseCardsClicked()
-    {
-        if (boardManager == null || enemyController == null)
-        {
-            Debug.LogError("[ButtonUI] BoardManager 또는 EnemyUI가 미할당입니다.");
-            return;
-        }
 
-        var cards = boardManager.GetActivationOrder();
-
-        foreach (CardData card in cards)
-        {
-            Debug.Log($"{card.cardName} 발동!");
-
-            if (card.cardType == CardType.Attack)
-            {
-                enemyController.TakeDamage(card.power);
-                Debug.Log($"{card.cardName}으로 {card.power} 데미지!");
-            }
-        }
-        boardManager.ClearBoard();
-        boardManager.ReturnAllToHand(handManager);
-    }
     public void OnClickEndTurnButton()
     {
-        List<CardData> cards = boardManager.GetActivationOrder();
+        EffectContext context = new EffectContext
+        {
+            enemyController = enemyController,
+            playerController = playerController,
+            handManager = handManager,
+            deckManager = deckManager
+        };
 
+        // 1. 카드 발동
+        var cards = boardManager.GetActivationOrder();
         foreach (CardData card in cards)
         {
-            Debug.Log($"{card.cardName} 발동!");
+            if (card.effects == null || card.effects.Length == 0) continue;
+            foreach (EffectSO effect in card.effects)
+            {
+                effect.Apply(context);
+            }
         }
+        boardManager.DiscardBoard(deckManager); 
+        boardManager.DestroyTiles();        
+        boardManager.ClearBoard();           
+        handManager.DiscardAll();
 
-        boardManager.ClearBoard();
-        boardManager.ReturnAllToHand(handManager);
+        enemyController.DoTurn();
+        playerController.ResetBlock();
+
+        deckManager.DrawCards(6);
     }
 }

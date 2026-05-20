@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5552635125935558372}
   - component: {fileID: 2711339521376227150}
   m_Layer: 5
-  m_Name: snailText
+  m_Name: Brute BonnetText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 6128081255329202135}
   - component: {fileID: 3353332732272901379}
   m_Layer: 5
-  m_Name: snail
+  m_Name: Brute Bonnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 4300381242028540859}
   - component: {fileID: 9169121301000622880}
   m_Layer: 5
-  m_Name: snailob
+  m_Name: Brute Bonnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,6 +407,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 9a8fbc3c7653fb84fbdc318a8804181a, type: 2}
   enemyUI: {fileID: 4300381242028540859}
   playerController: {fileID: 3467177034977676685, guid: c527f8da249bac0489946b7997115162, type: 3}
+  panul: {fileID: 0}
 --- !u!1 &7688317292197247267
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +530,7 @@ GameObject:
   - component: {fileID: 1411464525178820629}
   - component: {fileID: 7012504169098307073}
   m_Layer: 5
-  m_Name: snailSlider
+  m_Name: Brute BonnetSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

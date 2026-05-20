@@ -22,14 +22,14 @@ public class BoardManager : MonoBehaviour
 
     public void ReturnAllToHand(HandManager handManager)
     {
-        // 등록된 placed tile만 파괴 — 다른 PlacedTile은 절대 건드리지 않음
+  
         foreach (GameObject tile in placedTileObjects)
         {
             if (tile != null) Destroy(tile);
         }
         placedTileObjects.Clear();
 
-        // 카드 수거 (cardOrigin으로 중복 제거)
+
         HashSet<int> seenOrigins = new HashSet<int>();
         for (int i = 0; i < placedCards.Length; i++)
         {
@@ -145,15 +145,24 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    public void ClearBoardOnly()
+    public void DiscardBoard(DeckManager deckManager)
     {
+        HashSet<int> seenOrigins = new HashSet<int>();
         for (int i = 0; i < placedCards.Length; i++)
         {
-            placedCards[i] = null;
-            cardOrigin[i] = -1;
+            if (placedCards[i] == null) continue;
+            if (!seenOrigins.Add(cardOrigin[i])) continue;
+            deckManager.DiscardCard(placedCards[i]);
         }
+    }
 
-        Debug.Log("보드 데이터만 초기화 완료");
+    public void DestroyTiles()
+    {
+        foreach (GameObject tile in placedTileObjects)
+        {
+            if (tile != null) Destroy(tile);
+        }
+        placedTileObjects.Clear();
     }
 
 }

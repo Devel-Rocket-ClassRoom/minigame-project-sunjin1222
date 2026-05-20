@@ -5,14 +5,43 @@ public class EnemyController : MonoBehaviour
 {
     public EnemyData enemyData;
     public EnemyUI enemyUI;
+    public PlayerController playerController;
+
+    public GameObject panul;
 
     private int currentHealth;
+    private int patternIndex = 0;
+
+    private bool isDead;
 
     private void Start()
     {
         currentHealth = enemyData.maxHealth;
-
         enemyUI.UpdateUI(currentHealth, enemyData.maxHealth);
+    }
+
+    public void DoTurn()
+    {
+        if (!isDead)
+        {
+            if (enemyData.patterns == null || enemyData.patterns.Length == 0) return;
+
+            EnemyPattern pattern = enemyData.patterns[patternIndex];
+
+            switch (pattern.actionType)
+            {
+                case EnemyActionType.Attack:
+                    playerController.TakeDamage(pattern.value);
+                    Debug.Log($"{enemyData.enemyName} 공격! {pattern.value} 데미지");
+                    break;
+
+                case EnemyActionType.Defense:
+                    Debug.Log($"{enemyData.enemyName} 방어 준비");
+                    break;
+            }
+
+            patternIndex = (patternIndex + 1) % enemyData.patterns.Length;
+        }
     }
 
     public void TakeDamage(int damage)
@@ -32,6 +61,8 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log($"{enemyData.enemyName} 사망");
+        isDead = true;
+        panul.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

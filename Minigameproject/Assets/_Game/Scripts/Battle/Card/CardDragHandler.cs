@@ -115,7 +115,6 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             out Vector2 localPoint
         );
 
-        // 프리팹 1번만 생성 (이미 전체 타일 모양을 담고 있음)
         GameObject preview = Instantiate(cardData.floatingPreviewPrefab, canvasRect);
         RectTransform previewRect = preview.GetComponent<RectTransform>();
         previewRect.anchoredPosition = localPoint;
@@ -136,7 +135,6 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (cellIndex < 0 || cellIndex >= boardManager.gridCells.Length)
             return;
 
-        // 배치 가능 여부 저장
         bool canPlace = boardManager.CanPlace(cardData, cellIndex);
 
         RectTransform canvasRect =
@@ -145,11 +143,9 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         RectTransform cellRect =
             boardManager.gridCells[cellIndex].GetComponent<RectTransform>();
 
-        // 칸의 월드 좌표 가져오기
         Vector3[] corners = new Vector3[4];
         cellRect.GetWorldCorners(corners);
 
-        // corners[1] = 왼쪽 위
         Vector2 screenPos =
             RectTransformUtility.WorldToScreenPoint(
                 canvas.worldCamera,
@@ -173,13 +169,11 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         previewRect.anchorMin = new Vector2(0.5f, 0.5f);
         previewRect.anchorMax = new Vector2(0.5f, 0.5f);
 
-        // 왼쪽 위 기준
         previewRect.pivot = new Vector2(0f, 1f);
 
-        // 칸 위치로 이동
         previewRect.anchoredPosition = localPos;
 
-        // 색상 변경
+
         Image[] images = preview.GetComponentsInChildren<Image>();
 
         foreach (Image image in images)
