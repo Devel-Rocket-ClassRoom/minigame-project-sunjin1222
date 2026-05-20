@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cef257310d4b344a8fdb49aa1fd6f3e, type: 3}
-  m_Name: snail
+  m_Name: Brute Bonnet
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: "\uC57D\uD55C \uB2EC\uD33D\uC774"
+  enemyName: "\uAC15\uD55C \uBC84\uC12F"
   enemyType: 0
   maxHealth: 50
   description: 
   patterns:
   - actionType: 0
-    value: 15
+    value: 20
   - actionType: 0
-    value: 30
-  portrait: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
-  prefab: {fileID: 5004707697418747743, guid: e1de73ca135cbbb49a1f4b1c40b09462, type: 3}
+    value: 40
+  portrait: {fileID: -5705705506224072589, guid: 7e2b0b3681d511f4dbf8f85cc4386cae, type: 3}
+  prefab: {fileID: 5004707697418747743, guid: 99cc047188dadb440819df9111f9f57f, type: 3}

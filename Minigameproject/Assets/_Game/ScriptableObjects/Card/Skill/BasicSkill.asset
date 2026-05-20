@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: BasicSkill
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "\uBC29\uC5B4"
-  cardType: 1
   tileShape:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
-  power: 5
+  effects:
+  - {fileID: 11400000, guid: 4a732cf07b1660d4bac12dfae45a2b01, type: 2}
   description: "\uBC29\uC5B4 5"
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   floatingPreviewPrefab: {fileID: 1100, guid: 9a6d3b85ed619af4eb8e804009a17194, type: 3}

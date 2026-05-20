@@ -1,31 +1,29 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
-public class CardView : MonoBehaviour
+public class CardView : MonoBehaviour, IPointerClickHandler
 {
     public TextMeshProUGUI cardName;
     public Image cardImage;
     public TextMeshProUGUI cardDescription;
+    private CardData cardData;
 
+    private Action<CardData> onClickCallback;
 
+    public CardData GetCardData() => cardData;
 
-    public void Setup(CardData data)
+    public void Setup(CardData data, Action<CardData> onClick = null)
     {
-  
-        if (data == null)
-        {
-            Debug.LogError("[CardView] Setup에 null data가 전달되었습니다.");
-            return;
-        }
+        cardData = data;
+        onClickCallback = onClick;
 
+        if (data == null) return;
 
         if (cardName != null) cardName.text = data.cardName;
-        else Debug.LogWarning("[CardView] cardName 텍스트가 미할당입니다.");
-
         if (cardDescription != null) cardDescription.text = data.description;
-        else Debug.LogWarning("[CardView] cardDescription 텍스트가 미할당입니다.");
-
 
         if (cardImage != null)
         {
@@ -40,5 +38,10 @@ public class CardView : MonoBehaviour
                 cardImage.enabled = false;
             }
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        onClickCallback?.Invoke(cardData);
     }
 }
