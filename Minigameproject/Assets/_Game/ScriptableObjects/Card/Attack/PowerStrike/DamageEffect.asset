@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f2cc6db5c8f4b4e8511d3aae1f948b, type: 3}
   m_Name: DamageEffect
   m_EditorClassIdentifier: Assembly-CSharp::DamageEffect
-  damage: 10
+  damage: 60
