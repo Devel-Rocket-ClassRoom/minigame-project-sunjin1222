@@ -10,9 +10,15 @@ public class RewardManager : MonoBehaviour
 
     private List<CardData> currentRewards = new List<CardData>();
 
-    public void OnShowReward()
+    private void Start()
     {
-        rewardPanel.SetActive(true);
+        ShowReward();
+    }
+
+
+    public void ShowReward()
+    {
+      
         currentRewards.Clear();
 
 
@@ -29,6 +35,17 @@ public class RewardManager : MonoBehaviour
             rewardSlots[i].gameObject.SetActive(true);
         }
     }
+
+    public void OnShowReward()
+    {
+          rewardPanel.SetActive(true);
+    }
+
+      public void OnclauesReward()
+    {
+          rewardPanel.SetActive(false);
+    }
+
 
     public void OnCardSelected(CardData card)
     {
