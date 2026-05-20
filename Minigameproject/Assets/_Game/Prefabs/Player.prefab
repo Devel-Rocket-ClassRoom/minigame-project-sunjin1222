@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3526455286961321831}
-  - component: {fileID: 3467177034977676685}
+  - component: {fileID: 2693239697077205837}
   m_Layer: 5
   m_Name: Player
   m_TagString: Untagged
@@ -113,7 +113,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3467177034977676685
+--- !u!114 &2693239697077205837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,10 +122,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1134659310254685940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44cc5a13cd0ce00459a384a94dce6850, type: 3}
+  m_Script: {fileID: 11500000, guid: 44aaa1fcd5d05d949a254489f033fe03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  maxHealth: 80
+  maxHealth: 50
   block: 0
   gameover: {fileID: 0}
   slider: {fileID: 2733515536430656366}
@@ -664,7 +664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1905520743978459679
 RectTransform:
   m_ObjectHideFlags: 0
