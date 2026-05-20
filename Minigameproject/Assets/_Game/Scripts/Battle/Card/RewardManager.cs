@@ -16,13 +16,16 @@ public class RewardManager : MonoBehaviour
         currentRewards.Clear();
 
 
-        ShuffleReward(cardPool);
+        List<CardData> Copy = new List<CardData>(cardPool);
+        ShuffleReward(Copy);
+
 
         int count = Mathf.Min(3, cardPool.Count);
         for (int i = 0; i < count; i++)
         {
-            currentRewards.Add(cardPool[i]);
-            rewardSlots[i].Setup(cardPool[i], OnCardSelected);
+
+            currentRewards.Add(Copy[i]);
+            rewardSlots[i].Setup(Copy[i], OnCardSelected);
             rewardSlots[i].gameObject.SetActive(true);
         }
     }

@@ -3,7 +3,12 @@ using UnityEngine;
 
 
 
-
+public enum CardType 
+{
+    Attack,
+    Skill,
+    Support,
+}
 
 [CreateAssetMenu(fileName = "CardData", menuName = "Game/Card Data")]
 public class CardData : ScriptableObject
@@ -13,8 +18,8 @@ public class CardData : ScriptableObject
     public EffectSO[] effects;
     [TextArea] public string description;
     public Sprite icon;
-
-
+    
+    public CardType cardType;
     public GameObject floatingPreviewPrefab; 
     public GameObject boardPreviewPrefab;
 

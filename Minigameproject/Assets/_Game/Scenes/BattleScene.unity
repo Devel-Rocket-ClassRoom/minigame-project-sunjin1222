@@ -4425,8 +4425,8 @@ RectTransform:
   - {fileID: 1991445182}
   - {fileID: 1393605216}
   - {fileID: 1255823476}
-  - {fileID: 1835164617}
   - {fileID: 546152008}
+  - {fileID: 1835164617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6377,6 +6377,10 @@ PrefabInstance:
       propertyPath: gameover
       value: 
       objectReference: {fileID: 1255823473}
+    - target: {fileID: 2982159848656228791, guid: c527f8da249bac0489946b7997115162, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
     - target: {fileID: 3526455286961321831, guid: c527f8da249bac0489946b7997115162, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
