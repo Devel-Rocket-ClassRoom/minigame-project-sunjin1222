@@ -17,8 +17,8 @@ MonoBehaviour:
   maxHealth: 33
   description: 
   patterns:
-  - actionType: 2
-    value: 15
+  - actionType: 1
+    value: 8
   - actionType: 0
     value: 5
   - actionType: 0
