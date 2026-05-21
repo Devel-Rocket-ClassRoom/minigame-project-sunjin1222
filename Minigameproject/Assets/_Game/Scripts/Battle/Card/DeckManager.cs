@@ -4,18 +4,23 @@ using TMPro;
 
 public class DeckManager : MonoBehaviour
 {
+    public List<CardData> startDeck;
+
     private List<CardData> deck = new List<CardData>();
     private List<CardData> discardPile = new List<CardData>();
-    public List<CardData> startDeck;
+
     private const int StartHand = 6;
     public HandManager handManager;
-    
-    public TextMeshProUGUI Deckcount;
 
-        public TextMeshProUGUI DisCardcount;
+    public TextMeshProUGUI Deckcount;
+    public TextMeshProUGUI DisCardcount;
 
     private void Start()
     {
+
+        if (!RunDeck.IsInitialized)
+            RunDeck.Init(startDeck);
+
         InitializeDeck();
         DrawCards(StartHand);
     }
@@ -23,19 +28,21 @@ public class DeckManager : MonoBehaviour
     private void InitializeDeck()
     {
         deck.Clear();
+        discardPile.Clear();
 
-        if (startDeck == null || startDeck.Count == 0)
+        if (RunDeck.currentDeck == null || RunDeck.currentDeck.Count == 0)
         {
-            Debug.LogWarning("[DeckManager] startDeck이 비어있거나 미할당입니다. 덱이 빈 상태로 시작합니다.");
+            Debug.LogWarning("[DeckManager] RunDeck이 비어있습니다.");
             return;
         }
 
-        foreach (CardData card in startDeck)
+        foreach (CardData card in RunDeck.currentDeck)
         {
             if (card == null) continue;
             deck.Add(card);
         }
         ShuffleDeck(deck);
+        counter();
     }
 
     public void DrawCards(int count)
@@ -83,12 +90,13 @@ public class DeckManager : MonoBehaviour
 
     public void AddCardToDeck(CardData card)
     {
+        RunDeck.AddCard(card);
         deck.Add(card);
     }
 
     public void counter()
     {
-        Deckcount.text=deck.Count.ToString();
-        DisCardcount.text=discardPile.Count.ToString();
+        Deckcount.text = deck.Count.ToString();
+        DisCardcount.text = discardPile.Count.ToString();
     }
 }
