@@ -20,9 +20,9 @@ MonoBehaviour:
   - {x: 2, y: 1}
   - {x: 1, y: 2}
   effects:
-  - {fileID: 11400000, guid: 7e83cea6f962aba48a3697848caac8db, type: 2}
   - {fileID: 11400000, guid: 1f40eef8de95e854e8a0d0edeaea5599, type: 2}
-  description: 
+  - {fileID: 11400000, guid: 1f40eef8de95e854e8a0d0edeaea5599, type: 2}
+  description: "\uB370\uBBF8\uC9C010\n\uB370\uBBF8\uC9C010"
   icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   cardType: 0
   floatingPreviewPrefab: {fileID: 6856548126514726630, guid: 59d196133408de74db155f5da55c7ce9, type: 3}

@@ -931,6 +931,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 546152007}
     - target: {fileID: 9169121301000622880, guid: e1de73ca135cbbb49a1f4b1c40b09462, type: 3}
+      propertyPath: rewardManager
+      value: 
+      objectReference: {fileID: 1177024337}
+    - target: {fileID: 9169121301000622880, guid: e1de73ca135cbbb49a1f4b1c40b09462, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 2041841741}
@@ -1486,7 +1490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &524969465
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1494,13 +1498,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524969464}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1815255565}
-  m_Father: {fileID: 1020564026}
+  m_Father: {fileID: 1655477621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2289,7 +2293,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1320497913}
-  - {fileID: 524969465}
   - {fileID: 1254592256}
   m_Father: {fileID: 546152008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2709,6 +2712,7 @@ MonoBehaviour:
   - {fileID: 1684768129}
   - {fileID: 931203486}
   deckManager: {fileID: 1177024330}
+  rewardbutton: {fileID: 524969464}
 --- !u!114 &1177024338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5241,6 +5245,7 @@ RectTransform:
   - {fileID: 1393605216}
   - {fileID: 1255823476}
   - {fileID: 546152008}
+  - {fileID: 524969465}
   - {fileID: 1835164617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5955,7 +5960,7 @@ GameObject:
   - component: {fileID: 1835164619}
   - component: {fileID: 1835164618}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: RewardPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
