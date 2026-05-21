@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     public PlayerController playerController;
 
     public GameObject panul;
+    public RewardManager rewardManager;
 
     private int currentHealth;
     private int patternIndex = 0;
@@ -70,6 +71,7 @@ public class EnemyController : MonoBehaviour
     {
         isDead = true;
         panul.SetActive(true);
+        rewardManager.rewardbutton.SetActive(true);
         gameObject.SetActive(false);
     }
 }
