@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class PlayerController : MonoBehaviour
 {
     public int maxHealth = 50;
@@ -15,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     public TextMeshProUGUI sliderHealth;
     public TextMeshProUGUI Armor;
+
+    // public PlayerAnimator playerAnimator; // 피격 애니메이션
 
     private void Start()
     {
@@ -35,9 +36,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-              aemorOB.SetActive(false);
+            aemorOB.SetActive(false);
         }
-
     }
 
     public void TakeDamage(int damage)
@@ -52,25 +52,21 @@ public class PlayerController : MonoBehaviour
             aemorOB.SetActive(true);
             Armor.text = block.ToString();
             if (block <= 0)
-            {
                 aemorOB.SetActive(false);
-            }
         }
 
-
         currentHealth -= remainingDamage;
-
-        if (currentHealth < 0)
-            currentHealth = 0;
-
+        if (currentHealth < 0) currentHealth = 0;
 
         slider.value = currentHealth;
         sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
 
+        // 피격 애니메이션
+        // if (playerAnimator != null)
+        //     playerAnimator.PlayHit();
+
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
     public void ResetBlock()
@@ -81,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        RunDeck.Clear();
         gameover.SetActive(true);
     }
-
 }
