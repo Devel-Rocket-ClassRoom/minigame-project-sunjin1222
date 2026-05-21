@@ -7,6 +7,7 @@ public class RewardManager : MonoBehaviour
     public GameObject rewardPanel;
     public CardView[] rewardSlots;
     public DeckManager deckManager;
+    public GameObject rewardbutton;
 
     private List<CardData> currentRewards = new List<CardData>();
 
@@ -18,7 +19,7 @@ public class RewardManager : MonoBehaviour
 
     public void ShowReward()
     {
-      
+
         currentRewards.Clear();
 
 
@@ -38,18 +39,19 @@ public class RewardManager : MonoBehaviour
 
     public void OnShowReward()
     {
-          rewardPanel.SetActive(true);
+        rewardPanel.SetActive(true);
     }
 
-      public void OnclauesReward()
+    public void OnclauesReward()
     {
-          rewardPanel.SetActive(false);
+        rewardPanel.SetActive(false);
     }
 
 
     public void OnCardSelected(CardData card)
     {
         deckManager.AddCardToDeck(card);
+        rewardbutton.SetActive(false);
         rewardPanel.SetActive(false);
     }
 
