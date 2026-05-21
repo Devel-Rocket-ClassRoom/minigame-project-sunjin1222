@@ -22,6 +22,7 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (BattleController.IsTurnProcessing) return;
         if (!IsActivePlacement) return;
 
         boardManager.RemoveCard(originIndex);

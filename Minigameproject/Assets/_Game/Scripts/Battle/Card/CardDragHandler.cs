@@ -37,6 +37,13 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (BattleController.IsTurnProcessing)
+        {
+            // 드래그 강제 취소
+            eventData.pointerDrag = null;
+            return;
+        }
+
         originalPosition = rect.anchoredPosition;
 
         canvasGroup.alpha = 0f;
@@ -213,7 +220,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 boardManager,
                 handManager,
                 currentPreviewId,
-                cellIndex   
+                cellIndex
             );
         }
 
