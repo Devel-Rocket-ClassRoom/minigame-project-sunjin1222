@@ -1548,6 +1548,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720364473}
   m_CullTransparentMesh: 1
+--- !u!1001 &742155576
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1600796342847078890, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_Name
+      value: Brute Bonnet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.83623
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.21311
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678693187549771559, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310592684776803285, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: battleController
+      value: 
+      objectReference: {fileID: 1177024336}
+    - target: {fileID: 8783989312049011451, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783989312049011451, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
 --- !u!1 &817880147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2498,6 +2567,8 @@ MonoBehaviour:
   enemyAnimator: {fileID: 0}
   aemorOB: {fileID: 0}
   Armor: {fileID: 0}
+  battleController: {fileID: 1177024336}
+  currentHealth: 0
   block: 0
 --- !u!1 &1186278063
 GameObject:
@@ -7341,3 +7412,4 @@ SceneRoots:
   - {fileID: 55157259}
   - {fileID: 1396481567}
   - {fileID: 6043357137775074465}
+  - {fileID: 742155576}

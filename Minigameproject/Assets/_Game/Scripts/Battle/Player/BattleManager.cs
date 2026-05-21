@@ -47,6 +47,7 @@ public class BattleManager : MonoBehaviour
         }
 
         // 외부 참조 연결
+     
         controller.playerController = playerController;
         controller.rewardManager = rewardManager;
         controller.panul = panul;

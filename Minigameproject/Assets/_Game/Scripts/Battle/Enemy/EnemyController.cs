@@ -13,7 +13,8 @@ public class EnemyController : MonoBehaviour
 
     public GameObject aemorOB;
     public TextMeshProUGUI Armor;
-    private int currentHealth;
+
+    public int currentHealth;
     private int patternIndex = 0;
     private bool isDead;
 
@@ -79,7 +80,7 @@ public class EnemyController : MonoBehaviour
         }
 
 
-       
+
         if (block > 0)
         {
             int blockedDamage = Mathf.Min(block, damage);
@@ -103,7 +104,7 @@ public class EnemyController : MonoBehaviour
             Die();
     }
 
-     public void GainBlock(int amount)
+    public void GainBlock(int amount)
     {
         block += amount;
         if (block > 0)
@@ -128,9 +129,12 @@ public class EnemyController : MonoBehaviour
         isDead = true;
         panul.SetActive(true);
         rewardManager.rewardbutton.SetActive(true);
+
+        BattleController bc = FindObjectOfType<BattleController>();
+        if (bc != null) bc.Didie();
+
         gameObject.SetActive(false);
     }
-    
     public void ResetBlock()
     {
         block = 0;
