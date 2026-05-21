@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2979194778711039414, guid: 2aeb46ae7ffbf4b449f051a209ca206a, type: 3}
+  m_Sprite: {fileID: -1033350549586497293, guid: e541b0909d69a0f47a17e3dab56ae191, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 6310592684776803285}
   - component: {fileID: 1878026248818095622}
   m_Layer: 0
-  m_Name: Brute Bonnet
+  m_Name: Molaob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
