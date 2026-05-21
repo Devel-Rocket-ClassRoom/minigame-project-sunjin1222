@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -9,9 +10,14 @@ public class EnemyController : MonoBehaviour
     public EnemyAnimator enemyAnimator;
 
     private EnemyData enemyData;
+
+    public GameObject aemorOB;
+    public TextMeshProUGUI Armor;
     private int currentHealth;
     private int patternIndex = 0;
     private bool isDead;
+
+    public int block;
 
     private void Start() { }
 
@@ -54,7 +60,8 @@ public class EnemyController : MonoBehaviour
                     break;
 
                 case EnemyActionType.Defense:
-                    Debug.Log($"{enemyData.enemyName} 방어 준비");
+                    GainBlock(pattern.value);
+                    Debug.Log($"{enemyData.enemyName} {pattern.value}방어 준비");
                     break;
             }
 
@@ -71,6 +78,20 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
+
+       
+        if (block > 0)
+        {
+            int blockedDamage = Mathf.Min(block, damage);
+            block -= blockedDamage;
+            damage -= blockedDamage;
+            aemorOB.SetActive(true);
+            Armor.text = block.ToString();
+            if (block <= 0)
+                aemorOB.SetActive(false);
+        }
+
+
         currentHealth -= damage;
         if (currentHealth < 0) currentHealth = 0;
 
@@ -80,6 +101,20 @@ public class EnemyController : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
+    }
+
+     public void GainBlock(int amount)
+    {
+        block += amount;
+        if (block > 0)
+        {
+            aemorOB.SetActive(true);
+            Armor.text = block.ToString();
+        }
+        else
+        {
+            aemorOB.SetActive(false);
+        }
     }
 
     private void UpdateIntent()
@@ -94,5 +129,11 @@ public class EnemyController : MonoBehaviour
         panul.SetActive(true);
         rewardManager.rewardbutton.SetActive(true);
         gameObject.SetActive(false);
+    }
+    
+    public void ResetBlock()
+    {
+        block = 0;
+        aemorOB.SetActive(false);
     }
 }

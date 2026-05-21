@@ -15,11 +15,14 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI sliderHealth;
     public TextMeshProUGUI Armor;
 
-    // public PlayerAnimator playerAnimator; // 피격 애니메이션
+    // public PlayerAnimator playerAnimator;
 
     private void Start()
     {
-        currentHealth = maxHealth;
+
+        maxHealth = RunData.maxHp;
+        currentHealth = RunData.currentHp;
+
         block = 0;
         slider.maxValue = maxHealth;
         slider.value = currentHealth;
@@ -58,10 +61,12 @@ public class PlayerController : MonoBehaviour
         currentHealth -= remainingDamage;
         if (currentHealth < 0) currentHealth = 0;
 
+        // RunData에 HP 반영
+        RunData.currentHp = currentHealth;
+
         slider.value = currentHealth;
         sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
 
-        // 피격 애니메이션
         // if (playerAnimator != null)
         //     playerAnimator.PlayHit();
 
@@ -77,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        RunDeck.Clear();
+        RunData.Clear();
         gameover.SetActive(true);
     }
 }

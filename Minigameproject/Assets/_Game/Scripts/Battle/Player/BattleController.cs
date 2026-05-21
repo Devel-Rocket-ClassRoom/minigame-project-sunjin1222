@@ -53,7 +53,7 @@ public class BattleController : MonoBehaviour
                 effect.Apply(context);
             }
         }
-
+        enemyController.ResetBlock();
         boardManager.DiscardBoard(deckManager);
         boardManager.DestroyTiles();
         boardManager.ClearBoard();

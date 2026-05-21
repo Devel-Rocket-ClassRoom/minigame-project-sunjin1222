@@ -17,9 +17,8 @@ public class DeckManager : MonoBehaviour
 
     private void Start()
     {
-
-        if (!RunDeck.IsInitialized)
-            RunDeck.Init(startDeck);
+        if (!RunData.IsInitialized)
+            RunData.Init(startDeck, 50);
 
         InitializeDeck();
         DrawCards(StartHand);
@@ -30,13 +29,13 @@ public class DeckManager : MonoBehaviour
         deck.Clear();
         discardPile.Clear();
 
-        if (RunDeck.currentDeck == null || RunDeck.currentDeck.Count == 0)
+        if (RunData.currentDeck == null || RunData.currentDeck.Count == 0)
         {
-            Debug.LogWarning("[DeckManager] RunDeck이 비어있습니다.");
+            Debug.LogWarning("[DeckManager] RunData가 비어있습니다.");
             return;
         }
 
-        foreach (CardData card in RunDeck.currentDeck)
+        foreach (CardData card in RunData.currentDeck)
         {
             if (card == null) continue;
             deck.Add(card);
@@ -90,7 +89,7 @@ public class DeckManager : MonoBehaviour
 
     public void AddCardToDeck(CardData card)
     {
-        RunDeck.AddCard(card);
+        RunData.AddCard(card);
         deck.Add(card);
     }
 
