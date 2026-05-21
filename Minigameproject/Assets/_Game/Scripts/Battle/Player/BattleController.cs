@@ -9,19 +9,33 @@ public class BattleController : MonoBehaviour
     public PlayerController playerController;
     public DeckManager deckManager;
 
+    private void Start()
+    {
+        // BattleManager.Awake()에서 생성된 적 컨트롤러 가져오기
+        if (BattleManager.CurrentEnemy != null)
+            enemyController = BattleManager.CurrentEnemy;
+        else
+            Debug.LogError("[BattleController] BattleManager.CurrentEnemy가 null입니다.");
+    }
+
     public void OnResetClicked()
     {
         if (boardManager == null || handManager == null)
         {
-            Debug.LogError("[ButtonUI] BoardManager 또는 HandManager가 미할당입니다.");
+            Debug.LogError("[BattleController] BoardManager 또는 HandManager가 미할당입니다.");
             return;
         }
-
         boardManager.ReturnAllToHand(handManager);
     }
 
     public void OnClickEndTurnButton()
     {
+        if (enemyController == null)
+        {
+            Debug.LogError("[BattleController] enemyController가 null입니다.");
+            return;
+        }
+
         EffectContext context = new EffectContext
         {
             enemyController = enemyController,
@@ -30,7 +44,6 @@ public class BattleController : MonoBehaviour
             deckManager = deckManager
         };
 
-        // 1. 카드 발동
         var cards = boardManager.GetActivationOrder();
         foreach (CardData card in cards)
         {
@@ -40,9 +53,10 @@ public class BattleController : MonoBehaviour
                 effect.Apply(context);
             }
         }
-        boardManager.DiscardBoard(deckManager); 
-        boardManager.DestroyTiles();        
-        boardManager.ClearBoard();           
+
+        boardManager.DiscardBoard(deckManager);
+        boardManager.DestroyTiles();
+        boardManager.ClearBoard();
         handManager.DiscardAll();
 
         enemyController.DoTurn();
