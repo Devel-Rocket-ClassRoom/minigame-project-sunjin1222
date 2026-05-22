@@ -19,6 +19,6 @@ public class CardData : ScriptableObject
     
     public CardType cardType;
     public GameObject tileBlockPrefab;
-    public float floatingPreviewTileSize = 150f;
+    public float floatingPreviewTileSize = 60f;
     public GameObject boardPreviewPrefab;
 }

@@ -20,7 +20,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 4a732cf07b1660d4bac12dfae45a2b01, type: 2}
   description: "\uBC29\uC5B4 8"
-  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: -3291044538340086059, guid: d2e1504ebd7d24c4b8951a8324ec34b4, type: 3}
   cardType: 1
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
   floatingPreviewTileSize: 60
