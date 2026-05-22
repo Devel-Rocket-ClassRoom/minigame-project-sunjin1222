@@ -45,7 +45,7 @@ public class EnemyUI : MonoBehaviour
                 intentText.text = $"공격 {pattern.value}";
                 break;
             case EnemyActionType.Defense:
-                intentText.text = "방어";
+                intentText.text = $"방어{pattern.value}";
                 break;
         }
     }
