@@ -14,13 +14,12 @@ public class EnemyController : MonoBehaviour
     public GameObject aemorOB;
     public TextMeshProUGUI Armor;
 
+
     public int currentHealth;
     private int patternIndex = 0;
     private bool isDead;
 
     public int block;
-
-    private void Start() { }
 
     public void Initialize(EnemyData data)
     {
@@ -129,6 +128,9 @@ public class EnemyController : MonoBehaviour
         isDead = true;
         panul.SetActive(true);
         rewardManager.rewardbutton.SetActive(true);
+
+        Debug.Log($"{RunData.currentFloor}죽음 호출");
+        RunData.currentFloor+=1;
 
         BattleController bc = FindObjectOfType<BattleController>();
         if (bc != null) bc.Didie();

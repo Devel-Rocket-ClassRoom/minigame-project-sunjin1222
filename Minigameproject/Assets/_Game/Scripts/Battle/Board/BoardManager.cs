@@ -59,8 +59,8 @@ public class BoardManager : MonoBehaviour
 
         foreach (Vector2Int offset in card.tileShape)
         {
-            int targetCol = startCol + offset.x;
-            int targetRow = startRow + offset.y;
+            int targetCol = startCol + offset.x - card.tileOrigin.x;
+            int targetRow = startRow + offset.y - card.tileOrigin.y;
 
             if (targetCol < 0 || targetCol >= Width || targetRow < 0 || targetRow >= Height)
             {
@@ -89,8 +89,8 @@ public class BoardManager : MonoBehaviour
 
         foreach (Vector2Int offset in card.tileShape)
         {
-            int targetCol = startCol + offset.x;
-            int targetRow = startRow + offset.y;
+            int targetCol = startCol + offset.x - card.tileOrigin.x;
+            int targetRow = startRow + offset.y - card.tileOrigin.y;
             int targetIndex = targetCol + targetRow * Width;
 
             placedCards[targetIndex] = card;
@@ -145,6 +145,18 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+
+    public bool IsCellInPlacement(int originIndex, int cellIndex)
+    {
+        if (originIndex < 0)
+            return false;
+
+        if (cellIndex < 0 || cellIndex >= cardOrigin.Length)
+            return false;
+
+        return cardOrigin[cellIndex] == originIndex;
+    }
+
     public void DiscardBoard(DeckManager deckManager)
     {
         HashSet<int> seenOrigins = new HashSet<int>();

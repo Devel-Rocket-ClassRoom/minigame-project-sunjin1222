@@ -24,9 +24,40 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler
     {
         if (BattleController.IsTurnProcessing) return;
         if (!IsActivePlacement) return;
+        if (!IsPointerOnTile(eventData)) return;
 
         boardManager.RemoveCard(originIndex);
         handManager.AddCard(cardData);
         Destroy(gameObject);
+    }
+
+    private bool IsPointerOnTile(PointerEventData eventData)
+    {
+        if (boardManager == null || boardManager.gridCells == null)
+            return true;
+
+        for (int i = 0; i < boardManager.gridCells.Length; i++)
+        {
+            GameObject cell = boardManager.gridCells[i];
+
+            if (cell == null)
+                continue;
+
+            RectTransform cellRect = cell.GetComponent<RectTransform>();
+
+            if (cellRect == null)
+                continue;
+
+            if (RectTransformUtility.RectangleContainsScreenPoint(
+                cellRect,
+                eventData.position,
+                eventData.pressEventCamera
+            ))
+            {
+                return boardManager.IsCellInPlacement(originIndex, i);
+            }
+        }
+
+        return false;
     }
 }

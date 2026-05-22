@@ -16,10 +16,12 @@ MonoBehaviour:
   tileShape:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
+  tileOrigin: {x: 0, y: 0}
   effects:
   - {fileID: 11400000, guid: 4a732cf07b1660d4bac12dfae45a2b01, type: 2}
   description: "\uBC29\uC5B4 8"
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   cardType: 1
-  floatingPreviewPrefab: {fileID: 1100, guid: 9a6d3b85ed619af4eb8e804009a17194, type: 3}
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
   boardPreviewPrefab: {fileID: 1100, guid: 9a6d3b85ed619af4eb8e804009a17194, type: 3}
