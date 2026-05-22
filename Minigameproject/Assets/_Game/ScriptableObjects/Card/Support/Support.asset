@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Support
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: 
-  cardType: 2
-  cost: 0
-  power: 0
+  tileShape: []
+  tileOrigin: {x: 0, y: 0}
+  effects: []
   description: 
   icon: {fileID: 0}
+  cardType: 2
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 0}

@@ -1,7 +1,4 @@
-
 using UnityEngine;
-
-
 
 public enum CardType 
 {
@@ -15,12 +12,13 @@ public class CardData : ScriptableObject
 {
     public string cardName;
     public Vector2Int[] tileShape;
+    public Vector2Int tileOrigin;
     public EffectSO[] effects;
     [TextArea] public string description;
     public Sprite icon;
     
     public CardType cardType;
-    public GameObject floatingPreviewPrefab; 
+    public GameObject tileBlockPrefab;
+    public float floatingPreviewTileSize = 150f;
     public GameObject boardPreviewPrefab;
-
 }
