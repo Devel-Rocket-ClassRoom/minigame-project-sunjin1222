@@ -12,4 +12,8 @@ public class BlockEffect : EffectSO
     {
         context.playerController.GainBlock(block);
     }
+        public override void Preview(EffectContext context, EffectPreviewResult result)
+    {
+        result.block += block;
+    }
 }

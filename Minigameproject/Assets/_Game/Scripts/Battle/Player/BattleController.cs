@@ -44,62 +44,69 @@ public class BattleController : MonoBehaviour
         StartCoroutine(TurnRoutine());
     }
 
- private IEnumerator TurnRoutine()
-{
-    IsTurnProcessing = true;
-
-    EffectContext context = new EffectContext
+    private IEnumerator TurnRoutine()
     {
-        enemyController = enemyController,
-        playerController = playerController,
-        handManager = handManager,
-        deckManager = deckManager
-    };
+        IsTurnProcessing = true;
 
-    handManager.DiscardAll();
-
-    var cards = boardManager.GetActivationOrder();
-
-    foreach (CardData card in cards)
-    {
-        if (enemyController.currentHealth <= 0)
-            break;
-
-        if (card.effects == null || card.effects.Length == 0)
-            continue;
-
-        foreach (EffectSO effect in card.effects)
+        EffectContext context = new EffectContext
         {
+            enemyController = enemyController,
+            playerController = playerController,
+            handManager = handManager,
+            deckManager = deckManager
+        };
+
+        handManager.DiscardAll();
+
+        var cards = boardManager.GetActivationOrder();
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            BoardCardEntry entry = cards[i];
+            CardData card = entry.card;
+
+            context.activationOrder = i + 1;
+            context.adjacentCardCount =
+                boardManager.CountAdjacentCards(entry.originIndex);
+
             if (enemyController.currentHealth <= 0)
                 break;
 
-            effect.Apply(context);
-            yield return new WaitForSeconds(0.5f);
+            if (card.effects == null || card.effects.Length == 0)
+                continue;
+
+            foreach (EffectSO effect in card.effects)
+            {
+                if (enemyController.currentHealth <= 0)
+                    break;
+
+                effect.Apply(context);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
+        if (enemyController.currentHealth > 0)
+        {
+            enemyController.ResetBlock();
+
+            yield return new WaitForSeconds(0.5f);
+
+            enemyController.DoTurn();
+
+            yield return new WaitForSeconds(1f);
+
+            playerController.ResetBlock();
+
+
+            boardManager.DiscardBoard(deckManager);
+            boardManager.DestroyTiles();
+            boardManager.ClearBoard();
+            boardManager.RefreshCardPreviewTexts();
+
+            deckManager.DrawCards(6);
+        }
+
+        IsTurnProcessing = false;
     }
-
-    if (enemyController.currentHealth > 0)
-    {
-        enemyController.ResetBlock();
-
-        yield return new WaitForSeconds(0.5f);
-
-        enemyController.DoTurn();
-
-        yield return new WaitForSeconds(1f);
-
-        playerController.ResetBlock();
-    
-
-    boardManager.DiscardBoard(deckManager);
-    boardManager.DestroyTiles();
-    boardManager.ClearBoard();
-
-    deckManager.DrawCards(6);
-    }
-
-    IsTurnProcessing = false;
-}
 
     public void Didie()
     {

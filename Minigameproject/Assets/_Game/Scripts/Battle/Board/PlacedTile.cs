@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,6 +7,13 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler
     private CardData cardData;
     private BoardManager boardManager;
     private HandManager handManager;
+
+
+    public TextMeshProUGUI ActivationOrder;
+    public TextMeshProUGUI Value;
+
+    public int OriginIndex => originIndex;
+
     private int placedId = -1;
     private int originIndex = -1;
 
@@ -27,10 +35,15 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler
         if (!IsPointerOnTile(eventData)) return;
 
         boardManager.RemoveCard(originIndex);
+        boardManager.UnregisterPlacedTile(gameObject);
         handManager.AddCard(cardData);
-        Destroy(gameObject);
-    }
 
+        gameObject.SetActive(false);
+        boardManager.RefreshCardPreviewTexts();
+
+        Destroy(gameObject);
+
+    }
     private bool IsPointerOnTile(PointerEventData eventData)
     {
         if (boardManager == null || boardManager.gridCells == null)
@@ -59,5 +72,14 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler
         }
 
         return false;
+    }
+
+    public void SetPreviewText(string orderText, string valueText = "")
+    {
+        if (ActivationOrder != null)
+            ActivationOrder.text = orderText;
+
+        if (Value != null)
+            Value.text = valueText;
     }
 }

@@ -8,4 +8,8 @@ public class EffectContext
     public HandManager handManager;
     public DeckManager deckManager;
     public List<CardData> activatedCards = new List<CardData>();
+
+    public int activationOrder;
+
+    public int adjacentCardCount;
 }

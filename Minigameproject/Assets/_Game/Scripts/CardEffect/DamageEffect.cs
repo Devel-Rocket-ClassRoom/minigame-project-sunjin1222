@@ -12,4 +12,8 @@ public class DamageEffect : EffectSO
     {
         context.enemyController.TakeDamage(damage);
     }
+    public override void Preview(EffectContext context, EffectPreviewResult result)
+    {
+        result.damage += damage;
+    }
 }
