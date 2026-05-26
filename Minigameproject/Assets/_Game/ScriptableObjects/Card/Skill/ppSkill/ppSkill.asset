@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: ppSkill
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: "pp\uBC29\uC5B4"
+  tileShape:
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 1, y: 0}
+  tileOrigin: {x: 0, y: 0}
+  effects:
+  - {fileID: 11400000, guid: 4fda31ecc8b337b4f90ab54b171115b7, type: 2}
+  description: "\uBC29\uC5B4 8\n\uC11C\uC0AC 2 : +5"
+  icon: {fileID: -1033350549586497293, guid: e541b0909d69a0f47a17e3dab56ae191, type: 3}
+  cardType: 1
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: 71e3a22e78b53764d9c3878778aa956d, type: 3}

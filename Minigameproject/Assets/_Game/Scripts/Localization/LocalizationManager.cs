@@ -1,23 +1,6 @@
 using UnityEngine;
 
-
-
-public enum MapNodeType
-{
-    NormalBattle,
-    EliteBattle,
-    Rest,
-    Boss
-}
-
-public enum MapNodeState
-{
-    Locked,
-    Available,
-    Cleared
-}
-
-public class MapNode : MonoBehaviour
+public class LocalizationManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -2,6 +2,19 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+
+public class BoardCardEntry
+{
+    public CardData card;
+    public int originIndex;
+
+    public BoardCardEntry(CardData card, int originIndex)
+    {
+        this.card = card;
+        this.originIndex = originIndex;
+    }
+}
+
 public class BoardManager : MonoBehaviour
 {
     public const int Width = 3;
@@ -22,7 +35,7 @@ public class BoardManager : MonoBehaviour
 
     public void ReturnAllToHand(HandManager handManager)
     {
-  
+
         foreach (GameObject tile in placedTileObjects)
         {
             if (tile != null) Destroy(tile);
@@ -43,6 +56,7 @@ public class BoardManager : MonoBehaviour
             placedCards[i] = null;
             cardOrigin[i] = -1;
         }
+        RefreshCardPreviewTexts();
     }
 
     private void Awake()
@@ -78,6 +92,8 @@ public class BoardManager : MonoBehaviour
         return true;
     }
 
+
+
     public bool PlaceCard(CardData card, int startIndex)
     {
         if (!CanPlace(card, startIndex))
@@ -109,9 +125,9 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public List<CardData> GetActivationOrder()
+    public List<BoardCardEntry> GetActivationOrder()
     {
-        List<CardData> result = new List<CardData>();
+        List<BoardCardEntry> result = new List<BoardCardEntry>();
         HashSet<int> seenOrigins = new HashSet<int>();
 
         for (int i = 0; i < placedCards.Length; i++)
@@ -126,7 +142,7 @@ public class BoardManager : MonoBehaviour
             if (!seenOrigins.Add(origin))
                 continue;
 
-            result.Add(card);
+            result.Add(new BoardCardEntry(card, origin));
         }
 
         return result;
@@ -157,6 +173,49 @@ public class BoardManager : MonoBehaviour
         return cardOrigin[cellIndex] == originIndex;
     }
 
+    public int CountAdjacentCards(int originIndex)
+    {
+        HashSet<int> adjacentOrigins = new HashSet<int>();
+
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            if (cardOrigin[i] != originIndex)
+                continue;
+
+            int row = i / Width;
+            int col = i % Width;
+
+            AddAdjacentOrigin(row - 1, col, originIndex, adjacentOrigins);
+            AddAdjacentOrigin(row + 1, col, originIndex, adjacentOrigins);
+            AddAdjacentOrigin(row, col - 1, originIndex, adjacentOrigins);
+            AddAdjacentOrigin(row, col + 1, originIndex, adjacentOrigins);
+        }
+
+        return adjacentOrigins.Count;
+    }
+
+    private void AddAdjacentOrigin(
+        int row,
+        int col,
+        int currentOrigin,
+        HashSet<int> adjacentOrigins)
+    {
+        if (row < 0 || row >= Height || col < 0 || col >= Width)
+            return;
+
+        int index = col + row * Width;
+
+        if (placedCards[index] == null)
+            return;
+
+        int neighborOrigin = cardOrigin[index];
+
+        if (neighborOrigin == currentOrigin)
+            return;
+
+        adjacentOrigins.Add(neighborOrigin);
+    }
+
     public void DiscardBoard(DeckManager deckManager)
     {
         HashSet<int> seenOrigins = new HashSet<int>();
@@ -175,6 +234,76 @@ public class BoardManager : MonoBehaviour
             if (tile != null) Destroy(tile);
         }
         placedTileObjects.Clear();
+    }
+
+    public void RefreshCardPreviewTexts()
+    {
+        List<BoardCardEntry> entries = GetActivationOrder();
+
+        foreach (GameObject tileObject in placedTileObjects)
+        {
+            PlacedTile tile = tileObject.GetComponent<PlacedTile>();
+
+            if (tile != null)
+            {
+                tile.SetPreviewText("", "");
+            }
+        }
+
+        for (int i = 0; i < entries.Count; i++)
+        {
+            BoardCardEntry entry = entries[i];
+
+            EffectContext context = new EffectContext
+            {
+                activationOrder = i + 1,
+                adjacentCardCount = CountAdjacentCards(entry.originIndex)
+            };
+
+            EffectPreviewResult result = new EffectPreviewResult();
+
+            if (entry.card.effects != null)
+            {
+                foreach (EffectSO effect in entry.card.effects)
+                {
+                    if (effect != null)
+                    {
+                        effect.Preview(context, result);
+                    }
+                }
+            }
+
+            string valueText = BuildPreviewText(result);
+
+            foreach (GameObject tileObject in placedTileObjects)
+            {
+                PlacedTile tile = tileObject.GetComponent<PlacedTile>();
+
+                if (tile != null && tile.OriginIndex == entry.originIndex)
+                {
+                    tile.SetPreviewText($"{i + 1}", valueText);
+                    break;
+                }
+            }
+        }
+    }
+    public void UnregisterPlacedTile(GameObject tile)
+    {
+        placedTileObjects.Remove(tile);
+    }
+
+    private string BuildPreviewText(EffectPreviewResult result)
+    {
+        if (result.damage > 0 && result.block > 0)
+            return $"피해 {result.damage} / 방어 {result.block}";
+
+        if (result.damage > 0)
+            return $"피해 {result.damage}";
+
+        if (result.block > 0)
+            return $"방어 {result.block}";
+
+        return "";
     }
 
 }

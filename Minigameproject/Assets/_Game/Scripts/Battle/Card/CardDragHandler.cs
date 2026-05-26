@@ -92,6 +92,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             previewTiles.Clear();
             handManager.RemoveCard(cardView);
             Destroy(gameObject);
+            boardManager.RefreshCardPreviewTexts();
         }
         else
         {
