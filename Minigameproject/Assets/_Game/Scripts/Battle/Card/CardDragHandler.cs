@@ -20,6 +20,10 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private List<GameObject> previewTiles = new List<GameObject>();
     private int currentPreviewId;
 
+    // 2026-05-26: Preserve placed-card state so a failed board move can restore its original slot.
+    private bool isMovingPlacedCard;
+    private int originalBoardIndex = -1;
+
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -35,6 +39,16 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         cardData = data;
     }
 
+    // 2026-05-26: Placed cards reuse the hand drag flow without being added back to the hand.
+    public void SetupPlacedCardMove(CardData data, BoardManager board, HandManager hand, int originIndex)
+    {
+        cardData = data;
+        boardManager = board;
+        handManager = hand;
+        isMovingPlacedCard = true;
+        originalBoardIndex = originIndex;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (BattleController.IsTurnProcessing)
@@ -44,6 +58,13 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
 
         originalPosition = rect.anchoredPosition;
+
+        if (isMovingPlacedCard)
+        {
+            boardManager.RemoveCard(originalBoardIndex);
+            boardManager.UnregisterPlacedTile(gameObject);
+            boardManager.RefreshCardPreviewTexts();
+        }
 
         canvasGroup.alpha = 0f;
         canvasGroup.blocksRaycasts = false;
@@ -73,7 +94,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (cellIndex == -1)
         {
             DestroyPreview();
-            ReturnToHand();
+            CancelDrag();
             return;
         }
 
@@ -90,15 +111,36 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             }
 
             previewTiles.Clear();
-            handManager.RemoveCard(cardView);
+
+            if (!isMovingPlacedCard)
+            {
+                handManager.RemoveCard(cardView);
+            }
+
             Destroy(gameObject);
             boardManager.RefreshCardPreviewTexts();
         }
         else
         {
             DestroyPreview();
-            ReturnToHand();
+            CancelDrag();
         }
+    }
+
+    // 2026-05-26: A board card dropped in an invalid location returns to its previous placement.
+    private void CancelDrag()
+    {
+        if (isMovingPlacedCard)
+        {
+            boardManager.PlaceCard(cardData, originalBoardIndex);
+            boardManager.RegisterPlacedTile(gameObject);
+            canvasGroup.alpha = 1f;
+            canvasGroup.blocksRaycasts = true;
+            boardManager.RefreshCardPreviewTexts();
+            return;
+        }
+
+        ReturnToHand();
     }
 
     private void ReturnToHand()
@@ -255,6 +297,19 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             cellIndex
         );
 
+        // 2026-05-26: Every placed card can be picked up and repositioned on the board.
+        CardDragHandler placedDragHandler = placed.GetComponent<CardDragHandler>();
+
+        if (placedDragHandler == null)
+            placedDragHandler = placed.AddComponent<CardDragHandler>();
+
+        placedDragHandler.SetupPlacedCardMove(
+            cardData,
+            boardManager,
+            handManager,
+            cellIndex
+        );
+
         previewTiles.Add(placed);
     }
 
@@ -344,7 +399,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             }
         }
 
-        float threshold = 60f;
+        float threshold = 90f;
 
         if (nearestDistance > threshold)
             return -1;
