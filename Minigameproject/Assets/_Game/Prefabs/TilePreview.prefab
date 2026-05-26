@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff3f8a5a7603f34a81f21ab5a3c9e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacedTile
+  ActivationOrder: {fileID: 0}
+  Value: {fileID: 0}
 --- !u!222 &4100
 CanvasRenderer:
   m_ObjectHideFlags: 0

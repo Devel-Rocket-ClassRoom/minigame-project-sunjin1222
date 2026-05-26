@@ -238,6 +238,8 @@ public class BoardManager : MonoBehaviour
 
     public void RefreshCardPreviewTexts()
     {
+        placedTileObjects.RemoveAll(tile => tile == null);
+
         List<BoardCardEntry> entries = GetActivationOrder();
 
         foreach (GameObject tileObject in placedTileObjects)
