@@ -11,8 +11,6 @@ public class BoardManager : MonoBehaviour
     private int[] cardOrigin;
     public GameObject[] gridCells;
 
-
-
     private List<GameObject> placedTileObjects = new List<GameObject>();
 
     public void RegisterPlacedTile(GameObject tile)
@@ -22,13 +20,11 @@ public class BoardManager : MonoBehaviour
 
     public void ReturnAllToHand(HandManager handManager)
     {
-  
         foreach (GameObject tile in placedTileObjects)
         {
             if (tile != null) Destroy(tile);
         }
         placedTileObjects.Clear();
-
 
         HashSet<int> seenOrigins = new HashSet<int>();
         for (int i = 0; i < placedCards.Length; i++)
@@ -63,16 +59,12 @@ public class BoardManager : MonoBehaviour
             int targetRow = startRow + offset.y - card.tileOrigin.y;
 
             if (targetCol < 0 || targetCol >= Width || targetRow < 0 || targetRow >= Height)
-            {
                 return false;
-            }
 
             int targetIndex = targetCol + targetRow * Width;
 
             if (placedCards[targetIndex] != null)
-            {
                 return false;
-            }
         }
 
         return true;
@@ -81,9 +73,8 @@ public class BoardManager : MonoBehaviour
     public bool PlaceCard(CardData card, int startIndex)
     {
         if (!CanPlace(card, startIndex))
-        {
             return false;
-        }
+
         int startRow = startIndex / Width;
         int startCol = startIndex % Width;
 
@@ -117,14 +108,10 @@ public class BoardManager : MonoBehaviour
         for (int i = 0; i < placedCards.Length; i++)
         {
             CardData card = placedCards[i];
-
-            if (card == null)
-                continue;
+            if (card == null) continue;
 
             int origin = cardOrigin[i];
-
-            if (!seenOrigins.Add(origin))
-                continue;
+            if (!seenOrigins.Add(origin)) continue;
 
             result.Add(card);
         }
@@ -148,12 +135,8 @@ public class BoardManager : MonoBehaviour
 
     public bool IsCellInPlacement(int originIndex, int cellIndex)
     {
-        if (originIndex < 0)
-            return false;
-
-        if (cellIndex < 0 || cellIndex >= cardOrigin.Length)
-            return false;
-
+        if (originIndex < 0) return false;
+        if (cellIndex < 0 || cellIndex >= cardOrigin.Length) return false;
         return cardOrigin[cellIndex] == originIndex;
     }
 
@@ -177,4 +160,63 @@ public class BoardManager : MonoBehaviour
         placedTileObjects.Clear();
     }
 
+    /// <summary>
+    /// 체인 키워드용 — originIndex 카드에 상하좌우 인접한 다른 카드 수 반환
+    /// </summary>
+    public int GetAdjacentCardCount(int originIndex)
+    {
+        // originIndex 카드가 점유한 칸 목록 수집
+        HashSet<int> ownCells = new HashSet<int>();
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            if (cardOrigin[i] == originIndex)
+                ownCells.Add(i);
+        }
+
+        // 인접 칸 중 다른 카드가 있는 originIndex 수집
+        HashSet<int> adjacentOrigins = new HashSet<int>();
+        int[] dx = { 1, -1, 0, 0 };
+        int[] dy = { 0, 0, 1, -1 };
+
+        foreach (int cell in ownCells)
+        {
+            int row = cell / Width;
+            int col = cell % Width;
+
+            for (int d = 0; d < 4; d++)
+            {
+                int nCol = col + dx[d];
+                int nRow = row + dy[d];
+
+                if (nCol < 0 || nCol >= Width || nRow < 0 || nRow >= Height) continue;
+
+                int nIndex = nCol + nRow * Width;
+                int nOrigin = cardOrigin[nIndex];
+
+                if (nOrigin >= 0 && nOrigin != originIndex)
+                    adjacentOrigins.Add(nOrigin);
+            }
+        }
+
+        return adjacentOrigins.Count;
+    }
+
+    /// <summary>
+    /// 카드의 originIndex 반환 (EffectContext 세팅용)
+    /// </summary>
+    public int GetOriginIndex(CardData card)
+    {
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            if (placedCards[i] == card && cardOrigin[i] == i)
+                return i;
+        }
+        // tileOrigin 기준 첫 번째 칸 반환
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            if (placedCards[i] == card)
+                return cardOrigin[i];
+        }
+        return -1;
+    }
 }
