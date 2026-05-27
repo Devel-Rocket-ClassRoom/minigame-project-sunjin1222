@@ -23,8 +23,11 @@ public class BattleManager : MonoBehaviour
         if (playerController == null)
             Debug.LogError("[BattleManager] playerController가 인스펙터에 연결되지 않았습니다!");
 
-        EnemyData random = enemyPool[Random.Range(0, enemyPool.Length)];
-        SpawnEnemy(random);
+        EnemyData enemyToSpawn = RunData.selectedEnemy != null
+            ? RunData.selectedEnemy
+            : enemyPool[Random.Range(0, enemyPool.Length)];
+
+        SpawnEnemy(enemyToSpawn);
     }
 
     private void SpawnEnemy(EnemyData data)

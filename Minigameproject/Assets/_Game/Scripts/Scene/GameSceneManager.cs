@@ -10,8 +10,22 @@ public class GameSceneManager : MonoBehaviour
 
     private void Start()
     {
-        floor.text = $"현재{RunData.currentFloor}층";
-        addcard.text = $"추가된 카드:{RunData.AddedCard}장";
+        RefreshMapHud();
+    }
+
+    public void RefreshMapHud()
+    {
+        if (RunData.currentMap != null)
+        {
+            floor.text = $"용사의 연대기 / EP.{RunData.currentMap.episodeNumber}";
+            addcard.text = RunData.currentMap.episodeCompleted
+                ? "사라진 출발 장면 복구 완료"
+                : $"선택: {RunData.currentMap.selectedNodeIds.Count}/3";
+            return;
+        }
+
+        floor.text = "용사의 연대기 / EP.1";
+        addcard.text = "선택: 0/3";
     }
     public void LoadBattleScene()
     {

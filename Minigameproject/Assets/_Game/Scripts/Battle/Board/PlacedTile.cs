@@ -1,8 +1,9 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class PlacedTile : MonoBehaviour, IPointerClickHandler
+public class PlacedTile : MonoBehaviour, IPointerClickHandler, ICanvasRaycastFilter
 {
     private CardData cardData;
     private BoardManager boardManager;
@@ -26,6 +27,7 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler
         handManager = hand;
         placedId = id;
         originIndex = origin;
+        DisableChildRaycastTargets();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -46,6 +48,11 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler
     }
     private bool IsPointerOnTile(PointerEventData eventData)
     {
+        return IsRaycastLocationValid(eventData.position, eventData.pressEventCamera);
+    }
+
+    public bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera)
+    {
         if (boardManager == null || boardManager.gridCells == null)
             return true;
 
@@ -63,8 +70,8 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler
 
             if (RectTransformUtility.RectangleContainsScreenPoint(
                 cellRect,
-                eventData.position,
-                eventData.pressEventCamera
+                screenPoint,
+                eventCamera
             ))
             {
                 return boardManager.IsCellInPlacement(originIndex, i);
@@ -72,6 +79,17 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler
         }
 
         return false;
+    }
+
+    private void DisableChildRaycastTargets()
+    {
+        Graphic[] graphics = GetComponentsInChildren<Graphic>(true);
+
+        foreach (Graphic graphic in graphics)
+        {
+            if (graphic.gameObject != gameObject)
+                graphic.raycastTarget = false;
+        }
     }
 
     public void SetPreviewText(string orderText, string valueText = "")

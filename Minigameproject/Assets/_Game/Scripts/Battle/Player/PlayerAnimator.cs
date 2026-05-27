@@ -39,11 +39,11 @@ public class PlayerAnimator : MonoBehaviour
         {
             spriteRenderer.color = new Color(1f, 0.3f, 0.3f, 1f);
             transform.localPosition = originalPosition + new Vector3(-0.1f, 0, 0);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
 
             spriteRenderer.color = Color.white;
             transform.localPosition = originalPosition + new Vector3(0.1f, 0, 0);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         spriteRenderer.color = Color.white;
