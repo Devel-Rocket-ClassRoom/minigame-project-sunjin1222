@@ -130,7 +130,12 @@ public class EnemyController : MonoBehaviour
         rewardManager.rewardbutton.SetActive(true);
 
         Debug.Log($"{RunData.currentFloor}죽음 호출");
-        RunData.currentFloor+=1;
+        RunData.currentFloor += 1;
+
+        if (RunData.currentMap != null && RunData.selectedNodeId >= 0)
+        {
+            RunData.selectedBattleWon = true;
+        }
 
         BattleController bc = FindObjectOfType<BattleController>();
         if (bc != null) bc.Didie();

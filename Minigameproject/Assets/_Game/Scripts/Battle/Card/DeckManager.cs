@@ -20,6 +20,7 @@ public class DeckManager : MonoBehaviour
         if (!RunData.IsInitialized)
             RunData.Init(startDeck, 50);
 
+        RunData.ApplyPendingRewardCards();
         InitializeDeck();
         DrawCards(StartHand);
     }

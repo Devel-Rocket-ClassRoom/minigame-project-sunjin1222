@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI sliderHealth;
     public TextMeshProUGUI Armor;
 
-    // public PlayerAnimator playerAnimator;
+    public PlayerAnimator playerAnimator;
 
     private void Start()
     {
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
         currentHealth -= remainingDamage;
         if (currentHealth < 0) currentHealth = 0;
+      
 
         // RunData에 HP 반영
         RunData.currentHp = currentHealth;
@@ -67,8 +68,8 @@ public class PlayerController : MonoBehaviour
         slider.value = currentHealth;
         sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
 
-        // if (playerAnimator != null)
-        //     playerAnimator.PlayHit();
+        if (playerAnimator != null)
+            playerAnimator.PlayHit();
 
         if (currentHealth <= 0)
             Die();
@@ -82,6 +83,8 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        BattleController bc = FindObjectOfType<BattleController>();
+        if (bc != null) bc.Didie();
         RunData.Clear();
         gameover.SetActive(true);
     }

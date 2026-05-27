@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: "\uC57D\uD55C \uB2EC\uD33D\uC774"
   enemyType: 0
-  maxHealth: 20
+  maxHealth: 50
   description: 
   patterns:
   - actionType: 0
     value: 15
   - actionType: 1
-    value: 8
-  - actionType: 0
     value: 30
+  - actionType: 0
+    value: 40
   portrait: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
   prefab: {fileID: 1600796342847078890, guid: 3baf033f9260d0740864fad47167b9cf, type: 3}

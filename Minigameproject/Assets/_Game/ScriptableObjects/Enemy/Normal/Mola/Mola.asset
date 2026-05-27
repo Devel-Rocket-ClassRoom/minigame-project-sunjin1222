@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: "\uCE58\uCF54\uCE58\uCF54"
   enemyType: 0
-  maxHealth: 33
+  maxHealth: 50
   description: 
   patterns:
   - actionType: 1
-    value: 8
+    value: 5
   - actionType: 0
     value: 5
   - actionType: 0
