@@ -1,0 +1,54 @@
+{
+  "episodeNumber": 1,
+  "episodeTitle": "사라진 출발 장면",
+  "nodes": [
+    {
+      "id": 0,
+      "floor": 1,
+      "zoneName": "마을 훈련장",
+      "nodeType": "NormalBattle",
+      "riskLevel": 1,
+      "rewardHint": "기본 카드"
+    },
+    {
+      "id": 1,
+      "floor": 1,
+      "zoneName": "숲길 입구",
+      "nodeType": "NormalBattle",
+      "riskLevel": 1,
+      "rewardHint": "체인 카드"
+    },
+    {
+      "id": 2,
+      "floor": 1,
+      "zoneName": "낡은 신전",
+      "nodeType": "Event",
+      "riskLevel": 1,
+      "rewardHint": "회복 / 각성"
+    },
+    {
+      "id": 3,
+      "floor": 1,
+      "zoneName": "오염된 늑대굴",
+      "nodeType": "NormalBattle",
+      "riskLevel": 2,
+      "rewardHint": "공격 카드"
+    },
+    {
+      "id": 4,
+      "floor": 1,
+      "zoneName": "무너진 초소",
+      "nodeType": "NormalBattle",
+      "riskLevel": 2,
+      "rewardHint": "방어 카드"
+    },
+    {
+      "id": 5,
+      "floor": 1,
+      "zoneName": "남아있는 희망",
+      "nodeType": "Event",
+      "riskLevel": 1,
+      "rewardHint": "방어 카드"
+    }
+  ]
+}

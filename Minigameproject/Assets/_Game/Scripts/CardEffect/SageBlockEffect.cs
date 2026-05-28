@@ -14,7 +14,7 @@ public class SageBlockEffect : EffectSO
     public override void Apply(EffectContext context)
     {
         int finalblock = originblock;
-        if (context.activationOrder >= requiredOrder)
+        if (context.activationOrder >= context.GetAdjustedRequiredOrder(requiredOrder))
         {
             finalblock += bonusblock;
         }
@@ -25,7 +25,7 @@ public class SageBlockEffect : EffectSO
     {
         int finalBlock = originblock;
 
-        if (context.activationOrder >= requiredOrder)
+        if (context.activationOrder >= context.GetAdjustedRequiredOrder(requiredOrder))
         {
             finalBlock += bonusblock;
         }

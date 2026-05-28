@@ -1,0 +1,58 @@
+{
+  "episodeNumber": 2,
+  "episodeTitle": "깊어진 균열",
+  "nodes": [
+    {
+      "id": 0,
+      "floor": 2,
+      "zoneName": "버려진 성문",
+      "nodeType": "NormalBattle",
+      "riskLevel": 2,
+      "rewardHint": "공격 카드"
+    },
+    {
+      "id": 1,
+      "floor": 2,
+      "zoneName": "검은 시장",
+      "nodeType": "Event",
+      "riskLevel": 1,
+      "rewardHint": "특수 선택"
+    },
+    {
+      "id": 2,
+      "floor": 2,
+      "zoneName": "균열 숲",
+      "nodeType": "NormalBattle",
+      "riskLevel": 2,
+      "rewardHint": "체인 카드"
+    },
+    {
+      "id": 3,
+      "floor": 2,
+      "zoneName": "퀘스트 낡은 야영지",
+      "nodeType": "Rest",
+      "questId": "HealCamp",
+      "availableEpisodes": [2, 3],
+      "showOnce": true,
+      "mustAppearByEpisode": 3,
+      "riskLevel": 1,
+      "rewardHint": "HP 회복"
+    },
+    {
+      "id": 4,
+      "floor": 2,
+      "zoneName": "붉은 감시탑",
+      "nodeType": "NormalBattle",
+      "riskLevel": 3,
+      "rewardHint": "강화 카드"
+    },
+    {
+      "id": 5,
+      "floor": 2,
+      "zoneName": "사라진 희망",
+      "nodeType": "Event",
+      "riskLevel": 1,
+      "rewardHint": "방어 카드"
+    }
+  ]
+}

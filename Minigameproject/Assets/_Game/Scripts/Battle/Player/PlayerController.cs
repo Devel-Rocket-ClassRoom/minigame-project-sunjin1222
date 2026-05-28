@@ -43,6 +43,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Heal(int amount)
+    {
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+        RunData.currentHp = currentHealth;
+
+        slider.value = currentHealth;
+        sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
+    }
+
     public void TakeDamage(int damage)
     {
         int remainingDamage = damage;

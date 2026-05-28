@@ -126,11 +126,9 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         isDead = true;
+        RelicManager.ApplyRelics(RelicTriggerType.BattleVictory, playerController, null);
         panul.SetActive(true);
         rewardManager.rewardbutton.SetActive(true);
-
-        Debug.Log($"{RunData.currentFloor}죽음 호출");
-        RunData.currentFloor += 1;
 
         if (RunData.currentMap != null && RunData.selectedNodeId >= 0)
         {

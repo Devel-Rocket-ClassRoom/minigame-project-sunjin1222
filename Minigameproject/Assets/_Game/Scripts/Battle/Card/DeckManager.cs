@@ -4,7 +4,7 @@ using TMPro;
 
 public class DeckManager : MonoBehaviour
 {
-    public List<CardData> startDeck;
+    public CharacterData defaultCharacter;
 
     private List<CardData> deck = new List<CardData>();
     private List<CardData> discardPile = new List<CardData>();
@@ -17,8 +17,11 @@ public class DeckManager : MonoBehaviour
 
     private void Start()
     {
+        if (RunData.currentCharacter == null && defaultCharacter != null)
+            RunData.SetCharacter(defaultCharacter);
+
         if (!RunData.IsInitialized)
-            RunData.Init(startDeck, 50);
+            RunData.Init(false);
 
         RunData.ApplyPendingRewardCards();
         InitializeDeck();

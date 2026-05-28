@@ -14,7 +14,7 @@ public class SagaDamageEffect : EffectSO
     public override void Apply(EffectContext context)
     {
         int finalDamage = originDamage;
-        if (context.activationOrder >= requiredOrder)
+        if (context.activationOrder >= context.GetAdjustedRequiredOrder(requiredOrder))
         {
             finalDamage += bonusDamage;
         }
@@ -24,7 +24,7 @@ public class SagaDamageEffect : EffectSO
     {
         int finalDamage = originDamage;
 
-        if (context.activationOrder >= requiredOrder)
+        if (context.activationOrder >= context.GetAdjustedRequiredOrder(requiredOrder))
         {
             finalDamage += bonusDamage;
         }

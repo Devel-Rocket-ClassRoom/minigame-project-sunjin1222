@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85d316f028c2d74c8061e91db5c35be, type: 3}
+  m_Name: Goldpen
+  m_EditorClassIdentifier: Assembly-CSharp::RelicData
+  relicName: "\uD669\uAE08\uD39C"
+  description: "\uD134\uC2DC\uC791\uC2DC \uD55C\uC7A5\uC744 \uB4DC\uB85C\uC6B0 \uD569\uB2C8\uB2E4"
+  icon: {fileID: -7554224688839130104, guid: 9a7d2c359a2771a4499979db3ad2f57b, type: 3}
+  triggerType: 0
+  effectType: 1
+  amount: 1

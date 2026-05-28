@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40c3764f2007ca40a7348af80b9fc34, type: 3}
+  m_Name: sdaass
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterName: "\uB098\uD0C0\uC988\uB2CC"
+  maxHp: 50
+  description: "\uC544\uB098\uB098\uB098\uB098\uB098\uB098\uB098\uB09C"
+  image: {fileID: -1033350549586497293, guid: e541b0909d69a0f47a17e3dab56ae191, type: 3}
+  startDeck:
+  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
+  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
+  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
+  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
+  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
+  - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
+  - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
+  - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
+  - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
+  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  rewardCardPool:
+  - {fileID: 11400000, guid: 78d3dbb385b4a9a469c196f706d5b685, type: 2}
+  - {fileID: 11400000, guid: 09353520ff00d654a99e8cfda5483363, type: 2}
+  - {fileID: 11400000, guid: 5ec9da625fd9a2443bf5bf9297168ea2, type: 2}
+  - {fileID: 11400000, guid: 52fdcfa1d0edb9e42b623b01f3728bbe, type: 2}
+  - {fileID: 11400000, guid: 102ea917b31b548469250ce02fde967d, type: 2}
+  startingRelics:
+  - {fileID: 11400000, guid: 9757ece2e4d148b0819f360e0d9fd717, type: 2}

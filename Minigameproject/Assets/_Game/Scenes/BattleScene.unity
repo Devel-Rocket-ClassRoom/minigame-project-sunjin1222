@@ -1525,8 +1525,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 487}
-  m_SizeDelta: {x: 1829, y: 0}
+  m_AnchoredPosition: {x: 7.249878, y: 487}
+  m_SizeDelta: {x: 1814.4998, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &692888976
 MonoBehaviour:
@@ -2503,19 +2503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cbd3c6e1f58774c882a8dd0d52fc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckManager
-  startDeck:
-  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
-  - {fileID: 11400000, guid: 78d3dbb385b4a9a469c196f706d5b685, type: 2}
-  - {fileID: 11400000, guid: 78d3dbb385b4a9a469c196f706d5b685, type: 2}
-  - {fileID: 11400000, guid: 09353520ff00d654a99e8cfda5483363, type: 2}
-  - {fileID: 11400000, guid: 09353520ff00d654a99e8cfda5483363, type: 2}
-  - {fileID: 11400000, guid: 5ec9da625fd9a2443bf5bf9297168ea2, type: 2}
-  - {fileID: 11400000, guid: 5ec9da625fd9a2443bf5bf9297168ea2, type: 2}
-  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
-  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
-  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
-  - {fileID: 11400000, guid: 52fdcfa1d0edb9e42b623b01f3728bbe, type: 2}
-  - {fileID: 11400000, guid: 52fdcfa1d0edb9e42b623b01f3728bbe, type: 2}
+  defaultCharacter: {fileID: 0}
   handManager: {fileID: 1177024332}
   Deckcount: {fileID: 49916152}
   DisCardcount: {fileID: 1508218938}
@@ -2626,6 +2614,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09353520ff00d654a99e8cfda5483363, type: 2}
   - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
   - {fileID: 11400000, guid: 102ea917b31b548469250ce02fde967d, type: 2}
+  relicPool:
+  - {fileID: 11400000, guid: 48af766061ab1934492808ede69ebb82, type: 2}
+  - {fileID: 11400000, guid: 3ae8fd97a95f45c5bba52ed7963ab471, type: 2}
+  - {fileID: 11400000, guid: 8c0c0197455d4aa69695740df2e82b79, type: 2}
+  - {fileID: 11400000, guid: 9757ece2e4d148b0819f360e0d9fd717, type: 2}
   rewardPanel: {fileID: 1835164616}
   rewardSlots:
   - {fileID: 1640195858}
@@ -2647,6 +2640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameSceneManager
   floor: {fileID: 2080200077}
   addcard: {fileID: 2080200077}
+  HP: {fileID: 0}
 --- !u!114 &1177024340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4125,7 +4119,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1177024338}
         m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
-        m_MethodName: LoadMapScene
+        m_MethodName: LoadTitleScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4947,7 +4941,6 @@ GameObject:
   - component: {fileID: 1646076174}
   - component: {fileID: 1646076173}
   - component: {fileID: 1646076172}
-  - component: {fileID: 1646076175}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
@@ -5019,8 +5012,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1655477622}
-        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+      - m_Target: {fileID: 1177024336}
+        m_TargetAssemblyTypeName: BattleController, Assembly-CSharp
         m_MethodName: OnResetClicked
         m_Mode: 1
         m_Arguments:
@@ -5069,23 +5062,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646076170}
   m_CullTransparentMesh: 1
---- !u!114 &1646076175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646076170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81704e1ca74e4254aafbe1056b493aa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonUI
-  boardManager: {fileID: 1177024334}
-  handManager: {fileID: 1177024332}
-  enemyController: {fileID: 0}
-  playerController: {fileID: 0}
-  deckManager: {fileID: 0}
 --- !u!1 &1655477617
 GameObject:
   m_ObjectHideFlags: 0
@@ -5098,7 +5074,6 @@ GameObject:
   - component: {fileID: 1655477620}
   - component: {fileID: 1655477619}
   - component: {fileID: 1655477618}
-  - component: {fileID: 1655477622}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5198,23 +5173,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1655477622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655477617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81704e1ca74e4254aafbe1056b493aa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonUI
-  boardManager: {fileID: 1177024334}
-  handManager: {fileID: 1177024332}
-  enemyController: {fileID: 1177024341}
-  playerController: {fileID: 1351601481}
-  deckManager: {fileID: 1177024330}
 --- !u!1 &1684692250
 GameObject:
   m_ObjectHideFlags: 0
@@ -6885,7 +6843,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1655477622}
+      - m_Target: {fileID: 1177024336}
         m_TargetAssemblyTypeName: BattleController, Assembly-CSharp
         m_MethodName: OnClickEndTurnButton
         m_Mode: 1
@@ -7432,8 +7390,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2115668033}
   - component: {fileID: 2115668034}
+  - component: {fileID: 2115668035}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: RelicPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7476,14 +7435,29 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: -550
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_Spacing: 8
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2115668035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115668032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30dc3066e8304c14a8d4b4f887a4c25b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RelicDisplayView
+  relicPosition: {fileID: 2115668033}
+  iconSize: {x: 30, y: 30}
+  emptyIconColor: {r: 0.85, g: 0.75, b: 0.35, a: 1}
 --- !u!1 &2119458313
 GameObject:
   m_ObjectHideFlags: 0
@@ -7767,16 +7741,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5434979376463804025, guid: c527f8da249bac0489946b7997115162, type: 3}
       propertyPath: m_Size.x
-      value: 8.29
+      value: 6.62
       objectReference: {fileID: 0}
     - target: {fileID: 5434979376463804025, guid: c527f8da249bac0489946b7997115162, type: 3}
       propertyPath: m_Size.y
-      value: 8.8
+      value: 9.06
       objectReference: {fileID: 0}
     - target: {fileID: 5434979376463804025, guid: c527f8da249bac0489946b7997115162, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1033350549586497293, guid: e541b0909d69a0f47a17e3dab56ae191, type: 3}
+      objectReference: {fileID: 9084827194716846906, guid: 61e9e56191aa57747bc4e10e69794590, type: 3}
     - target: {fileID: 5434979376463804025, guid: c527f8da249bac0489946b7997115162, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

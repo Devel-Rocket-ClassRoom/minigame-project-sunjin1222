@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 // EP 후보 구역과 복구 시작 버튼을 기존 노드 프리팹으로 표시한다.
 public class MapView : MonoBehaviour
 {
     public MapNode nodePrefab;
     public RectTransform nodeContainer;
-    public Image linePrefab;
 
     private readonly Dictionary<int, MapNode> nodeViews =
         new Dictionary<int, MapNode>();
@@ -45,11 +43,6 @@ public class MapView : MonoBehaviour
         UpdateStartButton(mapData, onStart);
     }
 
-    public Vector2 GetFloorPosition(int floor)
-    {
-        return Vector2.zero;
-    }
-
     private void CreateCandidateViews(
         MapData mapData,
         Action<MapNodeData> onSelected)
@@ -60,7 +53,7 @@ public class MapView : MonoBehaviour
             nodeView.Setup(node, onSelected);
 
             RectTransform rect = nodeView.GetComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(260f, 150f);
+            rect.sizeDelta = new Vector2(300f, 210f);
             rect.anchoredPosition = new Vector2(
                 node.column * HorizontalSpacing,
                 CandidateY
@@ -75,7 +68,7 @@ public class MapView : MonoBehaviour
     {
         startButton = Instantiate(nodePrefab, nodeContainer);
         RectTransform rect = startButton.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(340f, 80f);
+        rect.sizeDelta = new Vector2(380f, 120f);
         rect.anchoredPosition = new Vector2(0f, StartButtonY);
         createdObjects.Add(startButton.gameObject);
 
@@ -89,16 +82,32 @@ public class MapView : MonoBehaviour
 
         if (mapData.episodeCompleted)
         {
-            startButton.SetupAction("EP.1 복구 완료", false, null);
+            startButton.SetupAction($"EP.{mapData.episodeNumber} 복구 완료", false, null);
             return;
         }
 
-        bool canStart = mapData.planConfirmed || mapData.selectedNodeIds.Count == 3;
+        bool selectedRequiredNodes = HasSelectedRequiredNodes(mapData);
+        bool canStart = mapData.planConfirmed ||
+            mapData.selectedNodeIds.Count == 3 && selectedRequiredNodes;
         string label = mapData.planConfirmed
             ? $"다음 장면 진행 ({Mathf.Min(mapData.executionIndex + 1, 3)}/3)"
-            : $"복구 시작 ({mapData.selectedNodeIds.Count}/3)";
+            : selectedRequiredNodes
+                ? $"복구 시작 ({mapData.selectedNodeIds.Count}/3)"
+                : $"필수 구역 선택 ({mapData.selectedNodeIds.Count}/3)";
 
         startButton.SetupAction(label, canStart, onStart);
+    }
+
+    private bool HasSelectedRequiredNodes(MapData mapData)
+    {
+        foreach (MapNodeData node in mapData.nodes)
+        {
+            if (node.requiredToProgress &&
+                !mapData.selectedNodeIds.Contains(node.id))
+                return false;
+        }
+
+        return true;
     }
 
     private void ClearRenderedObjects()

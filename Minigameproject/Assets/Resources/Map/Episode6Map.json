@@ -1,0 +1,62 @@
+{
+  "episodeNumber": 6,
+  "episodeTitle": "검은 성벽 아래",
+  "nodes": [
+    {
+      "id": 0,
+      "floor": 6,
+      "zoneName": "성벽 외곽",
+      "nodeType": "NormalBattle",
+      "riskLevel": 4,
+      "rewardHint": "공격 카드"
+    },
+    {
+      "id": 1,
+      "floor": 6,
+      "zoneName": "버려진 병참소",
+      "nodeType": "Rest",
+      "riskLevel": 1,
+      "rewardHint": "HP 회복"
+    },
+    {
+      "id": 2,
+      "floor": 6,
+      "zoneName": "퀘스트 부상병의 은신처",
+      "nodeType": "Event",
+      "questId": "WoundedScout",
+      "availableEpisodes": [6, 7],
+      "showOnce": true,
+      "mustAppearByEpisode": 7,
+      "riskLevel": 2,
+      "rewardHint": "회복 / 보상"
+    },
+    {
+      "id": 3,
+      "floor": 6,
+      "zoneName": "그을린 훈련장",
+      "nodeType": "NormalBattle",
+      "riskLevel": 4,
+      "rewardHint": "방어 카드"
+    },
+    {
+      "id": 4,
+      "floor": 6,
+      "zoneName": "퀘스트 검은 깃발",
+      "nodeType": "Event",
+      "questId": "BlackFlagEvent",
+      "requiredClearedQuestIds": ["BlackBridgeBattle"],
+      "forceInclude": true,
+      "showOnce": true,
+      "riskLevel": 2,
+      "rewardHint": "특수 선택"
+    },
+    {
+      "id": 5,
+      "floor": 6,
+      "zoneName": "성문 경비대",
+      "nodeType": "NormalBattle",
+      "riskLevel": 4,
+      "rewardHint": "강화 카드"
+    }
+  ]
+}

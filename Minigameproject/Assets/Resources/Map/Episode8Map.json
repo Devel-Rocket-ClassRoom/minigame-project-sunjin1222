@@ -1,0 +1,57 @@
+{
+  "episodeNumber": 8,
+  "episodeTitle": "사라진 장면의 끝",
+  "nodes": [
+    {
+      "id": 0,
+      "floor": 8,
+      "zoneName": "끝의 문턱",
+      "nodeType": "NormalBattle",
+      "riskLevel": 5,
+      "rewardHint": "공격 카드"
+    },
+    {
+      "id": 1,
+      "floor": 8,
+      "zoneName": "마지막 기록",
+      "nodeType": "Event",
+      "riskLevel": 2,
+      "rewardHint": "특수 선택"
+    },
+    {
+      "id": 2,
+      "floor": 8,
+      "zoneName": "검게 탄 회랑",
+      "nodeType": "NormalBattle",
+      "riskLevel": 5,
+      "rewardHint": "체인 카드"
+    },
+    {
+      "id": 3,
+      "floor": 8,
+      "zoneName": "최후의 정비소",
+      "nodeType": "Rest",
+      "riskLevel": 1,
+      "rewardHint": "HP 회복"
+    },
+    {
+      "id": 4,
+      "floor": 8,
+      "zoneName": "잊힌 주인공",
+      "nodeType": "NormalBattle",
+      "riskLevel": 5,
+      "rewardHint": "강화 카드"
+    },
+    {
+      "id": 5,
+      "floor": 8,
+      "zoneName": "복구의 심장",
+      "nodeType": "Boss",
+      "forceInclude": true,
+      "placeLast": true,
+      "fixedSelectionOrder": 3,
+      "riskLevel": 6,
+      "rewardHint": "최종 전투"
+    }
+  ]
+}
