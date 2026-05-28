@@ -194,6 +194,19 @@ public class BoardManager : MonoBehaviour
         return adjacentOrigins.Count;
     }
 
+    public int CountUnusedCells()
+    {
+        int count = 0;
+
+        for (int i = 0; i < placedCards.Length; i++)
+        {
+            if (placedCards[i] == null)
+                count++;
+        }
+
+        return count;
+    }
+
     private void AddAdjacentOrigin(
         int row,
         int col,
@@ -259,7 +272,8 @@ public class BoardManager : MonoBehaviour
             EffectContext context = new EffectContext
             {
                 activationOrder = i + 1,
-                adjacentCardCount = CountAdjacentCards(entry.originIndex)
+                adjacentCardCount = CountAdjacentCards(entry.originIndex),
+                sagaRequiredOrderReduction = GetSagaRequiredOrderReduction()
             };
 
             EffectPreviewResult result = new EffectPreviewResult();
@@ -306,6 +320,25 @@ public class BoardManager : MonoBehaviour
             return $"방어 {result.block}";
 
         return "";
+    }
+
+    private int GetSagaRequiredOrderReduction()
+    {
+        if (RunData.currentRelics == null)
+            return 0;
+
+        int reduction = 0;
+
+        foreach (RelicData relic in RunData.currentRelics)
+        {
+            if (relic == null)
+                continue;
+
+            if (relic.effectType == RelicEffectType.ReduceSagaRequiredOrder)
+                reduction += Mathf.Max(0, relic.amount);
+        }
+
+        return reduction;
     }
 
 }

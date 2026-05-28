@@ -1,0 +1,58 @@
+{
+  "episodeNumber": 7,
+  "episodeTitle": "무너지는 왕좌",
+  "nodes": [
+    {
+      "id": 0,
+      "floor": 7,
+      "zoneName": "왕좌의 전실",
+      "nodeType": "NormalBattle",
+      "riskLevel": 4,
+      "rewardHint": "공격 카드"
+    },
+    {
+      "id": 1,
+      "floor": 7,
+      "zoneName": "퀘스트 부상병의 은신처",
+      "nodeType": "Event",
+      "questId": "WoundedScout",
+      "availableEpisodes": [6, 7],
+      "showOnce": true,
+      "mustAppearByEpisode": 7,
+      "riskLevel": 2,
+      "rewardHint": "회복 / 보상"
+    },
+    {
+      "id": 2,
+      "floor": 7,
+      "zoneName": "부서진 기사상",
+      "nodeType": "Event",
+      "riskLevel": 2,
+      "rewardHint": "특수 선택"
+    },
+    {
+      "id": 3,
+      "floor": 7,
+      "zoneName": "붕괴된 계단",
+      "nodeType": "NormalBattle",
+      "riskLevel": 4,
+      "rewardHint": "체인 카드"
+    },
+    {
+      "id": 4,
+      "floor": 7,
+      "zoneName": "마지막 쉼터",
+      "nodeType": "Rest",
+      "riskLevel": 1,
+      "rewardHint": "HP 회복"
+    },
+    {
+      "id": 5,
+      "floor": 7,
+      "zoneName": "왕좌의 그림자",
+      "nodeType": "NormalBattle",
+      "riskLevel": 5,
+      "rewardHint": "강화 카드"
+    }
+  ]
+}

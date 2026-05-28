@@ -37,7 +37,7 @@ public class MapNode : MonoBehaviour
         onSelected = selectedCallback;
         onAction = null;
 
-        nodeText.fontSize = 18f;
+        nodeText.fontSize = 45f;
         nodeText.text = BuildLabel(nodeData);
 
         button.onClick.RemoveListener(OnButtonClicked);
@@ -72,7 +72,7 @@ public class MapNode : MonoBehaviour
         nodeData = null;
         onSelected = null;
         onAction = action;
-        nodeText.fontSize = 21f;
+        nodeText.fontSize = 30f;
         nodeText.text = label;
         nodeImage.color = interactable ? new Color(0.95f, 0.82f, 0.36f) : Color.gray;
         button.interactable = interactable;
@@ -108,14 +108,24 @@ public class MapNode : MonoBehaviour
             case MapNodeType.Rest:
                 typeLabel = "휴식";
                 break;
+            case MapNodeType.EliteBattle:
+                typeLabel = "엘리트";
+                break;
+            case MapNodeType.Boss:
+                typeLabel = "보스";
+                break;
             default:
                 typeLabel = "일반 전투";
                 break;
         }
 
         string stars = new string('★', Mathf.Max(1, data.riskLevel));
+        string required = data.requiredToProgress ? "[필수]\n" : string.Empty;
+        string fixedSelection = data.fixedSelectionOrder > 0
+            ? $"[고정 {data.fixedSelectionOrder}번째]\n"
+            : string.Empty;
         string selection = data.selectionOrder > 0 ? $"\n[{data.selectionOrder}번째 선택]" : string.Empty;
 
-        return $"{data.zoneName}\n{typeLabel} {stars}\n{data.rewardHint}{selection}";
+        return $"{required}{fixedSelection}{data.zoneName}\n{typeLabel} {stars}\n{data.rewardHint}{selection}";
     }
 }

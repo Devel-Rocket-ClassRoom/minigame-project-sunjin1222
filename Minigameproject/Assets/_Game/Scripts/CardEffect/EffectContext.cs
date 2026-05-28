@@ -12,4 +12,11 @@ public class EffectContext
     public int activationOrder;
 
     public int adjacentCardCount;
+
+    public int sagaRequiredOrderReduction;
+
+    public int GetAdjustedRequiredOrder(int requiredOrder)
+    {
+        return Mathf.Max(1, requiredOrder - sagaRequiredOrderReduction);
+    }
 }

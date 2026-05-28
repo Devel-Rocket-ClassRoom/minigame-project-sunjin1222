@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -12,10 +11,12 @@ public class MapNodeData
     public string rewardHint;
     public int riskLevel;
     public int selectionOrder;
+    public bool requiredToProgress;
+    public int fixedSelectionOrder;
+    public string questId;
 
     public MapNodeType nodeType;
     public MapNodeState state;
 
     public EnemyData enemyData;
-    public List<int> nextNodeIds = new List<int>();
 }

@@ -53,6 +53,7 @@ MonoBehaviour:
   aemorOB: {fileID: 662814929827056890}
   sliderHealth: {fileID: 3138939511857678209}
   Armor: {fileID: 7235649287707157749}
+  playerAnimator: {fileID: 0}
 --- !u!1 &662814929827056890
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,12 +338,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
+  m_Sprite: {fileID: 1890339498263491818, guid: 352f34dce9a9c5a4aa4dee53e58ed375, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 15.36, y: 10.24}
+  m_Size: {x: 9.11, y: 6.68}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
