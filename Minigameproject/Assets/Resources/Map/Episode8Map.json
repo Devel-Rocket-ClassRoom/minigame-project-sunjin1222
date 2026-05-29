@@ -8,15 +8,15 @@
       "zoneName": "끝의 문턱",
       "nodeType": "NormalBattle",
       "riskLevel": 5,
-      "rewardHint": "공격 카드"
+      "rewardHint": ""
     },
     {
       "id": 1,
       "floor": 8,
       "zoneName": "마지막 기록",
-      "nodeType": "Event",
+      "nodeType": "Rest",
       "riskLevel": 2,
-      "rewardHint": "특수 선택"
+      "rewardHint": ""
     },
     {
       "id": 2,
@@ -24,7 +24,7 @@
       "zoneName": "검게 탄 회랑",
       "nodeType": "NormalBattle",
       "riskLevel": 5,
-      "rewardHint": "체인 카드"
+      "rewardHint": ""
     },
     {
       "id": 3,
@@ -32,7 +32,7 @@
       "zoneName": "최후의 정비소",
       "nodeType": "Rest",
       "riskLevel": 1,
-      "rewardHint": "HP 회복"
+      "rewardHint": ""
     },
     {
       "id": 4,
@@ -40,7 +40,7 @@
       "zoneName": "잊힌 주인공",
       "nodeType": "NormalBattle",
       "riskLevel": 5,
-      "rewardHint": "강화 카드"
+      "rewardHint": ""
     },
     {
       "id": 5,
@@ -51,7 +51,7 @@
       "placeLast": true,
       "fixedSelectionOrder": 3,
       "riskLevel": 6,
-      "rewardHint": "최종 전투"
+      "rewardHint": ""
     }
   ]
 }

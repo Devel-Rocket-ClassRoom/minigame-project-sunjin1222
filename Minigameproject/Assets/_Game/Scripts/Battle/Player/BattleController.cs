@@ -71,6 +71,10 @@ public class BattleController : MonoBehaviour
 
         var cards = boardManager.GetActivationOrder();
         bool shouldRepeatFirstTile = ShouldRepeatFirstTileThisTurn();
+        
+        ApplyEndTurnBoardRelics();
+
+        yield return new WaitForSeconds(0.5f);
 
         for (int i = 0; i < cards.Count; i++)
         {
@@ -87,7 +91,6 @@ public class BattleController : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
 
-            ApplyEndTurnBoardRelics();
 
             enemyController.DoTurn();
 
@@ -212,6 +215,7 @@ public class BattleController : MonoBehaviour
 
             int blockAmount = unusedCellCount * Mathf.Max(1, relic.amount);
             playerController.GainBlock(blockAmount);
+
             Debug.Log($"[RelicManager] {relic.relicName} 발동: 방어도 {blockAmount}");
         }
     }

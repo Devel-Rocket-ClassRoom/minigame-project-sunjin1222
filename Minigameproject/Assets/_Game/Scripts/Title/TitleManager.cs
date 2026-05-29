@@ -7,6 +7,7 @@ public class TitleManager : MonoBehaviour
 {
     [Header("Selected Character")]
     public CharacterData characterData;
+    [SerializeField] private CharacterData defaultCharacter;
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI hpText;
@@ -26,6 +27,9 @@ public class TitleManager : MonoBehaviour
 
     private void Start()
     {
+        if (characterData == null)
+            characterData = defaultCharacter;
+
         RefreshStoryStartButton();
     }
 
@@ -79,6 +83,11 @@ public class TitleManager : MonoBehaviour
     {
         gameModePanel.SetActive(false);
         characterPanel.SetActive(true);
+
+        if (characterData == null)
+            characterData = defaultCharacter;
+
+        SelectCharacter(characterData);
     }
     public void OnStory()
     {
@@ -96,7 +105,6 @@ public class TitleManager : MonoBehaviour
     {
         if (RunData.currentCharacter == null)
         {
-            Debug.LogWarning("[TitleManager] 캐릭터를 먼저 선택해야 합니다.");
             return;
         }
 

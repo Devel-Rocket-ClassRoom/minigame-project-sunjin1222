@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40c3764f2007ca40a7348af80b9fc34, type: 3}
   m_Name: sdaass
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  characterName: "\uB098\uD0C0\uC988\uB2CC"
-  maxHp: 50
-  description: "\uC544\uB098\uB098\uB098\uB098\uB098\uB098\uB098\uB09C"
+  characterName: "\uD761\uD608\uC720\uB839"
+  maxHp: 78
+  description: "\"\uB098\uB294 \uCCA0\uB9DB\uC744 \uC88B\uC544\uD55C\uB2E4\""
   image: {fileID: -1033350549586497293, guid: e541b0909d69a0f47a17e3dab56ae191, type: 3}
+  battleSprite: {fileID: -1033350549586497293, guid: e541b0909d69a0f47a17e3dab56ae191, type: 3}
   startDeck:
   - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
   - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
@@ -42,4 +43,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 52fdcfa1d0edb9e42b623b01f3728bbe, type: 2}
   - {fileID: 11400000, guid: 102ea917b31b548469250ce02fde967d, type: 2}
   startingRelics:
-  - {fileID: 11400000, guid: 9757ece2e4d148b0819f360e0d9fd717, type: 2}
+  - {fileID: 11400000, guid: e4f7a0fb2b6746c0a60cf57968c9e7a1, type: 2}

@@ -10,16 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cef257310d4b344a8fdb49aa1fd6f3e, type: 3}
-  m_Name: Brute Bonnet
+  m_Name: BossBrute Bonnet
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: "\uAC15\uD55C \uBC84\uC12F"
-  enemyType: 0
-  maxHealth: 66
+  enemyName: "\uC9C4\uC9DC\uB85C \uAC15\uD55C \uBC84\uC12F"
+  enemyType: 2
+  maxHealth: 200
   description: 
   patterns:
   - actionType: 0
     value: 30
   - actionType: 0
     value: 60
-  portrait: {fileID: 2979194778711039414, guid: 2aeb46ae7ffbf4b449f051a209ca206a, type: 3}
-  prefab: {fileID: 1600796342847078890, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+  - actionType: 0
+    value: 90
+  - actionType: 0
+    value: 120
+  - actionType: 0
+    value: 150
+  - actionType: 0
+    value: 200
+  - actionType: 0
+    value: 99999
+  portrait: {fileID: -3607082822569126614, guid: 60a90f470b1899d4ea851c17d936a4c1, type: 3}
+  prefab: {fileID: 1600796342847078890, guid: 76afb491ebc4a394482a11f7f6a9bd40, type: 3}

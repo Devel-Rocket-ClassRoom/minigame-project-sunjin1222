@@ -16,17 +16,33 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI Armor;
 
     public PlayerAnimator playerAnimator;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         maxHealth = RunData.maxHp;
         currentHealth = RunData.currentHp;
+        ApplyCharacterVisual();
 
         block = 0;
         slider.maxValue = maxHealth;
         slider.value = currentHealth;
         sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
+    }
+
+    private void ApplyCharacterVisual()
+    {
+        if (spriteRenderer == null || RunData.currentCharacter == null)
+            return;
+
+        Sprite characterSprite = RunData.currentCharacter.battleSprite != null
+            ? RunData.currentCharacter.battleSprite
+            : RunData.currentCharacter.image;
+
+        if (characterSprite != null)
+            spriteRenderer.sprite = characterSprite;
     }
 
     public void GainBlock(int amount)
