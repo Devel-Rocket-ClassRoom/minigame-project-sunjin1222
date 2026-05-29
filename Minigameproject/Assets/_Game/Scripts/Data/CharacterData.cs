@@ -9,6 +9,7 @@ public class CharacterData : ScriptableObject
     [TextArea] public string description;
 
     public Sprite image;
+    public Sprite battleSprite;
     public List<CardData> startDeck = new List<CardData>();
     public List<CardData> rewardCardPool = new List<CardData>();
     public List<RelicData> startingRelics = new List<RelicData>();

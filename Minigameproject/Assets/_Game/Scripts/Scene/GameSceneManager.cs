@@ -39,7 +39,7 @@ public class GameSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("MapScene");
     }
-      public void LoadTitleScene()
+    public void LoadTitleScene()
     {
         SceneManager.LoadScene("TitleScene");
     }

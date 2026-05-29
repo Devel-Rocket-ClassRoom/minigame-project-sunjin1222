@@ -8,15 +8,15 @@
       "zoneName": "버려진 성문",
       "nodeType": "NormalBattle",
       "riskLevel": 2,
-      "rewardHint": "공격 카드"
+      "rewardHint": ""
     },
     {
       "id": 1,
       "floor": 2,
       "zoneName": "검은 시장",
-      "nodeType": "Event",
+      "nodeType": "Rest",
       "riskLevel": 1,
-      "rewardHint": "특수 선택"
+      "rewardHint": ""
     },
     {
       "id": 2,
@@ -24,7 +24,7 @@
       "zoneName": "균열 숲",
       "nodeType": "NormalBattle",
       "riskLevel": 2,
-      "rewardHint": "체인 카드"
+      "rewardHint": ""
     },
     {
       "id": 3,
@@ -36,7 +36,7 @@
       "showOnce": true,
       "mustAppearByEpisode": 3,
       "riskLevel": 1,
-      "rewardHint": "HP 회복"
+      "rewardHint": ""
     },
     {
       "id": 4,
@@ -44,15 +44,15 @@
       "zoneName": "붉은 감시탑",
       "nodeType": "NormalBattle",
       "riskLevel": 3,
-      "rewardHint": "강화 카드"
+      "rewardHint": ""
     },
     {
       "id": 5,
       "floor": 2,
       "zoneName": "사라진 희망",
-      "nodeType": "Event",
+      "nodeType": "Rest",
       "riskLevel": 1,
-      "rewardHint": "방어 카드"
+      "rewardHint": ""
     }
   ]
 }

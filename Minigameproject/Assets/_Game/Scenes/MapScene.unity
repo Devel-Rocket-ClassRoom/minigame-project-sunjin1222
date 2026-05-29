@@ -1254,9 +1254,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 096761e3290ea304eabebd039e836eb5, type: 2}
   - {fileID: 11400000, guid: 9a8fbc3c7653fb84fbdc318a8804181a, type: 2}
   eliteEnemyPool:
-  - {fileID: 11400000, guid: a77587dd699a9194391e9664405815be, type: 2}
+  - {fileID: 11400000, guid: 476c5286d83353541b8718ef79539fa9, type: 2}
   bossEnemyPool:
-  - {fileID: 11400000, guid: 9a8fbc3c7653fb84fbdc318a8804181a, type: 2}
+  - {fileID: 11400000, guid: 98187cead7a589440ae996d290839c12, type: 2}
   shrineRewardCard: {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
 --- !u!114 &1517625446
 MonoBehaviour:

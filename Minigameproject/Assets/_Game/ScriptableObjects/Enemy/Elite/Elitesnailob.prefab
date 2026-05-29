@@ -27,8 +27,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5678693187549771559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,15 +81,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -5080631935822126369, guid: 13ec59850f371ad45ae0a9b0812717a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.98, y: 0.66}
+  m_Size: {x: 9.06, y: 8.51}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!1 &992315588920017289
 GameObject:
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 6310592684776803285}
   - component: {fileID: 1878026248818095622}
   m_Layer: 0
-  m_Name: snailob
+  m_Name: Elitesnailob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1094,7 +1094,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 8783989312049011451}
   m_HandleRect: {fileID: 0}
