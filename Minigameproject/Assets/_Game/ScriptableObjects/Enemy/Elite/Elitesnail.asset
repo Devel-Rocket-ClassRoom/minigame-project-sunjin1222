@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cef257310d4b344a8fdb49aa1fd6f3e, type: 3}
-  m_Name: Brute Bonnet
+  m_Name: Elitesnail
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: "\uAC15\uD55C \uBC84\uC12F"
+  enemyName: "\uAC15\uD55C \uB2EC\uD33D\uC774"
   enemyType: 0
-  maxHealth: 66
+  maxHealth: 60
   description: 
   patterns:
   - actionType: 0
     value: 30
+  - actionType: 1
+    value: 12
   - actionType: 0
     value: 60
-  portrait: {fileID: 2979194778711039414, guid: 2aeb46ae7ffbf4b449f051a209ca206a, type: 3}
-  prefab: {fileID: 1600796342847078890, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}
+  - actionType: 2
+    value: 0
+  portrait: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
+  prefab: {fileID: 1600796342847078890, guid: ec89fae727cc15d4ea402d87cb513c4f, type: 3}

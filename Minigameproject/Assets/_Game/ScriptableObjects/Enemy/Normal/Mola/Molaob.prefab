@@ -249,6 +249,7 @@ MonoBehaviour:
   enemyAnimator: {fileID: 0}
   aemorOB: {fileID: 5459973894513032355}
   Armor: {fileID: 2924940325125901075}
+  currentHealth: 0
   block: 0
 --- !u!114 &1878026248818095622
 MonoBehaviour:
@@ -310,7 +311,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3421441849065716839}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!114 &1569116636827568657
 MonoBehaviour:
   m_ObjectHideFlags: 0

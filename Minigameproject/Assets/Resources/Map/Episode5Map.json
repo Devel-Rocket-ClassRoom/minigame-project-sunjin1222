@@ -8,15 +8,15 @@
       "zoneName": "말라붙은 수로",
       "nodeType": "NormalBattle",
       "riskLevel": 3,
-      "rewardHint": "공격 카드"
+      "rewardHint": ""
     },
     {
       "id": 1,
       "floor": 5,
       "zoneName": "흐린 우물",
-      "nodeType": "Event",
+      "nodeType": "Rest",
       "riskLevel": 1,
-      "rewardHint": "특수 선택"
+      "rewardHint": ""
     },
     {
       "id": 2,
@@ -28,7 +28,7 @@
       "showOnce": true,
       "mustAppearByEpisode": 5,
       "riskLevel": 1,
-      "rewardHint": "HP 회복"
+      "rewardHint": ""
     },
     {
       "id": 3,
@@ -36,15 +36,15 @@
       "zoneName": "뒤틀린 수문",
       "nodeType": "NormalBattle",
       "riskLevel": 4,
-      "rewardHint": "강화 카드"
+      "rewardHint": ""
     },
     {
       "id": 4,
       "floor": 5,
       "zoneName": "물길의 잔향",
-      "nodeType": "Event",
+      "nodeType": "Rest",
       "riskLevel": 2,
-      "rewardHint": "회복 / 카드"
+      "rewardHint": ""
     },
     {
       "id": 5,
@@ -52,7 +52,7 @@
       "zoneName": "침수된 회랑",
       "nodeType": "NormalBattle",
       "riskLevel": 3,
-      "rewardHint": "체인 카드"
+      "rewardHint": ""
     }
   ]
 }

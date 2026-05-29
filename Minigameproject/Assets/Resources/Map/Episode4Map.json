@@ -16,9 +16,9 @@
       "id": 1,
       "floor": 4,
       "zoneName": "붉은 제단",
-      "nodeType": "Event",
+      "nodeType": "Rest",
       "riskLevel": 2,
-      "rewardHint": "특수 선택"
+      "rewardHint": ""
     },
     {
       "id": 2,
@@ -26,7 +26,7 @@
       "zoneName": "끊어진 보급로",
       "nodeType": "NormalBattle",
       "riskLevel": 3,
-      "rewardHint": "체인 카드"
+      "rewardHint": ""
     },
     {
       "id": 3,
@@ -38,7 +38,7 @@
       "showOnce": true,
       "mustAppearByEpisode": 5,
       "riskLevel": 1,
-      "rewardHint": "HP 회복"
+      "rewardHint": ""
     },
     {
       "id": 4,
@@ -46,15 +46,15 @@
       "zoneName": "부서진 감시소",
       "nodeType": "NormalBattle",
       "riskLevel": 3,
-      "rewardHint": "방어 카드"
+      "rewardHint": ""
     },
     {
       "id": 5,
       "floor": 4,
       "zoneName": "잠긴 보관함",
-      "nodeType": "Event",
+      "nodeType": "Rest",
       "riskLevel": 1,
-      "rewardHint": "보상 선택"
+      "rewardHint": ""
     }
   ]
 }
