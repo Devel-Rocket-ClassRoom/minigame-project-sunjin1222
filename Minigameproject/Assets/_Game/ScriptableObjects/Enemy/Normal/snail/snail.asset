@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: "\uC57D\uD55C \uB2EC\uD33D\uC774"
   enemyType: 0
-  maxHealth: 1
+  maxHealth: 46
   description: 
   patterns:
   - actionType: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: "\uCE58\uCF54\uCE58\uCF54"
   enemyType: 0
-  maxHealth: 1
+  maxHealth: 15
   description: 
   patterns:
   - actionType: 1
@@ -25,5 +25,7 @@ MonoBehaviour:
     value: 10
   - actionType: 0
     value: 15
+  - actionType: 0
+    value: 20
   portrait: {fileID: 2559956779852038644, guid: e541b0909d69a0f47a17e3dab56ae191, type: 3}
   prefab: {fileID: 1600796342847078890, guid: b969828f89b03a94d8a891cc470703d7, type: 3}

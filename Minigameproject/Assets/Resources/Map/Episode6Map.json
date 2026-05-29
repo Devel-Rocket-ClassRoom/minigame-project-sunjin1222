@@ -8,7 +8,7 @@
       "zoneName": "성벽 외곽",
       "nodeType": "NormalBattle",
       "riskLevel": 4,
-      "rewardHint": "공격 카드"
+      "rewardHint": ""
     },
     {
       "id": 1,
@@ -16,19 +16,19 @@
       "zoneName": "버려진 병참소",
       "nodeType": "Rest",
       "riskLevel": 1,
-      "rewardHint": "HP 회복"
+      "rewardHint": ""
     },
     {
       "id": 2,
       "floor": 6,
       "zoneName": "퀘스트 부상병의 은신처",
-      "nodeType": "Event",
+      "nodeType": "Rest",
       "questId": "WoundedScout",
       "availableEpisodes": [6, 7],
       "showOnce": true,
       "mustAppearByEpisode": 7,
       "riskLevel": 2,
-      "rewardHint": "회복 / 보상"
+      "rewardHint": ""
     },
     {
       "id": 3,
@@ -36,19 +36,19 @@
       "zoneName": "그을린 훈련장",
       "nodeType": "NormalBattle",
       "riskLevel": 4,
-      "rewardHint": "방어 카드"
+      "rewardHint": ""
     },
     {
       "id": 4,
       "floor": 6,
       "zoneName": "퀘스트 검은 깃발",
-      "nodeType": "Event",
+      "nodeType": "Rest",
       "questId": "BlackFlagEvent",
       "requiredClearedQuestIds": ["BlackBridgeBattle"],
       "forceInclude": true,
       "showOnce": true,
       "riskLevel": 2,
-      "rewardHint": "특수 선택"
+      "rewardHint": ""
     },
     {
       "id": 5,
@@ -56,7 +56,7 @@
       "zoneName": "성문 경비대",
       "nodeType": "NormalBattle",
       "riskLevel": 4,
-      "rewardHint": "강화 카드"
+      "rewardHint": ""
     }
   ]
 }
