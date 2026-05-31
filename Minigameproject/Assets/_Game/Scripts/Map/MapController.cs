@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
+using TMPro;
 
 // EP 후보 선택, 실행 순서, 전투 복귀 결과를 관리한다.
 public class MapController : MonoBehaviour
@@ -14,6 +16,7 @@ public class MapController : MonoBehaviour
 
     private MapData currentMap;
     private MapNodeData activeEventNode;
+    private GameObject bigMap;
 
     private void Start()
     {
@@ -24,11 +27,16 @@ public class MapController : MonoBehaviour
         }
 
         HideEventPanel();
+        SetupBigMapButtons();
 
         if (RunData.currentMap == null)
-            RunData.currentMap = mapGenerator.GenerateMap();
+        {
+            ShowBigMap();
+            return;
+        }
 
         currentMap = RunData.currentMap;
+        HideBigMap();
 
         bool hasCompletedBattle = ApplyCompletedBattleResult();
 
@@ -37,12 +45,147 @@ public class MapController : MonoBehaviour
             CompleteEpisodeIfFinished();
         }
 
-        AdvanceEpisodeIfCompleted();
+        if (AdvanceEpisodeIfCompleted())
+            return;
 
         DrawEpisodePlan();
 
         if (mapDragHandler != null)
             mapDragHandler.FocusOn(Vector2.zero);
+    }
+
+    private void SetupBigMapButtons()
+    {
+        bigMap = GameObject.Find("BigMap");
+
+        if (bigMap == null)
+        {
+            Debug.LogWarning("[MapController] BigMap 오브젝트를 찾지 못했습니다.");
+            return;
+        }
+
+        SetupBigMapPanZoom();
+
+        Button[] episodeButtons = bigMap.GetComponentsInChildren<Button>(true);
+
+        foreach (Button button in episodeButtons)
+        {
+            if (!TryGetEpisodeNumber(button.name, out int episodeNumber))
+                continue;
+
+            int selectedEpisode = episodeNumber;
+            button.onClick.AddListener(() => OpenEpisode(selectedEpisode));
+        }
+
+        RefreshBigMapButtons();
+    }
+
+    private void SetupBigMapPanZoom()
+    {
+        RectTransform viewport = bigMap.transform as RectTransform;
+
+        if (viewport == null || viewport.childCount == 0)
+        {
+            Debug.LogWarning("[MapController] BigMap 콘텐츠를 찾지 못했습니다.");
+            return;
+        }
+
+        RectTransform content = viewport.GetChild(0) as RectTransform;
+        BigMapPanZoom panZoom = bigMap.GetComponent<BigMapPanZoom>();
+
+        if (panZoom == null)
+            panZoom = bigMap.AddComponent<BigMapPanZoom>();
+
+        panZoom.Configure(viewport, content);
+    }
+
+    private bool TryGetEpisodeNumber(string buttonName, out int episodeNumber)
+    {
+        episodeNumber = 0;
+
+        return !string.IsNullOrEmpty(buttonName) &&
+            buttonName.StartsWith("Ep", StringComparison.OrdinalIgnoreCase) &&
+            int.TryParse(buttonName.Substring(2), out episodeNumber);
+    }
+
+    public void OpenEpisode(int episodeNumber)
+    {
+        if (episodeNumber < 1 ||
+            episodeNumber > mapGenerator.MaxEpisodeNumber ||
+            !RunData.IsEpisodeUnlocked(episodeNumber) ||
+            RunData.IsEpisodeCleared(episodeNumber))
+        {
+            Debug.LogWarning($"[MapController] 열 수 없는 EP입니다: {episodeNumber}");
+            return;
+        }
+
+        RunData.currentFloor = episodeNumber;
+        RunData.currentMap = mapGenerator.GenerateMap(episodeNumber);
+        currentMap = RunData.currentMap;
+
+        HideBigMap();
+        DrawEpisodePlan();
+
+        if (mapDragHandler != null)
+            mapDragHandler.FocusOn(Vector2.zero);
+    }
+
+    private void ShowBigMap()
+    {
+        RefreshBigMapButtons();
+
+        if (mapView != null && mapView.nodeContainer != null)
+            mapView.nodeContainer.gameObject.SetActive(false);
+
+        if (bigMap != null)
+            bigMap.SetActive(true);
+    }
+
+    private void HideBigMap()
+    {
+        if (bigMap != null)
+            bigMap.SetActive(false);
+
+        if (mapView != null && mapView.nodeContainer != null)
+            mapView.nodeContainer.gameObject.SetActive(true);
+    }
+
+    private void RefreshBigMapButtons()
+    {
+        if (bigMap == null)
+            return;
+
+        Button[] episodeButtons = bigMap.GetComponentsInChildren<Button>(true);
+
+        foreach (Button button in episodeButtons)
+        {
+            if (TryGetEpisodeNumber(button.name, out int episodeNumber))
+                UpdateBigMapButtonState(button, episodeNumber);
+        }
+    }
+
+    private void UpdateBigMapButtonState(Button button, int episodeNumber)
+    {
+        bool isCleared = RunData.IsEpisodeCleared(episodeNumber);
+        bool isUnlocked = RunData.IsEpisodeUnlocked(episodeNumber);
+
+        ColorBlock colors = button.colors;
+        colors.disabledColor = isCleared
+            ? new Color(0.85f, 0.72f, 0.22f, 1f)
+            : new Color(0.45f, 0.45f, 0.45f, 0.65f);
+        button.colors = colors;
+        button.interactable = isUnlocked && !isCleared;
+
+        TMP_Text episodeName = button.GetComponentInChildren<TMP_Text>(true);
+
+        if (episodeName != null)
+        {
+            episodeName.color = isCleared
+                ? new Color(0.2f, 0.8f, 0.3f, 1f)
+                : isUnlocked
+                    ? new Color(0.95f, 0.2f, 0.2f, 1f)
+                    : new Color(0.55f, 0.55f, 0.55f, 1f);
+        }
     }
 
     private void DrawEpisodePlan()
@@ -165,7 +308,9 @@ public class MapController : MonoBehaviour
         if (currentMap.executionIndex >= currentMap.selectedNodeIds.Count)
         {
             CompleteEpisodeIfFinished();
-            AdvanceEpisodeIfCompleted();
+            if (AdvanceEpisodeIfCompleted())
+                return;
+
             DrawEpisodePlan();
             return;
         }
@@ -178,7 +323,9 @@ public class MapController : MonoBehaviour
         if (selectedNode == null)
         {
             CompleteEpisodeIfFinished();
-            AdvanceEpisodeIfCompleted();
+            if (AdvanceEpisodeIfCompleted())
+                return;
+
             DrawEpisodePlan();
             return;
         }
@@ -187,7 +334,9 @@ public class MapController : MonoBehaviour
         {
             ResolveRest(selectedNode);
             CompleteEpisodeIfFinished();
-            AdvanceEpisodeIfCompleted();
+            if (AdvanceEpisodeIfCompleted())
+                return;
+
             DrawEpisodePlan();
             return;
         }
@@ -235,6 +384,7 @@ public class MapController : MonoBehaviour
         }
 
         activeEventNode = eventNode;
+        RunData.MarkEventSeen(eventNode.eventData);
 
         healChoiceButton.onClick.RemoveListener(ChooseEventHeal);
         cardChoiceButton.onClick.RemoveListener(ChooseEventCard);
@@ -280,7 +430,9 @@ public class MapController : MonoBehaviour
         activeEventNode = null;
 
         CompleteEpisodeIfFinished();
-        AdvanceEpisodeIfCompleted();
+        if (AdvanceEpisodeIfCompleted())
+            return;
+
         DrawEpisodePlan();
     }
 
@@ -313,16 +465,21 @@ public class MapController : MonoBehaviour
             currentMap.episodeCompleted = true;
     }
 
-    private void AdvanceEpisodeIfCompleted()
+    private bool AdvanceEpisodeIfCompleted()
     {
-        if (!currentMap.episodeCompleted ||
-            currentMap.episodeNumber >= mapGenerator.MaxEpisodeNumber)
-            return;
+        if (!currentMap.episodeCompleted)
+            return false;
+
+        RunData.MarkEpisodeCleared(currentMap.episodeNumber);
+
+        if (currentMap.episodeNumber >= mapGenerator.MaxEpisodeNumber)
+            return false;
 
         int nextEpisodeNumber = currentMap.episodeNumber + 1;
-        RunData.currentFloor = nextEpisodeNumber;
-        RunData.currentMap = mapGenerator.GenerateMap(nextEpisodeNumber);
-        currentMap = RunData.currentMap;
+        RunData.UnlockEpisode(nextEpisodeNumber);
+        RunData.currentMap = null;
+        ShowBigMap();
+        return true;
     }
 
     private bool HasSelectedRequiredNodes()

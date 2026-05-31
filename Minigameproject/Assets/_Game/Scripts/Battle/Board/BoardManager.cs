@@ -24,8 +24,6 @@ public class BoardManager : MonoBehaviour
     private int[] cardOrigin;
     public GameObject[] gridCells;
 
-
-
     private List<GameObject> placedTileObjects = new List<GameObject>();
 
     public void RegisterPlacedTile(GameObject tile)
@@ -35,6 +33,7 @@ public class BoardManager : MonoBehaviour
 
     public void ReturnAllToHand(HandManager handManager)
     {
+        HideActivationHighlight();
 
         foreach (GameObject tile in placedTileObjects)
         {
@@ -118,6 +117,8 @@ public class BoardManager : MonoBehaviour
 
     public void ClearBoard()
     {
+        HideActivationHighlight();
+
         for (int i = 0; i < placedCards.Length; i++)
         {
             placedCards[i] = null;
@@ -242,11 +243,46 @@ public class BoardManager : MonoBehaviour
 
     public void DestroyTiles()
     {
+        HideActivationHighlight();
+
         foreach (GameObject tile in placedTileObjects)
         {
             if (tile != null) Destroy(tile);
         }
         placedTileObjects.Clear();
+    }
+
+    public void ShowActivationHighlight(int originIndex)
+    {
+        HideActivationHighlight();
+
+        if (originIndex < 0)
+            return;
+
+        foreach (GameObject tileObject in placedTileObjects)
+        {
+            if (tileObject == null)
+                continue;
+
+            PlacedTile tile = tileObject.GetComponent<PlacedTile>();
+
+            if (tile != null && tile.OriginIndex == originIndex)
+                tile.SetActivationHighlight(true);
+        }
+    }
+
+    public void HideActivationHighlight()
+    {
+        foreach (GameObject tileObject in placedTileObjects)
+        {
+            if (tileObject == null)
+                continue;
+
+            PlacedTile tile = tileObject.GetComponent<PlacedTile>();
+
+            if (tile != null)
+                tile.SetActivationHighlight(false);
+        }
     }
 
     public void RefreshCardPreviewTexts()

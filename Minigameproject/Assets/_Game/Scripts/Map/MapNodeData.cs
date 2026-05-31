@@ -19,4 +19,5 @@ public class MapNodeData
     public MapNodeState state;
 
     public EnemyData enemyData;
+    public EventData eventData;
 }

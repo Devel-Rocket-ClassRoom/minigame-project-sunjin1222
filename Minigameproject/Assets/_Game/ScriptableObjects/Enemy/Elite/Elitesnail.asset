@@ -25,5 +25,5 @@ MonoBehaviour:
     value: 60
   - actionType: 2
     value: 0
-  portrait: {fileID: 21300000, guid: 8ca362aac3d07c847af7a5733881f051, type: 3}
+  portrait: {fileID: 21300012, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
   prefab: {fileID: 1600796342847078890, guid: ec89fae727cc15d4ea402d87cb513c4f, type: 3}

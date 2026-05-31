@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RelicData
   relicName: "\uD68C\uC218\uB418\uB294 \uC601\uAC10"
   description: "\uC804\uD22C \uC2B9\uB9AC \uC2DC \uCCB4\uB825\uC744 4 \uD68C\uBCF5\uD55C\uB2E4."
-  icon: {fileID: -8123881783287637142, guid: 064a2e06faf7576469a86b192b732241, type: 3}
+  icon: {fileID: 21300002, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
   triggerType: 1
   effectType: 2
   amount: 4

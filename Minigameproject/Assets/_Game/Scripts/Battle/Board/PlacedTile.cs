@@ -1,4 +1,5 @@
 using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,6 +18,9 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler, ICanvasRaycastFil
 
     private int placedId = -1;
     private int originIndex = -1;
+    private readonly Dictionary<Image, Color> originalImageColors =
+        new Dictionary<Image, Color>();
+    private bool isHighlighted;
 
     public bool IsActivePlacement => cardData != null;
 
@@ -99,5 +103,38 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler, ICanvasRaycastFil
 
         if (Value != null)
             Value.text = valueText;
+    }
+
+    public void SetActivationHighlight(bool shouldHighlight)
+    {
+        if (isHighlighted == shouldHighlight)
+            return;
+
+        isHighlighted = shouldHighlight;
+
+        if (shouldHighlight)
+        {
+            transform.SetAsLastSibling();
+
+            Image[] images = GetComponentsInChildren<Image>(true);
+
+            foreach (Image image in images)
+            {
+                if (!originalImageColors.ContainsKey(image))
+                    originalImageColors.Add(image, image.color);
+
+                Color originalColor = originalImageColors[image];
+                Color grayColor = new Color(0.8f, 0.8f, 0.8f, originalColor.a);
+                image.color = Color.Lerp(originalColor, grayColor, 0.75f);
+            }
+
+            return;
+        }
+
+        foreach (KeyValuePair<Image, Color> entry in originalImageColors)
+        {
+            if (entry.Key != null)
+                entry.Key.color = entry.Value;
+        }
     }
 }
