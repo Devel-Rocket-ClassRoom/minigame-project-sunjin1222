@@ -15,6 +15,9 @@ public class MapGenerator : MonoBehaviour
     public EnemyData[] eliteEnemyPool;
     public EnemyData[] bossEnemyPool;
 
+    [Header("Event Pool")]
+    public EventData[] eventPool;
+
     [Header("Event Reward")]
     public CardData shrineRewardCard;
 
@@ -30,6 +33,7 @@ public class MapGenerator : MonoBehaviour
         MapData mapData = LoadMapFromJson(episodeNumber);
 
         AssignEnemies(mapData);
+        AssignEvents(mapData);
         return mapData;
     }
 
@@ -40,18 +44,26 @@ public class MapGenerator : MonoBehaviour
 
         if (mapJson == null)
         {
-            Debug.LogWarning($"[MapGenerator] Resources/{mapJsonResourcePath}.json 파일을 찾지 못해 기본 맵을 사용합니다.");
-            return CreateDefaultMap(episodeNumber);
+            Debug.LogWarning($"[MapGenerator] Resources/{mapJsonResourcePath}.json 파일을 찾지 못했습니다.");
+            return new MapData
+            {
+                episodeNumber = episodeNumber,
+                episodeTitle = $"EP.{episodeNumber}"
+            };
         }
 
         try
         {
             MapJsonData jsonData = JsonUtility.FromJson<MapJsonData>(mapJson.text);
 
-            if (jsonData == null || jsonData.nodes == null || jsonData.nodes.Length == 0)
+            if (jsonData == null || jsonData.nodes == null)
             {
-                Debug.LogWarning("[MapGenerator] 맵 JSON에 노드가 없어 기본 맵을 사용합니다.");
-                return CreateDefaultMap(episodeNumber);
+                Debug.LogWarning("[MapGenerator] 맵 JSON 데이터가 비어 있습니다.");
+                return new MapData
+                {
+                    episodeNumber = episodeNumber,
+                    episodeTitle = $"EP.{episodeNumber}"
+                };
             }
 
             MapData mapData = new MapData
@@ -66,25 +78,14 @@ public class MapGenerator : MonoBehaviour
         }
         catch (Exception exception)
         {
-            Debug.LogWarning($"[MapGenerator] 맵 JSON 파싱 실패: {exception.Message}. 기본 맵을 사용합니다.");
-            return CreateDefaultMap(episodeNumber);
+            Debug.LogWarning($"[MapGenerator] 맵 JSON 파싱 실패: {exception.Message}");
+
+            return new MapData
+            {
+                episodeNumber = episodeNumber,
+                episodeTitle = $"EP.{episodeNumber}"
+            };
         }
-    }
-
-    private MapData CreateDefaultMap(int episodeNumber)
-    {
-        MapData mapData = new MapData
-        {
-            episodeNumber = episodeNumber
-        };
-
-        mapData.nodes.Add(CreateCandidate(0, episodeNumber, -2, "마을 훈련장", MapNodeType.NormalBattle, 1, "기본 카드"));
-        mapData.nodes.Add(CreateCandidate(1, episodeNumber, -1, "숲길 입구", MapNodeType.NormalBattle, 1, "체인 카드"));
-        mapData.nodes.Add(CreateCandidate(2, episodeNumber, 0, "낡은 신전", MapNodeType.Event, 1, "회복 / 각성"));
-        mapData.nodes.Add(CreateCandidate(3, episodeNumber, 1, "오염된 늑대굴", MapNodeType.NormalBattle, 2, "공격 카드"));
-        mapData.nodes.Add(CreateCandidate(4, episodeNumber, 2, "무너진 초소", MapNodeType.NormalBattle, 2, "방어 카드"));
-
-        return mapData;
     }
 
     private void AddRandomNodes(MapData mapData, MapNodeJsonData[] sourceNodes)
@@ -289,6 +290,58 @@ public class MapGenerator : MonoBehaviour
             return null;
 
         return enemyPool[UnityEngine.Random.Range(0, enemyPool.Length)];
+    }
+
+    private void AssignEvents(MapData mapData)
+    {
+        List<EventData> candidates = new List<EventData>();
+
+        if (eventPool != null)
+        {
+            foreach (EventData eventData in eventPool)
+            {
+                if (eventData == null ||
+                    !eventData.CanAppear(mapData.episodeNumber) ||
+                    (eventData.showOncePerRun && RunData.HasSeenEvent(eventData)))
+                    continue;
+
+                candidates.Add(eventData);
+            }
+        }
+
+        foreach (MapNodeData node in mapData.nodes)
+        {
+            if (node.nodeType != MapNodeType.Event)
+                continue;
+
+            node.eventData = GetRandomWeightedEvent(candidates);
+
+            if (node.eventData != null)
+                candidates.Remove(node.eventData);
+        }
+    }
+
+    private EventData GetRandomWeightedEvent(List<EventData> candidates)
+    {
+        int totalWeight = 0;
+
+        foreach (EventData eventData in candidates)
+            totalWeight += Mathf.Max(1, eventData.weight);
+
+        if (totalWeight <= 0)
+            return null;
+
+        int randomWeight = UnityEngine.Random.Range(0, totalWeight);
+
+        foreach (EventData eventData in candidates)
+        {
+            randomWeight -= Mathf.Max(1, eventData.weight);
+
+            if (randomWeight < 0)
+                return eventData;
+        }
+
+        return null;
     }
 
     [Serializable]

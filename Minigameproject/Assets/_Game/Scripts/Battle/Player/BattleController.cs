@@ -136,14 +136,19 @@ public class BattleController : MonoBehaviour
         if (entry.card.effects == null || entry.card.effects.Length == 0)
             yield break;
 
+        boardManager.ShowActivationHighlight(entry.originIndex);
+        yield return new WaitForSeconds(0.15f);
+
         foreach (EffectSO effect in entry.card.effects)
         {
             if (enemyController.currentHealth <= 0)
-                yield break;
+                break;
 
             effect.Apply(context);
             yield return new WaitForSeconds(0.5f);
         }
+
+        boardManager.HideActivationHighlight();
     }
 
     private bool ShouldRepeatFirstTileThisTurn()

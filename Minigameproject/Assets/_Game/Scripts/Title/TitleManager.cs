@@ -78,7 +78,10 @@ public class TitleManager : MonoBehaviour
     {
         gameModePanel.SetActive(true);
     }
-
+    public void OnBackGameMode()
+    {
+        gameModePanel.SetActive(false);
+    }
     public void OnCharacter()
     {
         gameModePanel.SetActive(false);
@@ -89,6 +92,13 @@ public class TitleManager : MonoBehaviour
 
         SelectCharacter(characterData);
     }
+    public void OnBackOnCharacter()
+    {
+        gameModePanel.SetActive(true);
+        characterPanel.SetActive(false);
+
+    }
+
     public void OnStory()
     {
         if (RunData.currentCharacter == null)
@@ -100,6 +110,19 @@ public class TitleManager : MonoBehaviour
         storyPanel.SetActive(true);
         characterPanel.SetActive(false);
     }
+
+    public void OnBackStoryr()
+    {
+        storyPanel.SetActive(false);
+        characterPanel.SetActive(true);
+
+        if (characterData == null)
+            characterData = defaultCharacter;
+
+        SelectCharacter(characterData);
+    }
+
+
 
     public void StartSelectedStory()
     {
@@ -126,4 +149,5 @@ public class TitleManager : MonoBehaviour
 
         return selectedCharacter.startingRelics[0];
     }
+  
 }

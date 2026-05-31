@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ReduceSagaRequiredOrder
   m_EditorClassIdentifier: Assembly-CSharp::RelicData
   relicName: "\uD3B8\uC9D1\uC790\uC758 \uBA54\uBAA8"
-  description: "\uBAA8\uB4E0 \uC11C\uC0AC \uD0A4\uC6CC\uB4DC\uC758 \uD544\uC694 \uBC1C\uB3D9 \uC21C\uC11C\uAC00 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
-  icon: {fileID: 0}
+  description: "\uBAA8\uB4E0 \uC11C\uC0AC \uD0A4\uC6CC\uB4DC\uC758 \uD544\uC694 \uBC1C\uB3D9
+    \uC21C\uC11C\uAC00 1 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  icon: {fileID: 21300112, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
   triggerType: 2
   effectType: 4
   amount: 1

@@ -15,7 +15,7 @@ MonoBehaviour:
   relicName: "\uC7AC\uD0C0\uC790\uB418\uB294 \uCCAB \uBB38\uC7A5"
   description: "3\uD134\uB9C8\uB2E4 \uCCAB \uBC88\uC9F8 \uD0C0\uC77C\uC744 \uD55C
     \uBC88 \uB354 \uBC1C\uB3D9\uD569\uB2C8\uB2E4."
-  icon: {fileID: 2249891770150793430, guid: 3707bc17a0134c1418f0bfc64f5d135b, type: 3}
+  icon: {fileID: 21300070, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
   triggerType: 2
   effectType: 3
   amount: 3

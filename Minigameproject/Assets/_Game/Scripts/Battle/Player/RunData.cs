@@ -11,6 +11,8 @@ public static class RunData
     public static event Action RelicsChanged;
     public static HashSet<string> seenQuestIds = new HashSet<string>();
     public static HashSet<string> clearedQuestIds = new HashSet<string>();
+    public static HashSet<string> seenEventIds = new HashSet<string>();
+    public static HashSet<int> clearedEpisodeNumbers = new HashSet<int>();
     public static bool IsInitialized => currentDeck.Count > 0;
     public static CharacterData currentCharacter;
 
@@ -19,6 +21,7 @@ public static class RunData
     public static int maxHp = 50;
 
     public static int currentFloor = 1;
+    public static int highestUnlockedEpisode = 1;
     public static int AddedCard;
 
     public static MapData currentMap;
@@ -58,9 +61,12 @@ public static class RunData
 
             currentHp = maxHp;
             currentFloor = 1;
+            highestUnlockedEpisode = 1;
             currentMap = null;
             seenQuestIds.Clear();
             clearedQuestIds.Clear();
+            seenEventIds.Clear();
+            clearedEpisodeNumbers.Clear();
             selectedNodeId = -1;
             selectedBattleWon = false;
             selectedEnemy = null;
@@ -132,6 +138,21 @@ public static class RunData
         AddedCard += 1;
     }
 
+    public static bool HasSeenEvent(EventData eventData)
+    {
+        return eventData != null &&
+            !string.IsNullOrEmpty(eventData.eventId) &&
+            seenEventIds.Contains(eventData.eventId);
+    }
+
+    public static void MarkEventSeen(EventData eventData)
+    {
+        if (eventData == null || string.IsNullOrEmpty(eventData.eventId))
+            return;
+
+        seenEventIds.Add(eventData.eventId);
+    }
+
     public static void ApplyPendingRewardCards()
     {
         if (pendingRewardCards.Count == 0)
@@ -139,6 +160,31 @@ public static class RunData
 
         currentDeck.AddRange(pendingRewardCards);
         pendingRewardCards.Clear();
+    }
+
+    public static bool IsEpisodeUnlocked(int episodeNumber)
+    {
+        return episodeNumber >= 1 &&
+            episodeNumber <= highestUnlockedEpisode;
+    }
+
+    public static void UnlockEpisode(int episodeNumber)
+    {
+        highestUnlockedEpisode = Mathf.Max(
+            highestUnlockedEpisode,
+            episodeNumber
+        );
+    }
+
+    public static bool IsEpisodeCleared(int episodeNumber)
+    {
+        return clearedEpisodeNumbers.Contains(episodeNumber);
+    }
+
+    public static void MarkEpisodeCleared(int episodeNumber)
+    {
+        if (episodeNumber >= 1)
+            clearedEpisodeNumbers.Add(episodeNumber);
     }
 
     public static void Clear()
@@ -149,9 +195,12 @@ public static class RunData
         RelicsChanged?.Invoke();
         seenQuestIds.Clear();
         clearedQuestIds.Clear();
+        seenEventIds.Clear();
+        clearedEpisodeNumbers.Clear();
         currentHp = 50;
         maxHp = 50;
         currentFloor = 1;
+        highestUnlockedEpisode = 1;
         AddedCard = 0;
         currentMap = null;
         selectedNodeId = -1;
