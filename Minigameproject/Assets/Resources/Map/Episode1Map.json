@@ -22,7 +22,7 @@
       "id": 2,
       "floor": 1,
       "zoneName": "낡은 신전",
-      "nodeType": "Rest",
+      "nodeType": "Event",
       "riskLevel": 1,
       "rewardHint": ""
     },
@@ -38,7 +38,7 @@
       "id": 4,
       "floor": 1,
       "zoneName": "무너진 초소",
-      "nodeType": "NormalBattle",
+      "nodeType": "Event",
       "riskLevel": 2,
       "rewardHint": ""
     },

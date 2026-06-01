@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: ChainBlock
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "\uBC29\uC5B4"
+  cardName: "\uCCB4\uC778\uBC29\uC5B4"
   tileShape:
   - {x: 0, y: 1}
   - {x: 1, y: 1}
