@@ -347,7 +347,7 @@ public class BoardManager : MonoBehaviour
     private string BuildPreviewText(EffectPreviewResult result)
     {
         if (result.damage > 0 && result.block > 0)
-            return $"피해 {result.damage} / 방어 {result.block}";
+            return $"피해 {result.damage}\n방어 {result.block}";
 
         if (result.damage > 0)
             return $"피해 {result.damage}";

@@ -14,7 +14,7 @@
       "id": 1,
       "floor": 2,
       "zoneName": "검은 시장",
-      "nodeType": "Rest",
+      "nodeType": "Event",
       "riskLevel": 1,
       "rewardHint": ""
     },

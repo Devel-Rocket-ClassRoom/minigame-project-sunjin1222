@@ -1,19 +1,40 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+
+public enum EventRewardType
+{
+    Card,
+    Relic
+}
 
 [Serializable]
 public class EventChoiceData
 {
     public string choiceText;
 
-    [TextArea]
-    public string resultText;
-
     [Tooltip("양수는 회복, 음수는 피해입니다.")]
     public int hpChange;
 
-    public CardData rewardCard;
-    public RelicData rewardRelic;
+    public EventRewardType rewardType;
+    public List<CardData> rewardCards = new List<CardData>();
+    public List<RelicData> rewardRelics = new List<RelicData>();
+
+    public CardData GetRandomRewardCard()
+    {
+        if (rewardType != EventRewardType.Card || rewardCards == null || rewardCards.Count == 0)
+            return null;
+
+        return rewardCards[UnityEngine.Random.Range(0, rewardCards.Count)];
+    }
+
+    public RelicData GetRandomRewardRelic()
+    {
+        if (rewardType != EventRewardType.Relic || rewardRelics == null || rewardRelics.Count == 0)
+            return null;
+
+        return rewardRelics[UnityEngine.Random.Range(0, rewardRelics.Count)];
+    }
 }
 
 [CreateAssetMenu(fileName = "EventData", menuName = "Game/Event Data")]
