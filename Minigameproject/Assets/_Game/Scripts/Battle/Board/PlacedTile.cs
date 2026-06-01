@@ -124,8 +124,8 @@ public class PlacedTile : MonoBehaviour, IPointerClickHandler, ICanvasRaycastFil
                     originalImageColors.Add(image, image.color);
 
                 Color originalColor = originalImageColors[image];
-                Color grayColor = new Color(0.8f, 0.8f, 0.8f, originalColor.a);
-                image.color = Color.Lerp(originalColor, grayColor, 0.75f);
+                Color rareGold = new Color(1f, 0.75f, 0.1f, originalColor.a);
+                image.color = Color.Lerp(originalColor, rareGold, 0.75f);
             }
 
             return;
