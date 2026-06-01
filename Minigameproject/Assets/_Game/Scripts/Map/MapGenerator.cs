@@ -31,7 +31,7 @@ public class MapGenerator : MonoBehaviour
     public MapData GenerateMap(int episodeNumber)
     {
         MapData mapData = LoadMapFromJson(episodeNumber);
-
+  
         AssignEnemies(mapData);
         AssignEvents(mapData);
         return mapData;
