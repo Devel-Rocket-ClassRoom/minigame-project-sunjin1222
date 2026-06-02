@@ -55,6 +55,7 @@
       "floor": 8,
       "zoneName": "최후의 정비소",
       "nodeType": "Rest",
+      "forceInclude": true,
       "riskLevel": 1,
       "rewardHint": ""
     },
