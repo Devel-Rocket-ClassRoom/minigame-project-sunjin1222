@@ -1,6 +1,6 @@
 {
   "episodeNumber": 3,
-  "episodeTitle": "상처의 갈림길",
+  "episodeTitle": "붉은 안개의 길",
   "nodes": [
     {
       "id": 0,
@@ -21,38 +21,57 @@
     {
       "id": 2,
       "floor": 3,
-      "zoneName": "퀘스트 낡은 야영지",
-      "nodeType": "Rest",
-      "questId": "HealCamp",
-      "availableEpisodes": [2, 3],
-      "showOnce": true,
-      "mustAppearByEpisode": 3,
+      "zoneName": "붉은 안개숲",
+      "nodeType": "NormalBattle",
       "riskLevel": 1,
       "rewardHint": ""
     },
     {
       "id": 3,
       "floor": 3,
-      "zoneName": "잊힌 표지판",
-      "nodeType": "Rest",
+      "zoneName": "그림자 협곡",
+      "nodeType": "NormalBattle",
       "riskLevel": 1,
       "rewardHint": ""
     },
     {
       "id": 4,
       "floor": 3,
-      "zoneName": "퀘스트 검은 다리",
+      "zoneName": "무너진 쉼터",
       "nodeType": "NormalBattle",
+      "riskLevel": 1,
+      "rewardHint": ""
+    },
+    {
+      "id": 5,
+       "floor": 3,
+      "zoneName": "퀘스트 검은 다리",
+      "nodeType": "EliteBattle",
       "questId": "BlackBridgeBattle",
       "forceInclude": true,
       "riskLevel": 3,
       "rewardHint": ""
     },
     {
-      "id": 5,
+      "id": 6,
       "floor": 3,
-      "zoneName": "무너진 쉼터",
+      "zoneName": "낡은 야영지",
       "nodeType": "Rest",
+      "questId": "HealCamp1",
+      "availableEpisodes": [
+        2,
+        3
+      ],
+      "showOnce": true,
+      "mustAppearByEpisode": 3,
+      "riskLevel": 1,
+      "rewardHint": ""
+    },
+    {
+      "id": 7,
+      "floor": 3,
+      "zoneName": "잊힌 표지판",
+      "nodeType": "Event",
       "riskLevel": 1,
       "rewardHint": ""
     }

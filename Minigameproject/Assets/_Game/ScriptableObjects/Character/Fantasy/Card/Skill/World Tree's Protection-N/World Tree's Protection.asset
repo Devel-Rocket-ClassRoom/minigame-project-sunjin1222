@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: World Tree's Protection
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: "\uC138\uACC4\uC218\uC758 \uBCF4\uD638"
+  tileShape:
+  - {x: 0, y: 0}
+  - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 2, y: 1}
+  tileOrigin: {x: 1, y: 1}
+  effects:
+  - {fileID: 11400000, guid: c0c78307853f908479a82345eb8abe42, type: 2}
+  description: "\uBC29\uC5B4\uB3C4 30\n\uC11C\uC0AC 3 : -10"
+  icon: {fileID: 3799414482616589096, guid: c44be6ff7e66fef4eaf1b89e52f9af68, type: 3}
+  cardType: 1
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: 6efa50a399f61fc43a5f65c00550eddb, type: 3}

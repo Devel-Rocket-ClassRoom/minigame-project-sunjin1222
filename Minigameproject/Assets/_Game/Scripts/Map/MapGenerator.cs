@@ -18,9 +18,6 @@ public class MapGenerator : MonoBehaviour
     [Header("Event Pool")]
     public EventData[] eventPool;
 
-    [Header("Event Reward")]
-    public CardData shrineRewardCard;
-
     public int MaxEpisodeNumber => maxEpisodeNumber;
 
     public MapData GenerateMap()
@@ -154,7 +151,8 @@ public class MapGenerator : MonoBehaviour
                 node.rewardHint,
                 node.requiredToProgress,
                 node.fixedSelectionOrder,
-                node.questId
+                node.questId,
+                node.fixedEventId
             ));
 
             MarkQuestAppeared(node);
@@ -253,7 +251,8 @@ public class MapGenerator : MonoBehaviour
         string rewardHint,
         bool requiredToProgress = false,
         int fixedSelectionOrder = 0,
-        string questId = "")
+        string questId = "",
+        string fixedEventId = "")
     {
         return new MapNodeData
         {
@@ -267,6 +266,7 @@ public class MapGenerator : MonoBehaviour
             requiredToProgress = requiredToProgress,
             fixedSelectionOrder = fixedSelectionOrder,
             questId = questId,
+            fixedEventId = fixedEventId,
             state = MapNodeState.Available
         };
     }
@@ -301,6 +301,7 @@ public class MapGenerator : MonoBehaviour
             foreach (EventData eventData in eventPool)
             {
                 if (eventData == null ||
+                    eventData.fixedOnly ||
                     !eventData.CanAppear(mapData.episodeNumber) ||
                     (eventData.showOncePerRun && RunData.HasSeenEvent(eventData)))
                     continue;
@@ -314,11 +315,35 @@ public class MapGenerator : MonoBehaviour
             if (node.nodeType != MapNodeType.Event)
                 continue;
 
+            if (!string.IsNullOrEmpty(node.fixedEventId))
+            {
+                node.eventData = FindEventById(node.fixedEventId);
+
+                if (node.eventData == null)
+                    Debug.LogWarning($"[MapGenerator] 고정 이벤트 '{node.fixedEventId}'를 찾지 못했습니다.");
+
+                continue;
+            }
+
             node.eventData = GetRandomWeightedEvent(candidates);
 
             if (node.eventData != null)
                 candidates.Remove(node.eventData);
         }
+    }
+
+    private EventData FindEventById(string eventId)
+    {
+        if (eventPool == null)
+            return null;
+
+        foreach (EventData eventData in eventPool)
+        {
+            if (eventData != null && eventData.eventId == eventId)
+                return eventData;
+        }
+
+        return null;
     }
 
     private EventData GetRandomWeightedEvent(List<EventData> candidates)
@@ -370,5 +395,6 @@ public class MapGenerator : MonoBehaviour
         public bool requiredToProgress = false;
         public bool placeLast = false;
         public int fixedSelectionOrder = 0;
+        public string fixedEventId = string.Empty;
     }
 }

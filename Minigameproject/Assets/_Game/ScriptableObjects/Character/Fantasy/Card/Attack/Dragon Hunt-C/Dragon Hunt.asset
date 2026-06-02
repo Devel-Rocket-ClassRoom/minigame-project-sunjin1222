@@ -21,7 +21,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: ff882e33af6ae6e4dbca7ca00f98edbe, type: 2}
   - {fileID: 11400000, guid: 390e0aa959797734f97803d59acdb603, type: 2}
-  description: "\uB370\uBBF8\uC9C0 7\n\uCCB4\uC778 \uBC29\uC5B4\uB3C4 2\n"
+  description: "\uB370\uBBF8\uC9C0 7\n\uCCB4\uC778 : \uBC29\uC5B4\uB3C4 2\n"
   icon: {fileID: -3400087497760554248, guid: 3465febaccc4a274cb158811de959090, type: 3}
   cardType: 0
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

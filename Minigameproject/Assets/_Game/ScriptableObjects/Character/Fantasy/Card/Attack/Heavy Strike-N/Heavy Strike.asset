@@ -23,7 +23,7 @@ MonoBehaviour:
   tileOrigin: {x: 1, y: 1}
   effects:
   - {fileID: 11400000, guid: b0f9d187a99eeeb4a9665fb761ecca24, type: 2}
-  description: "\uB370\uBBF8\uC9C040"
+  description: "\uB370\uBBF8\uC9C0 40"
   icon: {fileID: 819851439158909787, guid: 5dc945b0b80f16447ab687ae05bbb700, type: 3}
   cardType: 0
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

@@ -14,20 +14,16 @@
       "id": 1,
       "floor": 6,
       "zoneName": "버려진 병참소",
-      "nodeType": "Rest",
+      "nodeType": "NormalBattle",
       "riskLevel": 1,
       "rewardHint": ""
     },
     {
       "id": 2,
       "floor": 6,
-      "zoneName": "퀘스트 부상병의 은신처",
-      "nodeType": "Rest",
-      "questId": "WoundedScout",
-      "availableEpisodes": [6, 7],
-      "showOnce": true,
-      "mustAppearByEpisode": 7,
-      "riskLevel": 2,
+      "zoneName": "검은 성문",
+      "nodeType": "NormalBattle",
+      "riskLevel": 4,
       "rewardHint": ""
     },
     {
@@ -41,21 +37,63 @@
     {
       "id": 4,
       "floor": 6,
-      "zoneName": "퀘스트 검은 깃발",
-      "nodeType": "Rest",
-      "questId": "BlackFlagEvent",
-      "requiredClearedQuestIds": ["BlackBridgeBattle"],
-      "forceInclude": true,
-      "showOnce": true,
-      "riskLevel": 2,
+      "zoneName": "파괴된 투석기",
+      "nodeType": "NormalBattle",
+      "riskLevel": 4,
       "rewardHint": ""
     },
     {
       "id": 5,
       "floor": 6,
-      "zoneName": "성문 경비대",
+      "zoneName": "무너진 방벽",
       "nodeType": "NormalBattle",
       "riskLevel": 4,
+      "rewardHint": ""
+    },
+    {
+      "id": 6,
+      "floor": 6,
+      "zoneName": "함락된 전초기지",
+      "nodeType": "EliteBattle",
+      "riskLevel": 4,
+      "rewardHint": ""
+    },
+    {
+      "id": 7,
+      "floor": 6,
+      "zoneName": "부상병의 은신처",
+      "nodeType": "Rest",
+      "questId": "HealCamp3",
+      "availableEpisodes": [
+        6,
+        7
+      ],
+      "showOnce": true,
+      "mustAppearByEpisode": 7,
+      "riskLevel": 2,
+      "rewardHint": ""
+    },
+    {
+      "id": 8,
+      "floor": 6,
+      "zoneName": "잿더미 속 기록",
+      "nodeType": "Event",
+      "riskLevel": 4,
+      "rewardHint": ""
+    },
+    {
+      "id": 9,
+      "floor": 6,
+      "zoneName": "퀘스트 검은 깃발",
+      "nodeType": "Event",
+      "questId": "BlackFlagEvent",
+      "fixedEventId": "Fantasy101",
+      "requiredClearedQuestIds": [
+        "BlackBridgeBattle"
+      ],
+      "forceInclude": true,
+      "showOnce": true,
+      "riskLevel": 2,
       "rewardHint": ""
     }
   ]

@@ -1,11 +1,11 @@
 {
   "episodeNumber": 4,
-  "episodeTitle": "붉은 안개의 길",
+  "episodeTitle": "봉인된 물길",
   "nodes": [
     {
       "id": 0,
       "floor": 4,
-      "zoneName": "안개 낀 벌판",
+      "zoneName": "봉인의 수문",
       "nodeType": "EliteBattle",
       "forceInclude": true,
       "requiredToProgress": true,
@@ -16,7 +16,7 @@
       "id": 1,
       "floor": 4,
       "zoneName": "붉은 제단",
-      "nodeType": "Rest",
+      "nodeType": "NormalBattle",
       "riskLevel": 2,
       "rewardHint": ""
     },
@@ -31,28 +31,47 @@
     {
       "id": 3,
       "floor": 4,
-      "zoneName": "퀘스트 약초꾼의 천막",
-      "nodeType": "Rest",
-      "questId": "HerbalistTent",
-      "availableEpisodes": [4, 5],
-      "showOnce": true,
-      "mustAppearByEpisode": 5,
-      "riskLevel": 1,
-      "rewardHint": ""
-    },
-    {
-      "id": 4,
-      "floor": 4,
       "zoneName": "부서진 감시소",
       "nodeType": "NormalBattle",
       "riskLevel": 3,
       "rewardHint": ""
     },
     {
+      "id": 4,
+      "floor": 4,
+      "zoneName": "침수된 창고",
+      "nodeType": "NormalBattle",
+      "riskLevel": 1,
+      "rewardHint": ""
+    },
+    {
       "id": 5,
       "floor": 4,
-      "zoneName": "잠긴 보관함",
+      "zoneName": "물에 잠긴 나루터",
+      "nodeType": "NormalBattle",
+      "riskLevel": 1,
+      "rewardHint": ""
+    },
+    {
+      "id": 6,
+      "floor": 4,
+      "zoneName": "약초꾼의 천막",
       "nodeType": "Rest",
+      "questId": "HealCamp2",
+      "availableEpisodes": [
+        4,
+        5
+      ],
+      "showOnce": true,
+      "mustAppearByEpisode": 5,
+      "riskLevel": 1,
+      "rewardHint": ""
+    },
+    {
+      "id": 7,
+      "floor": 4,
+      "zoneName": "떠내려온 보관함",
+      "nodeType": "Event",
       "riskLevel": 1,
       "rewardHint": ""
     }

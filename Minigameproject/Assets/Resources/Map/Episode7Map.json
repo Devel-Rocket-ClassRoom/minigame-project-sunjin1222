@@ -1,6 +1,6 @@
 {
   "episodeNumber": 7,
-  "episodeTitle": "무너지는 왕좌",
+  "episodeTitle": "최후의 관문",
   "nodes": [
     {
       "id": 0,
@@ -13,12 +13,8 @@
     {
       "id": 1,
       "floor": 7,
-      "zoneName": "퀘스트 부상병의 은신처",
-      "nodeType": "Rest",
-      "questId": "WoundedScout",
-      "availableEpisodes": [6, 7],
-      "showOnce": true,
-      "mustAppearByEpisode": 7,
+      "zoneName": "침묵의 회랑",
+      "nodeType": "NormalBattle",
       "riskLevel": 2,
       "rewardHint": ""
     },
@@ -26,7 +22,7 @@
       "id": 2,
       "floor": 7,
       "zoneName": "부서진 기사상",
-      "nodeType": "Rest",
+      "nodeType": "NormalBattle",
       "riskLevel": 2,
       "rewardHint": ""
     },
@@ -41,8 +37,8 @@
     {
       "id": 4,
       "floor": 7,
-      "zoneName": "마지막 쉼터",
-      "nodeType": "Rest",
+      "zoneName": "검은 성소",
+      "nodeType": "NormalBattle",
       "riskLevel": 1,
       "rewardHint": ""
     },
@@ -52,6 +48,47 @@
       "zoneName": "왕좌의 그림자",
       "nodeType": "NormalBattle",
       "riskLevel": 5,
+      "rewardHint": ""
+    },
+    {
+      "id": 6,
+      "floor": 7,
+      "zoneName": "검은 근위대",
+      "nodeType": "NormalBattle",
+      "riskLevel": 5,
+      "rewardHint": ""
+    },
+    {
+      "id": 7,
+      "floor": 7,
+      "zoneName": "마지막 수호자",
+      "nodeType": "EliteBattle",
+      "forceInclude": true,
+      "requiredToProgress": true,
+      "riskLevel": 5,
+      "rewardHint": "필수 전투"
+    },
+    {
+      "id": 8,
+      "floor": 7,
+      "zoneName": "부상병의 은신처",
+      "nodeType": "Rest",
+      "questId": "HealCamp3",
+      "availableEpisodes": [
+        6,
+        7
+      ],
+      "showOnce": true,
+      "mustAppearByEpisode": 7,
+      "riskLevel": 2,
+      "rewardHint": ""
+    },
+    {
+      "id": 9,
+      "floor": 7,
+      "zoneName": "마지막 쉼터",
+      "nodeType": "Event",
+      "riskLevel": 1,
       "rewardHint": ""
     }
   ]

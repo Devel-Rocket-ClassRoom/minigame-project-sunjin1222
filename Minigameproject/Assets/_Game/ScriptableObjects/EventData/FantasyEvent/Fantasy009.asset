@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d2c8bb57c84d04bba55371bb46d9cf, type: 3}
+  m_Name: Fantasy009
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  eventId: Fantasy009
+  eventTitle: "\uC0C1\uC778\uC758 \uD638\uC704"
+  description: "\"\uC5EC\uAE30\uAE4C\uC9C0 \uACE0\uB9C8\uC6CC\n\uC774\uAC74 \uBCF4\uB2F5\uC774\uC57C
+    \n\uAC80\uACFC \uBC29\uD328 \uC5B4\uB5A4\uAC8C \uC88B\uC544?\""
+  illustration: {fileID: 8628015757821773985, guid: 18eff61ab095be94185ac3a2c285b2cf, type: 3}
+  choices:
+  - choiceText: "[\uAC80\uC744 \uACE0\uB978\uB2E4]\uACF5\uACA9\uCE74\uB4DC 3\uC7A5\uC911
+      1\uC7A5 \uD68D\uB4DD"
+    hpChange: 0
+    rewardType: 0
+    useCharacterCardPool: 1
+    filterByCardType: 1
+    rewardCardType: 0
+    cardOptionCount: 3
+    rewardCards: []
+    rewardRelics: []
+  - choiceText: "[\uBC29\uD328\uB97C \uACE0\uB978\uB2E4]\uC2A4\uD0AC\uCE74\uB4DC
+      3\uC7A5\uC911 1\uC7A5 \uD68D\uB4DD"
+    hpChange: 0
+    rewardType: 0
+    useCharacterCardPool: 1
+    filterByCardType: 1
+    rewardCardType: 1
+    cardOptionCount: 3
+    rewardCards: []
+    rewardRelics: []
+  minFloor: 1
+  maxFloor: 0
+  weight: 1
+  showOncePerRun: 1
+  fixedOnly: 0

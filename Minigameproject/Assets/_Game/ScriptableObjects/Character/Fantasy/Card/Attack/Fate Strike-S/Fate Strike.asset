@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: Fate Strike
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "\uD30C\uC6CC \uC2AC\uB808\uC26C"
+  cardName: "\uC6B4\uBA85\uC758 \uC77C\uACA9"
   tileShape:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -21,7 +21,7 @@ MonoBehaviour:
   tileOrigin: {x: 0, y: 0}
   effects:
   - {fileID: 11400000, guid: 77508efc72c00424085216032db301f2, type: 2}
-  description: "\uB370\uBBF8\uC9C0 20\n\uC11C\uC0AC 4 : +20"
+  description: "\uB370\uBBF8\uC9C0 12\n\uC11C\uC0AC 4 : +15"
   icon: {fileID: 1923685053, guid: c00f70adef54ca54f8c73924f608e34e, type: 3}
   cardType: 0
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

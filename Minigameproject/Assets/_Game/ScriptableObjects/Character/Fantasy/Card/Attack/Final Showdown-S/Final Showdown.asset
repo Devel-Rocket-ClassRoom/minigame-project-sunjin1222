@@ -22,7 +22,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 5bb8097c47bc53e47a31c8daa3e5c965, type: 2}
   - {fileID: 11400000, guid: 88c71d4cd4b0dd54ba0b61fd9c3b6bbd, type: 2}
-  description: "\uB370\uBBF8\uC9C05\n\uC11C\uC0AC4:+10\n\uC11C\uC0AC5:+15"
+  description: "\uB370\uBBF8\uC9C0 5\n\uC11C\uC0AC 4 : +10\n\uC11C\uC0AC 5 : +15"
   icon: {fileID: 4731178720423523223, guid: bb4532c71c9724146bdbae2268d3fbfe, type: 3}
   cardType: 0
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

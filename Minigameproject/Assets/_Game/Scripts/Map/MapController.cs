@@ -13,6 +13,8 @@ public class MapController : MonoBehaviour
     public MapDragHandler mapDragHandler;
     public GameObject eventPanel;
 
+    public GameSceneManager gameSceneManager;
+
     private MapData currentMap;
     private MapNodeData activeEventNode;
     private GameObject bigMap;
@@ -28,6 +30,7 @@ public class MapController : MonoBehaviour
     private Button cardRemoveConfirmButton;
     private CardData selectedRemoveCard;
     private RectTransform selectedRemoveCardRect;
+    private EventRewardPanelController eventRewardPanelController;
 
     public TMP_Text HralText;
 
@@ -42,6 +45,8 @@ public class MapController : MonoBehaviour
         HideEventPanel();
         BindRestPanel();
         HideRestPanels();
+        BindEventRewardPanel();
+        eventRewardPanelController?.Hide();
         SetupBigMapButtons();
 
         if (RunData.currentMap == null)
@@ -480,6 +485,7 @@ public class MapController : MonoBehaviour
 
         int healAmount = Mathf.CeilToInt(RunData.maxHp * 0.3f);
         RunData.currentHp = Mathf.Min(RunData.maxHp, RunData.currentHp + healAmount);
+        gameSceneManager.RefreshMapHud();
         CompleteRest(activeRestNode);
     }
 
@@ -598,6 +604,65 @@ public class MapController : MonoBehaviour
         ClearSelectedRemoveCard();
     }
 
+    private void BindEventRewardPanel()
+    {
+        GameObject rewardPanel = FindSceneObject("EventRewardPanel");
+
+        if (rewardPanel == null)
+            return;
+
+        eventRewardPanelController = rewardPanel.GetComponent<EventRewardPanelController>();
+
+        if (eventRewardPanelController == null)
+            eventRewardPanelController = rewardPanel.AddComponent<EventRewardPanelController>();
+
+        eventRewardPanelController.Initialize();
+    }
+
+    private void ShowEventCardReward(List<CardData> cards)
+    {
+        HideEventPanel();
+
+        if (eventRewardPanelController == null ||
+            !eventRewardPanelController.TryShowCards(cards, ConfirmEventReward))
+        {
+            Debug.LogWarning("[MapController] 이벤트 카드 보상 패널을 찾지 못해 첫 번째 카드를 즉시 지급합니다.");
+            if (cards != null && cards.Count > 0)
+                RunData.AddEventCard(cards[0]);
+
+            CompleteEvent(activeEventNode);
+        }
+    }
+
+    private void ShowEventRelicReward(RelicData relic)
+    {
+        HideEventPanel();
+
+        if (eventRewardPanelController == null ||
+            !eventRewardPanelController.TryShowRelic(relic, ConfirmEventReward))
+        {
+            Debug.LogWarning("[MapController] 이벤트 유물 보상 패널을 찾지 못해 유물을 즉시 지급합니다.");
+            if (relic != null)
+                RunData.AddRelic(relic);
+
+            CompleteEvent(activeEventNode);
+        }
+    }
+
+    private void ConfirmEventReward(CardData card, RelicData relic)
+    {
+        if (activeEventNode == null)
+            return;
+
+        if (card != null)
+            RunData.AddEventCard(card);
+
+        if (relic != null)
+            RunData.AddRelic(relic);
+
+        CompleteEvent(activeEventNode);
+    }
+
     private void ShowShrineEvent(MapNodeData eventNode)
     {
         EventData eventData = eventNode.eventData;
@@ -700,15 +765,22 @@ public class MapController : MonoBehaviour
 
         EventChoiceData choice = choices[choiceIndex];
         RunData.currentHp = Mathf.Clamp(RunData.currentHp + choice.hpChange, 0, RunData.maxHp);
+        gameSceneManager.RefreshMapHud();
 
-        CardData rewardCard = choice.GetRandomRewardCard();
+        List<CardData> rewardCards = choice.GetRandomRewardCards();
         RelicData rewardRelic = choice.GetRandomRewardRelic();
 
-        if (rewardCard != null)
-            RunData.AddEventCard(rewardCard);
+        if (rewardCards.Count > 0)
+        {
+            ShowEventCardReward(rewardCards);
+            return;
+        }
 
         if (rewardRelic != null)
-            RunData.AddRelic(rewardRelic);
+        {
+            ShowEventRelicReward(rewardRelic);
+            return;
+        }
 
         CompleteEvent(activeEventNode);
     }
@@ -718,6 +790,7 @@ public class MapController : MonoBehaviour
         MarkNodeCleared(eventNode);
 
         HideEventPanel();
+        eventRewardPanelController?.Hide();
         activeEventNode = null;
 
         CompleteEpisodeIfFinished();

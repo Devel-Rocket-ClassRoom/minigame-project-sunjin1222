@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da9c020ef6626f4e804c1e781f3f507, type: 3}
   m_Name: ChainDamageEffect
   m_EditorClassIdentifier: Assembly-CSharp::ChainDamageEffect
-  originDamage: 16
-  bonusPerAdjacentCard: 2
+  originDamage: 24
+  bonusPerAdjacentCard: -3

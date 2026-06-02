@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3e7a75fc0f3b24d95f2fa084338f04, type: 3}
   m_Name: SagaDamageEffect
   m_EditorClassIdentifier: Assembly-CSharp::SagaDamageEffect
-  originDamage: 10
+  originDamage: 12
   requiredOrder: 4
   bonusDamage: 15

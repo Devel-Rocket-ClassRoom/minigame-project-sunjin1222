@@ -57,6 +57,7 @@ public class BattleController : MonoBehaviour
     {
         IsTurnProcessing = true;
         turnCount++;
+        enemyController.ResetDamageTakenThisTurn();
 
         EffectContext context = new EffectContext
         {
