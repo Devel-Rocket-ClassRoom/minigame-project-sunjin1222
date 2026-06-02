@@ -14,6 +14,7 @@ public class MapNodeData
     public bool requiredToProgress;
     public int fixedSelectionOrder;
     public string questId;
+    public string fixedEventId;
 
     public MapNodeType nodeType;
     public MapNodeState state;

@@ -6,7 +6,6 @@ public class GameSceneManager : MonoBehaviour
 {
 
     public TextMeshProUGUI floor;
-    public TextMeshProUGUI addcard;
 
     public TextMeshProUGUI HP;
 
@@ -17,18 +16,10 @@ public class GameSceneManager : MonoBehaviour
 
     public void RefreshMapHud()
     {
-        if (RunData.currentMap != null)
-        {
-            floor.text = $"용사의 연대기 / EP.{RunData.currentMap.episodeNumber}";
-            HP.text = $"HP:{RunData.currentHp}/{RunData.maxHp}";
-            addcard.text = RunData.currentMap.episodeCompleted
-                ? $"{RunData.currentMap.episodeTitle} 복구 완료"
-                : $"선택: {RunData.currentMap.selectedNodeIds.Count}/3";
-            return;
-        }
-        HP.text = $"HP:{RunData.currentHp}/{RunData.maxHp}";
-        floor.text = "용사의 연대기 / EP.1";
-        addcard.text = "선택: 0/3";
+        HP.text = $"{RunData.currentHp}/{RunData.maxHp}";
+        floor.text = RunData.currentMap != null
+            ? $"용사의 연대기\nEP.{RunData.currentMap.episodeNumber}"
+            : "용사의 연대기\nEP.1";
     }
     public void LoadBattleScene()
     {

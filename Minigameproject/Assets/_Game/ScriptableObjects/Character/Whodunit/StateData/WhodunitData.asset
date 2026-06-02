@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: WhodunitData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   characterName: "\uCD94\uB9AC\uC791\uAC00"
-  maxHp: 60
-  description: "\"\uB098\uB294 \uCCA0\uB9DB\uC744 \uC88B\uC544\uD55C\uB2E4\""
+  maxHp: 69
+  description: "\"\uC9C4\uC2E4\uC740 \uC228\uACA8\uC838 \uC788\uC5C8\uB358 \uAC8C
+    \uC544\uB2C8\uB2E4.\n \uB2E8\uC9C0 \uBCF4\uC9C0 \uBABB\uD588\uC744 \uBFD0\uC774\uC9C0\""
   image: {fileID: 3698660180644308013, guid: 2dbc733081f2c2f4081e619af72330d3, type: 3}
   battleSprite: {fileID: -6718478805127269227, guid: d708b4b15d7b8b94297a471fe23ecbaa, type: 3}
   startDeck:

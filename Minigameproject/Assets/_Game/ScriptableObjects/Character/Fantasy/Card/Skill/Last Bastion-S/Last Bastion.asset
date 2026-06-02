@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Last Bastion
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: "\uCD5C\uD6C4\uC758 \uBC29\uC5B4\uC120"
+  tileShape:
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 2, y: 1}
+  - {x: 2, y: 0}
+  tileOrigin: {x: 1, y: 1}
+  effects:
+  - {fileID: 11400000, guid: 85cca1f30ba3dff4a908ba9aafa6a592, type: 2}
+  description: "\uBC29\uC5B4\uB3C4 18\n\uC11C\uC0AC 5 : +10"
+  icon: {fileID: 3501438936947059227, guid: 8cfe9f1ebc466d54e9d95a54bf7caf14, type: 3}
+  cardType: 1
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: a88241bc7f2f33644be5deb9037aec67, type: 3}

@@ -16,6 +16,7 @@ MonoBehaviour:
   enemyType: 2
   maxHealth: 200
   description: 
+  attackIncreasePerPatternLoop: 10
   patterns:
   - actionType: 0
     value: 30

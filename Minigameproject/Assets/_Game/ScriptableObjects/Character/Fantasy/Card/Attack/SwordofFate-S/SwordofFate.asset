@@ -21,7 +21,7 @@ MonoBehaviour:
   tileOrigin: {x: 1, y: 0}
   effects:
   - {fileID: 11400000, guid: dff420804cca72e499ae5b081ea2c81f, type: 2}
-  description: "\uB370\uBBF8\uC9C0 12\n\uC11C\uC0AC 3: +5 "
+  description: "\uB370\uBBF8\uC9C0 12\n\uC11C\uC0AC 3 : +5 "
   icon: {fileID: 383099649029892881, guid: 326707879ee8e994ca70b43d500ec232, type: 3}
   cardType: 0
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

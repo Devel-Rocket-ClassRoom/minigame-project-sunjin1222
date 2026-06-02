@@ -1,6 +1,6 @@
 {
   "episodeNumber": 8,
-  "episodeTitle": "사라진 장면의 끝",
+  "episodeTitle": "모험의 끝",
   "nodes": [
     {
       "id": 0,
@@ -13,9 +13,9 @@
     {
       "id": 1,
       "floor": 8,
-      "zoneName": "마지막 기록",
-      "nodeType": "Rest",
-      "riskLevel": 2,
+      "zoneName": "찢어진 마지막 장",
+      "nodeType": "NormalBattle",
+      "riskLevel": 5,
       "rewardHint": ""
     },
     {
@@ -29,9 +29,9 @@
     {
       "id": 3,
       "floor": 8,
-      "zoneName": "최후의 정비소",
-      "nodeType": "Rest",
-      "riskLevel": 1,
+      "zoneName": "끝나지 않은 서사",
+      "nodeType": "NormalBattle",
+      "riskLevel": 5,
       "rewardHint": ""
     },
     {
@@ -45,7 +45,31 @@
     {
       "id": 5,
       "floor": 8,
-      "zoneName": "복구의 심장",
+      "zoneName": "왕좌의 수호자",
+      "nodeType": "NormalBattle",
+      "riskLevel": 5,
+      "rewardHint": ""
+    },
+    {
+      "id": 6,
+      "floor": 8,
+      "zoneName": "최후의 정비소",
+      "nodeType": "Rest",
+      "riskLevel": 1,
+      "rewardHint": ""
+    },
+    {
+      "id": 7,
+      "floor": 8,
+      "zoneName": "마지막 기록",
+      "nodeType": "Event",
+      "riskLevel": 2,
+      "rewardHint": ""
+    },
+    {
+      "id": 8,
+        "floor": 8,
+      "zoneName": "검은 마왕",
       "nodeType": "Boss",
       "forceInclude": true,
       "placeLast": true,

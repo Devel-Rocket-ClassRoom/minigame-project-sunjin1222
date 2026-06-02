@@ -1,6 +1,6 @@
 {
   "episodeNumber": 2,
-  "episodeTitle": "깊어진 균열",
+  "episodeTitle": "깨어난 어둠",
   "nodes": [
     {
       "id": 0,
@@ -13,8 +13,8 @@
     {
       "id": 1,
       "floor": 2,
-      "zoneName": "검은 시장",
-      "nodeType": "Event",
+      "zoneName": "속삭이는 계곡",
+      "nodeType": "NormalBattle",
       "riskLevel": 1,
       "rewardHint": ""
     },
@@ -29,12 +29,8 @@
     {
       "id": 3,
       "floor": 2,
-      "zoneName": "퀘스트 낡은 야영지",
-      "nodeType": "Rest",
-      "questId": "HealCamp",
-      "availableEpisodes": [2, 3],
-      "showOnce": true,
-      "mustAppearByEpisode": 3,
+      "zoneName": "그림자 제단",
+      "nodeType": "NormalBattle",
       "riskLevel": 1,
       "rewardHint": ""
     },
@@ -49,8 +45,31 @@
     {
       "id": 5,
       "floor": 2,
-      "zoneName": "사라진 희망",
+      "zoneName": "잿빛 마을",
+      "nodeType": "NormalBattle",
+      "riskLevel": 1,
+      "rewardHint": ""
+    },
+    {
+      "id": 6,
+      "floor": 2,
+      "zoneName": "낡은 야영지",
       "nodeType": "Rest",
+      "questId": "HealCamp1",
+      "availableEpisodes": [
+        2,
+        3
+      ],
+      "showOnce": true,
+      "mustAppearByEpisode": 3,
+      "riskLevel": 1,
+      "rewardHint": ""
+    },
+    {
+      "id": 7,
+      "floor": 2,
+      "zoneName": "검은 시장",
+      "nodeType": "Event",
       "riskLevel": 1,
       "rewardHint": ""
     }

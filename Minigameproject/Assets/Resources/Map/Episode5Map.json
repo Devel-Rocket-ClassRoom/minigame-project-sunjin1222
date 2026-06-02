@@ -1,11 +1,11 @@
 {
   "episodeNumber": 5,
-  "episodeTitle": "봉인된 물길",
+  "episodeTitle": "여행의 노래",
   "nodes": [
     {
       "id": 0,
       "floor": 5,
-      "zoneName": "말라붙은 수로",
+      "zoneName": "바람의 언덕",
       "nodeType": "NormalBattle",
       "riskLevel": 3,
       "rewardHint": ""
@@ -13,27 +13,23 @@
     {
       "id": 1,
       "floor": 5,
-      "zoneName": "흐린 우물",
-      "nodeType": "Rest",
+      "zoneName": "별빛 오솔길",
+      "nodeType": "NormalBattle",
       "riskLevel": 1,
       "rewardHint": ""
     },
     {
       "id": 2,
       "floor": 5,
-      "zoneName": "퀘스트 약초꾼의 천막",
-      "nodeType": "Rest",
-      "questId": "HerbalistTent",
-      "availableEpisodes": [4, 5],
-      "showOnce": true,
-      "mustAppearByEpisode": 5,
-      "riskLevel": 1,
+      "zoneName": "오래된 마차길",
+      "nodeType": "NormalBattle",
+      "riskLevel": 3,
       "rewardHint": ""
     },
     {
       "id": 3,
       "floor": 5,
-      "zoneName": "뒤틀린 수문",
+      "zoneName": "여행자 우물",
       "nodeType": "NormalBattle",
       "riskLevel": 4,
       "rewardHint": ""
@@ -41,16 +37,39 @@
     {
       "id": 4,
       "floor": 5,
-      "zoneName": "물길의 잔향",
-      "nodeType": "Rest",
+      "zoneName": "노래하는 들판",
+      "nodeType": "NormalBattle",
       "riskLevel": 2,
       "rewardHint": ""
     },
     {
       "id": 5,
       "floor": 5,
-      "zoneName": "침수된 회랑",
+      "zoneName": "메아리 언덕",
       "nodeType": "NormalBattle",
+      "riskLevel": 3,
+      "rewardHint": ""
+    },
+    {
+      "id": 6,
+      "floor": 5,
+      "zoneName": "약초꾼의 천막",
+      "nodeType": "Rest",
+      "questId": "HealCamp2",
+      "availableEpisodes": [
+        4,
+        5
+      ],
+      "showOnce": true,
+      "mustAppearByEpisode": 5,
+      "riskLevel": 1,
+      "rewardHint": ""
+    },
+    {
+      "id": 7,
+      "floor": 5,
+      "zoneName": "여행자의 길",
+      "nodeType": "Event",
       "riskLevel": 3,
       "rewardHint": ""
     }

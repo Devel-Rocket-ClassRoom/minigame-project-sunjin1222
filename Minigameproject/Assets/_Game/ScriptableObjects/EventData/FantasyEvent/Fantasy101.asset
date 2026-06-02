@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d2c8bb57c84d04bba55371bb46d9cf, type: 3}
+  m_Name: Fantasy101
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  eventId: Fantasy101
+  eventTitle: "\uAC80\uC740 \uAE43\uBC1C"
+  description: "\uAC80\uC740 \uB2E4\uB9AC\uB97C \uC9C0\uD0A4\uB358 \uC790\uB4E4\uC758
+    \uAE43\uBC1C\uC774\uB2E4.\n\uBD88\uAE38\uD55C \uAE30\uC6B4\uC774 \uC544\uC9C1
+    \uCC9C\uC5D0 \uB0A8\uC544 \uC788\uB2E4."
+  illustration: {fileID: 0}
+  choices:
+  - choiceText: "[\uAE43\uBC1C\uC744 \uBD88\uD0DC\uC6B4\uB2E4] \uCCB4\uB825 -8, \uBB34\uC791\uC704
+      \uC720\uBB3C 1\uAC1C \uD68D\uB4DD"
+    hpChange: -8
+    rewardType: 1
+    useCharacterCardPool: 0
+    filterByCardType: 0
+    rewardCardType: 0
+    cardOptionCount: 0
+    rewardCards: []
+    rewardRelics:
+    - {fileID: 11400000, guid: 9757ece2e4d148b0819f360e0d9fd717, type: 2}
+    - {fileID: 11400000, guid: e4f7a0fb2b6746c0a60cf57968c9e7a1, type: 2}
+    - {fileID: 11400000, guid: 3ae8fd97a95f45c5bba52ed7963ab471, type: 2}
+    - {fileID: 11400000, guid: 48af766061ab1934492808ede69ebb82, type: 2}
+    - {fileID: 11400000, guid: 8c0c0197455d4aa69695740df2e82b79, type: 2}
+  - choiceText: "[\uAE43\uBC1C\uC744 \uC870\uC0AC\uD55C\uB2E4] \uACF5\uACA9 \uCE74\uB4DC
+      3\uC7A5 \uC911 1\uC7A5 \uD68D\uB4DD"
+    hpChange: 0
+    rewardType: 0
+    useCharacterCardPool: 1
+    filterByCardType: 1
+    rewardCardType: 0
+    cardOptionCount: 3
+    rewardCards: []
+    rewardRelics: []
+  - choiceText: "[\uAC74\uB4DC\uB9AC\uC9C0 \uC54A\uB294\uB2E4]"
+    hpChange: 0
+    rewardType: 0
+    useCharacterCardPool: 0
+    filterByCardType: 0
+    rewardCardType: 0
+    cardOptionCount: 0
+    rewardCards: []
+    rewardRelics: []
+  minFloor: 6
+  maxFloor: 6
+  weight: 1
+  showOncePerRun: 1
+  fixedOnly: 1
