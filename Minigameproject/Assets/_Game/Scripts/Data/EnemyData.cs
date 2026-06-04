@@ -31,6 +31,7 @@ public class EnemyPattern
 [CreateAssetMenu(fileName = "Data", menuName = "Game/Enemy Data")]
 public class EnemyData : ScriptableObject
 {
+    public string enemyId;
     public string enemyName;
     public EnemyType enemyType;
 

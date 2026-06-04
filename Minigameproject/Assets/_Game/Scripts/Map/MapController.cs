@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using System;
-using System.Collections.Generic;
 using TMPro;
 
 // EP 후보 선택, 실행 순서, 전투 복귀 결과를 관리한다.
@@ -16,21 +14,9 @@ public class MapController : MonoBehaviour
     public GameSceneManager gameSceneManager;
 
     private MapData currentMap;
-    private MapNodeData activeEventNode;
-    private GameObject bigMap;
-    private TMP_Text eventNameText;
-    private TMP_Text eventDescriptionText;
-    private Image eventImage;
-    private Button[] eventChoiceButtons = Array.Empty<Button>();
-    private GameObject restPanel;
-    private GameObject cardRemovePanel;
-    private Transform cardRemoveContent;
-    private GameObject cardRemoveTemplate;
-    private MapNodeData activeRestNode;
-    private Button cardRemoveConfirmButton;
-    private CardData selectedRemoveCard;
-    private RectTransform selectedRemoveCardRect;
-    private EventRewardPanelController eventRewardPanelController;
+    private BigMapEpisodeView bigMapView;
+    private EventPanelController eventPanelController;
+    private RestPanelController restPanelController;
 
     public TMP_Text HralText;
 
@@ -42,12 +28,9 @@ public class MapController : MonoBehaviour
             return;
         }
 
-        HideEventPanel();
+        BindEventPanel();
         BindRestPanel();
-        HideRestPanels();
-        BindEventRewardPanel();
-        eventRewardPanelController?.Hide();
-        SetupBigMapButtons();
+        SetupBigMapView();
 
         if (RunData.currentMap == null)
         {
@@ -74,9 +57,9 @@ public class MapController : MonoBehaviour
             mapDragHandler.FocusOn(Vector2.zero);
     }
 
-    private void SetupBigMapButtons()
+    private void SetupBigMapView()
     {
-        bigMap = GameObject.Find("BigMap");
+        GameObject bigMap = GameObject.Find("BigMap");
 
         if (bigMap == null)
         {
@@ -84,48 +67,12 @@ public class MapController : MonoBehaviour
             return;
         }
 
-        SetupBigMapPanZoom();
+        bigMapView = bigMap.GetComponent<BigMapEpisodeView>();
 
-        Button[] episodeButtons = bigMap.GetComponentsInChildren<Button>(true);
+        if (bigMapView == null)
+            bigMapView = bigMap.AddComponent<BigMapEpisodeView>();
 
-        foreach (Button button in episodeButtons)
-        {
-            if (!TryGetEpisodeNumber(button.name, out int episodeNumber))
-                continue;
-
-            int selectedEpisode = episodeNumber;
-            button.onClick.AddListener(() => OpenEpisode(selectedEpisode));
-        }
-
-        RefreshBigMapButtons();
-    }
-
-    private void SetupBigMapPanZoom()
-    {
-        RectTransform viewport = bigMap.transform as RectTransform;
-
-        if (viewport == null || viewport.childCount == 0)
-        {
-            Debug.LogWarning("[MapController] BigMap 콘텐츠를 찾지 못했습니다.");
-            return;
-        }
-
-        RectTransform content = viewport.GetChild(0) as RectTransform;
-        BigMapPanZoom panZoom = bigMap.GetComponent<BigMapPanZoom>();
-
-        if (panZoom == null)
-            panZoom = bigMap.AddComponent<BigMapPanZoom>();
-
-        panZoom.Configure(viewport, content);
-    }
-
-    private bool TryGetEpisodeNumber(string buttonName, out int episodeNumber)
-    {
-        episodeNumber = 0;
-
-        return !string.IsNullOrEmpty(buttonName) &&
-            buttonName.StartsWith("Ep", StringComparison.OrdinalIgnoreCase) &&
-            int.TryParse(buttonName.Substring(2), out episodeNumber);
+        bigMapView.Initialize(OpenEpisode);
     }
 
     public void OpenEpisode(int episodeNumber)
@@ -152,60 +99,20 @@ public class MapController : MonoBehaviour
 
     private void ShowBigMap()
     {
-        RefreshBigMapButtons();
-
         if (mapView != null && mapView.nodeContainer != null)
             mapView.nodeContainer.gameObject.SetActive(false);
 
-        if (bigMap != null)
-            bigMap.SetActive(true);
+        if (bigMapView != null)
+            bigMapView.Show();
     }
 
     private void HideBigMap()
     {
-        if (bigMap != null)
-            bigMap.SetActive(false);
+        if (bigMapView != null)
+            bigMapView.Hide();
 
         if (mapView != null && mapView.nodeContainer != null)
             mapView.nodeContainer.gameObject.SetActive(true);
-    }
-
-    private void RefreshBigMapButtons()
-    {
-        if (bigMap == null)
-            return;
-
-        Button[] episodeButtons = bigMap.GetComponentsInChildren<Button>(true);
-
-        foreach (Button button in episodeButtons)
-        {
-            if (TryGetEpisodeNumber(button.name, out int episodeNumber))
-                UpdateBigMapButtonState(button, episodeNumber);
-        }
-    }
-
-    private void UpdateBigMapButtonState(Button button, int episodeNumber)
-    {
-        bool isCleared = RunData.IsEpisodeCleared(episodeNumber);
-        bool isUnlocked = RunData.IsEpisodeUnlocked(episodeNumber);
-
-        ColorBlock colors = button.colors;
-        colors.disabledColor = isCleared
-            ? new Color(0.85f, 0.72f, 0.22f, 1f)
-            : new Color(0.45f, 0.45f, 0.45f, 0.65f);
-        button.colors = colors;
-        button.interactable = isUnlocked && !isCleared;
-
-        TMP_Text episodeName = button.GetComponentInChildren<TMP_Text>(true);
-
-        if (episodeName != null)
-        {
-            episodeName.color = isCleared
-                ? new Color(0.2f, 0.8f, 0.3f, 1f)
-                : isUnlocked
-                    ? new Color(0.95f, 0.2f, 0.2f, 1f)
-                    : new Color(0.55f, 0.55f, 0.55f, 1f);
-        }
     }
 
     private void DrawEpisodePlan()
@@ -353,7 +260,6 @@ public class MapController : MonoBehaviour
         if (selectedNode.nodeType == MapNodeType.Rest)
         {
             ShowRestPanel(selectedNode);
-            HralText.text=$"{Mathf.CeilToInt(RunData.maxHp * 0.3f)}";
             return;
         }
 
@@ -385,206 +291,37 @@ public class MapController : MonoBehaviour
 
     private void BindRestPanel()
     {
-        restPanel = FindSceneObject("RestPanel");
-        cardRemovePanel = FindSceneObject("CardRemovePanel");
-
-        if (restPanel != null)
-        {
-            Button healButton = FindButton(restPanel, "HealButton");
-            Button removeCardButton = FindButton(restPanel, "RemoveCardButton");
-
-            if (healButton != null)
-                healButton.onClick.AddListener(ChooseRestHeal);
-
-            if (removeCardButton != null)
-                removeCardButton.onClick.AddListener(ShowCardRemovePanel);
-        }
-
-        if (cardRemovePanel == null)
-            return;
-
-        Transform content = FindChild(cardRemovePanel.transform, "Content");
-
-        if (content == null)
-            return;
-
-        cardRemoveContent = content;
-        CardView templateView = content.GetComponentInChildren<CardView>(true);
-
-        if (templateView != null)
-        {
-            cardRemoveTemplate = templateView.gameObject;
-            cardRemoveTemplate.SetActive(false);
-        }
-
-        cardRemoveConfirmButton = FindButton(cardRemovePanel, "ConfirmButton");
-
-        if (cardRemoveConfirmButton == null)
-        {
-            Debug.LogError("[MapController] CardRemovePanel 아래 ConfirmButton을 찾지 못했습니다.");
-            return;
-        }
-
-        cardRemoveConfirmButton.onClick.AddListener(ConfirmCardRemove);
-        cardRemoveConfirmButton.gameObject.SetActive(false);
+        restPanelController = new RestPanelController(
+            gameSceneManager,
+            HralText,
+            CompleteRest);
+        restPanelController.Initialize();
     }
 
-    private GameObject FindSceneObject(string objectName)
+    private void BindEventPanel()
     {
-        foreach (Transform transform in FindObjectsByType<Transform>(
-            FindObjectsInactive.Include,
-            FindObjectsSortMode.None))
-        {
-            if (transform.gameObject.scene.IsValid() &&
-                string.Equals(transform.name.Trim(), objectName, StringComparison.Ordinal))
-                return transform.gameObject;
-        }
-
-        return null;
-    }
-
-    private Transform FindChild(Transform parent, string childName)
-    {
-        foreach (Transform child in parent.GetComponentsInChildren<Transform>(true))
-        {
-            if (string.Equals(child.name.Trim(), childName, StringComparison.Ordinal))
-                return child;
-        }
-
-        return null;
-    }
-
-    private Button FindButton(GameObject parent, string buttonName)
-    {
-        foreach (Button button in parent.GetComponentsInChildren<Button>(true))
-        {
-            if (string.Equals(button.name.Trim(), buttonName, StringComparison.Ordinal))
-                return button;
-        }
-
-        return null;
+        eventPanelController = new EventPanelController(
+            eventPanel,
+            gameSceneManager,
+            CompleteEvent);
+        eventPanelController.Initialize();
     }
 
     private void ShowRestPanel(MapNodeData restNode)
     {
-        if (restPanel == null)
+        if (restPanelController == null)
         {
-            Debug.LogError("[MapController] RestPanel을 찾지 못했습니다.");
+            Debug.LogError("[MapController] RestPanelController가 초기화되지 않았습니다.");
             CompleteRest(restNode);
             return;
         }
 
-        activeRestNode = restNode;
-        restPanel.SetActive(true);
-    }
-
-    private void ChooseRestHeal()
-    {
-        if (activeRestNode == null)
-            return;
-
-        int healAmount = Mathf.CeilToInt(RunData.maxHp * 0.3f);
-        RunData.currentHp = Mathf.Min(RunData.maxHp, RunData.currentHp + healAmount);
-        gameSceneManager.RefreshMapHud();
-        CompleteRest(activeRestNode);
-    }
-
-    private void ShowCardRemovePanel()
-    {
-        if (activeRestNode == null || cardRemovePanel == null || cardRemoveContent == null)
-        {
-            Debug.LogError("[MapController] 카드 제거 패널 또는 Content를 찾지 못했습니다.");
-            return;
-        }
-
-        if (cardRemoveTemplate == null)
-        {
-            Debug.LogError("[MapController] 카드 제거 화면에 템플릿 카드가 없습니다.");
-            return;
-        }
-
-        ClearCardRemoveContent();
-        ClearSelectedRemoveCard();
-
-        foreach (CardData card in RunData.currentDeck)
-            CreateRemoveCard(card);
-
-        restPanel.SetActive(false);
-        cardRemovePanel.SetActive(true);
-    }
-
-    private void ClearCardRemoveContent()
-    {
-        for (int i = cardRemoveContent.childCount - 1; i >= 0; i--)
-        {
-            GameObject child = cardRemoveContent.GetChild(i).gameObject;
-
-            if (child != cardRemoveTemplate)
-                Destroy(child);
-        }
-    }
-
-    private void CreateRemoveCard(CardData card)
-    {
-        GameObject cardObject = Instantiate(cardRemoveTemplate, cardRemoveContent);
-        cardObject.SetActive(true);
-
-        CardDragHandler dragHandler = cardObject.GetComponent<CardDragHandler>();
-        if (dragHandler != null)
-            dragHandler.enabled = false;
-
-        CardView cardView = cardObject.GetComponent<CardView>();
-        if (cardView != null)
-            cardView.Setup(card, selectedCard => SelectCardToRemove(selectedCard, cardObject));
-    }
-
-    private void SelectCardToRemove(CardData card, GameObject cardObject)
-    {
-        if (activeRestNode == null || card == null)
-            return;
-
-        if (RunData.currentDeck.Count <= 1)
-        {
-            Debug.LogWarning("[MapController] 덱의 마지막 카드는 제거할 수 없습니다.");
-            return;
-        }
-
-        ClearSelectedRemoveCard();
-        selectedRemoveCard = card;
-        selectedRemoveCardRect = cardObject.GetComponent<RectTransform>();
-
-        if (selectedRemoveCardRect != null)
-            selectedRemoveCardRect.localScale = Vector3.one * 1.08f;
-
-        cardRemoveConfirmButton.gameObject.SetActive(true);
-    }
-
-    private void ConfirmCardRemove()
-    {
-        if (activeRestNode == null || selectedRemoveCard == null)
-            return;
-
-        RunData.currentDeck.Remove(selectedRemoveCard);
-        CompleteRest(activeRestNode);
-    }
-
-    private void ClearSelectedRemoveCard()
-    {
-        if (selectedRemoveCardRect != null)
-            selectedRemoveCardRect.localScale = Vector3.one;
-
-        selectedRemoveCard = null;
-        selectedRemoveCardRect = null;
-
-        if (cardRemoveConfirmButton != null)
-            cardRemoveConfirmButton.gameObject.SetActive(false);
+        restPanelController.Show(restNode);
     }
 
     private void CompleteRest(MapNodeData restNode)
     {
         MarkNodeCleared(restNode);
-        HideRestPanels();
-        activeRestNode = null;
 
         CompleteEpisodeIfFinished();
         if (AdvanceEpisodeIfCompleted())
@@ -593,205 +330,21 @@ public class MapController : MonoBehaviour
         DrawEpisodePlan();
     }
 
-    private void HideRestPanels()
-    {
-        if (restPanel != null)
-            restPanel.SetActive(false);
-
-        if (cardRemovePanel != null)
-            cardRemovePanel.SetActive(false);
-
-        ClearSelectedRemoveCard();
-    }
-
-    private void BindEventRewardPanel()
-    {
-        GameObject rewardPanel = FindSceneObject("EventRewardPanel");
-
-        if (rewardPanel == null)
-            return;
-
-        eventRewardPanelController = rewardPanel.GetComponent<EventRewardPanelController>();
-
-        if (eventRewardPanelController == null)
-            eventRewardPanelController = rewardPanel.AddComponent<EventRewardPanelController>();
-
-        eventRewardPanelController.Initialize();
-    }
-
-    private void ShowEventCardReward(List<CardData> cards)
-    {
-        HideEventPanel();
-
-        if (eventRewardPanelController == null ||
-            !eventRewardPanelController.TryShowCards(cards, ConfirmEventReward))
-        {
-            Debug.LogWarning("[MapController] 이벤트 카드 보상 패널을 찾지 못해 첫 번째 카드를 즉시 지급합니다.");
-            if (cards != null && cards.Count > 0)
-                RunData.AddEventCard(cards[0]);
-
-            CompleteEvent(activeEventNode);
-        }
-    }
-
-    private void ShowEventRelicReward(RelicData relic)
-    {
-        HideEventPanel();
-
-        if (eventRewardPanelController == null ||
-            !eventRewardPanelController.TryShowRelic(relic, ConfirmEventReward))
-        {
-            Debug.LogWarning("[MapController] 이벤트 유물 보상 패널을 찾지 못해 유물을 즉시 지급합니다.");
-            if (relic != null)
-                RunData.AddRelic(relic);
-
-            CompleteEvent(activeEventNode);
-        }
-    }
-
-    private void ConfirmEventReward(CardData card, RelicData relic)
-    {
-        if (activeEventNode == null)
-            return;
-
-        if (card != null)
-            RunData.AddEventCard(card);
-
-        if (relic != null)
-            RunData.AddRelic(relic);
-
-        CompleteEvent(activeEventNode);
-    }
-
     private void ShowShrineEvent(MapNodeData eventNode)
     {
-        EventData eventData = eventNode.eventData;
-
-        if (eventPanel == null)
+        if (eventPanelController == null)
         {
-            Debug.LogError("[MapController] 이벤트 패널이 연결되지 않았습니다.");
+            Debug.LogError("[MapController] EventPanelController가 초기화되지 않았습니다.");
             CompleteEvent(eventNode);
             return;
         }
 
-        if (eventData == null)
-        {
-            Debug.LogWarning("[MapController] 이벤트 노드에 배정된 EventData가 없습니다.");
-            CompleteEvent(eventNode);
-            return;
-        }
-
-        BindEventPanel();
-
-        if (eventChoiceButtons.Length == 0)
-        {
-            Debug.LogError("[MapController] 이벤트 선택 버튼을 찾지 못했습니다.");
-            CompleteEvent(eventNode);
-            return;
-        }
-
-        activeEventNode = eventNode;
-        RunData.MarkEventSeen(eventData);
-
-        if (eventNameText != null)
-            eventNameText.text = eventData.eventTitle;
-
-        if (eventDescriptionText != null)
-            eventDescriptionText.text = eventData.description;
-
-        if (eventImage != null)
-        {
-            eventImage.sprite = eventData.illustration;
-            eventImage.gameObject.SetActive(eventData.illustration != null);
-        }
-
-        for (int i = 0; i < eventChoiceButtons.Length; i++)
-        {
-            Button button = eventChoiceButtons[i];
-            button.onClick.RemoveAllListeners();
-
-            bool hasChoice = eventData.choices != null && i < eventData.choices.Length;
-            button.gameObject.SetActive(hasChoice);
-
-            if (!hasChoice)
-                continue;
-
-            int choiceIndex = i;
-            TMP_Text buttonText = button.GetComponentInChildren<TMP_Text>(true);
-
-            if (buttonText != null)
-                buttonText.text = eventData.choices[i].choiceText;
-
-            button.onClick.AddListener(() => ChooseEventChoice(choiceIndex));
-        }
-
-        eventPanel.SetActive(true);
-    }
-
-    private void BindEventPanel()
-    {
-        if (eventChoiceButtons.Length > 0)
-            return;
-
-        eventChoiceButtons = eventPanel.GetComponentsInChildren<Button>(true);
-
-        foreach (TMP_Text text in eventPanel.GetComponentsInChildren<TMP_Text>(true))
-        {
-            if (text.transform.parent.name == "EventName")
-                eventNameText = text;
-            else if (text.transform.parent.name == "EventText")
-                eventDescriptionText = text;
-        }
-
-        foreach (Image image in eventPanel.GetComponentsInChildren<Image>(true))
-        {
-            if (image.name == "EventImage")
-            {
-                eventImage = image;
-                break;
-            }
-        }
-    }
-
-    private void ChooseEventChoice(int choiceIndex)
-    {
-        if (activeEventNode == null || activeEventNode.eventData == null)
-            return;
-
-        EventChoiceData[] choices = activeEventNode.eventData.choices;
-
-        if (choices == null || choiceIndex < 0 || choiceIndex >= choices.Length)
-            return;
-
-        EventChoiceData choice = choices[choiceIndex];
-        RunData.currentHp = Mathf.Clamp(RunData.currentHp + choice.hpChange, 0, RunData.maxHp);
-        gameSceneManager.RefreshMapHud();
-
-        List<CardData> rewardCards = choice.GetRandomRewardCards();
-        RelicData rewardRelic = choice.GetRandomRewardRelic();
-
-        if (rewardCards.Count > 0)
-        {
-            ShowEventCardReward(rewardCards);
-            return;
-        }
-
-        if (rewardRelic != null)
-        {
-            ShowEventRelicReward(rewardRelic);
-            return;
-        }
-
-        CompleteEvent(activeEventNode);
+        eventPanelController.Show(eventNode);
     }
 
     private void CompleteEvent(MapNodeData eventNode)
     {
         MarkNodeCleared(eventNode);
-
-        HideEventPanel();
-        eventRewardPanelController?.Hide();
-        activeEventNode = null;
 
         CompleteEpisodeIfFinished();
         if (AdvanceEpisodeIfCompleted())
@@ -810,16 +363,6 @@ public class MapController : MonoBehaviour
         if (!string.IsNullOrEmpty(node.questId))
             RunData.clearedQuestIds.Add(node.questId);
     }
-
-    private void HideEventPanel()
-    {
-        foreach (Button button in eventChoiceButtons)
-            button.onClick.RemoveAllListeners();
-
-        if (eventPanel != null)
-            eventPanel.SetActive(false);
-    }
-
     private void CompleteEpisodeIfFinished()
     {
         if (currentMap.executionIndex >= currentMap.selectedNodeIds.Count)

@@ -10,6 +10,7 @@ public enum CardType
 [CreateAssetMenu(fileName = "CardData", menuName = "Game/Card Data")]
 public class CardData : ScriptableObject
 {
+    public string cardId;
     public string cardName;
     public Vector2Int[] tileShape;
     public Vector2Int tileOrigin;
