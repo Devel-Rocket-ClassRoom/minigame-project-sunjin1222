@@ -4,7 +4,8 @@ public enum RelicTriggerType
 {
     BattleStart,
     BattleVictory,
-    TurnActivation
+    TurnActivation,
+    TurnStart
 }
 
 public enum RelicEffectType
@@ -14,7 +15,14 @@ public enum RelicEffectType
     Heal,
     RepeatFirstTileEveryTurns,
     ReduceSagaRequiredOrder,
-    GainBlockPerUnusedBoardCell
+    GainBlockPerUnusedBoardCell,
+    DealDamagePerUnusedBoardCell
+}
+
+public enum RelicConditionType
+{
+    None,
+    PlayerHealthAtOrBelowPercent
 }
 
 [CreateAssetMenu(fileName = "RelicData", menuName = "Game/Relic Data")]
@@ -27,4 +35,6 @@ public class RelicData : ScriptableObject
     public RelicTriggerType triggerType = RelicTriggerType.BattleStart;
     public RelicEffectType effectType = RelicEffectType.GainBlock;
     public int amount = 1;
+    public RelicConditionType conditionType = RelicConditionType.None;
+    public int conditionAmount = 50;
 }

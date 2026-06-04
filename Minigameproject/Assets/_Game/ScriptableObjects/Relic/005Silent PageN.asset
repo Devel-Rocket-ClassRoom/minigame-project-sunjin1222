@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85d316f028c2d74c8061e91db5c35be, type: 3}
+  m_Name: 005Silent PageN
+  m_EditorClassIdentifier: Assembly-CSharp::RelicData
+  relicId: Relic_005
+  relicName: "\uCE68\uBB35\uC758 \uD398\uC774\uC9C0"
+  description: "\uD134 \uC885\uB8CC \uC2DC \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC740
+    \uBCF4\uB4DC \uCE78\uC218\uB9CC\uD07C \n1\uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4. "
+  icon: {fileID: 438895471204581479, guid: 3be7c7c6c3ad55f4fa26283f80304938, type: 3}
+  triggerType: 2
+  effectType: 6
+  amount: 1
+  conditionType: 0
+  conditionAmount: 50

@@ -60,13 +60,19 @@ public class RelicDisplayView : MonoBehaviour
         image.sprite = relic.icon;
         image.color = relic.icon == null ? emptyIconColor : Color.white;
         image.preserveAspect = true;
-        image.raycastTarget = false;
+        image.raycastTarget = true;
 
         LayoutElement layoutElement = iconObject.AddComponent<LayoutElement>();
         layoutElement.preferredWidth = iconSize.x;
         layoutElement.preferredHeight = iconSize.y;
         layoutElement.minWidth = iconSize.x;
         layoutElement.minHeight = iconSize.y;
+
+        if (RelicTooltipBuilder.TryBuild(relic, out string title, out string body))
+        {
+            TooltipTrigger tooltipTrigger = iconObject.AddComponent<TooltipTrigger>();
+            tooltipTrigger.SetTooltip(title,body);
+        }
 
         createdIcons.Add(iconObject);
     }

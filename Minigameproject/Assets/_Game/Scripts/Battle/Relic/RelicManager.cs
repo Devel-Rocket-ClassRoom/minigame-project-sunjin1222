@@ -15,7 +15,30 @@ public static class RelicManager
             if (relic == null || relic.triggerType != triggerType)
                 continue;
 
+            if (!CanApplyRelic(relic, playerController))
+                continue;
+
             ApplyRelic(relic, playerController, deckManager);
+        }
+    }
+
+    public static bool CanApplyRelic(RelicData relic, PlayerController playerController)
+    {
+        if (relic == null)
+            return false;
+
+        switch (relic.conditionType)
+        {
+            case RelicConditionType.None:
+                return true;
+
+            case RelicConditionType.PlayerHealthAtOrBelowPercent:
+                return playerController != null &&
+                    playerController.IsHealthAtOrBelowPercent(relic.conditionAmount);
+
+            default:
+                Debug.LogWarning($"[RelicManager] 처리되지 않은 유물 조건입니다: {relic.conditionType}");
+                return false;
         }
     }
 

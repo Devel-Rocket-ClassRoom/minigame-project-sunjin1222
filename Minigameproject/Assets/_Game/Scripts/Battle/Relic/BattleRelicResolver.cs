@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class BattleRelicResolver
 {
-    public static bool ShouldRepeatFirstTile(int turnCount)
+    public static bool ShouldRepeatFirstTile(int turnCount, PlayerController playerController)
     {
         if (RunData.currentRelics == null)
             return false;
@@ -10,6 +10,9 @@ public static class BattleRelicResolver
         foreach (RelicData relic in RunData.currentRelics)
         {
             if (relic == null)
+                continue;
+
+            if (!RelicManager.CanApplyRelic(relic, playerController))
                 continue;
 
             if (relic.triggerType != RelicTriggerType.TurnActivation)
@@ -29,7 +32,7 @@ public static class BattleRelicResolver
         return false;
     }
 
-    public static int GetSagaRequiredOrderReduction()
+    public static int GetSagaRequiredOrderReduction(PlayerController playerController = null)
     {
         if (RunData.currentRelics == null)
             return 0;
@@ -41,6 +44,9 @@ public static class BattleRelicResolver
             if (relic == null)
                 continue;
 
+            if (!RelicManager.CanApplyRelic(relic, playerController))
+                continue;
+
             if (relic.effectType == RelicEffectType.ReduceSagaRequiredOrder)
                 reduction += Mathf.Max(0, relic.amount);
         }
@@ -50,9 +56,10 @@ public static class BattleRelicResolver
 
     public static void ApplyEndTurnBoardRelics(
         BoardManager boardManager,
-        PlayerController playerController)
+        PlayerController playerController,
+        EnemyController enemyController)
     {
-        if (RunData.currentRelics == null || boardManager == null || playerController == null)
+        if (RunData.currentRelics == null || boardManager == null)
             return;
 
         int unusedCellCount = boardManager.CountUnusedCells();
@@ -65,16 +72,34 @@ public static class BattleRelicResolver
             if (relic == null)
                 continue;
 
+            if (!RelicManager.CanApplyRelic(relic, playerController))
+                continue;
+
             if (relic.triggerType != RelicTriggerType.TurnActivation)
                 continue;
 
-            if (relic.effectType != RelicEffectType.GainBlockPerUnusedBoardCell)
+            if (relic.effectType == RelicEffectType.GainBlockPerUnusedBoardCell)
+            {
+                if (playerController == null)
+                    continue;
+
+                int blockAmount = unusedCellCount * Mathf.Max(1, relic.amount);
+                playerController.GainBlock(blockAmount);
+
+                Debug.Log($"[RelicManager] {relic.relicName} 발동: 방어도 {blockAmount}");
                 continue;
+            }
 
-            int blockAmount = unusedCellCount * Mathf.Max(1, relic.amount);
-            playerController.GainBlock(blockAmount);
+            if (relic.effectType == RelicEffectType.DealDamagePerUnusedBoardCell)
+            {
+                if (enemyController == null)
+                    continue;
 
-            Debug.Log($"[RelicManager] {relic.relicName} 발동: 방어도 {blockAmount}");
+                int damageAmount = unusedCellCount * Mathf.Max(1, relic.amount);
+                enemyController.TakeDamage(damageAmount);
+
+                Debug.Log($"[RelicManager] {relic.relicName} 발동: 피해 {damageAmount}");
+            }
         }
     }
 }

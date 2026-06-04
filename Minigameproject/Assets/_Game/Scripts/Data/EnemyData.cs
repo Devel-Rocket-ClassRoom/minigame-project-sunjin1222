@@ -11,7 +11,9 @@ public enum EnemyActionType
 {
     Attack,
     Defense,
-    Buff
+    Buff,
+    ThornsBuff,
+    Charge
 }
 
 public enum EnemyPatternMode
@@ -37,6 +39,7 @@ public class EnemyData : ScriptableObject
 
     public int maxHealth;
     [Min(0)] public int maxDamagePerTurn;
+    [Min(0)] public int thorns;
 
     [TextArea] public string description;
 

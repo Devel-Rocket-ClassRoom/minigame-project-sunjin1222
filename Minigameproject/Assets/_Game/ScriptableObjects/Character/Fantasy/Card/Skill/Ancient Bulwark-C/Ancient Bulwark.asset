@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: Ancient Bulwark
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Fantasy_016
   cardName: "\uACE0\uB300\uC758 \uBC29\uBCBD"
   tileShape:
   - {x: 1, y: 0}
@@ -23,6 +24,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a702892ec0b0cc3449b2b7745a57eba8, type: 2}
   description: "\uBC29\uC5B4\uB3C4 4\n\uC11C\uC0AC 3 : +5\n\uCCB4\uC778 : \uBC29\uC5B4\uB3C4
     2"
+  tooltipText: "\uCCB4\uC778: \uC778\uC811\uD55C \uCE74\uB4DC 1\uC7A5\uB2F9 \uCCB4\uC778
+    \uC218\uCE58\uAC00 1\uD68C \uC801\uC6A9\uB429\uB2C8\uB2E4.\n\uC11C\uC0AC N: \uC774
+    \uCE74\uB4DC\uAC00 N\uBC88\uC9F8 \uC774\uC0C1\uC73C\uB85C \uBC1C\uB3D9\uB418\uBA74
+    \uD6A8\uACFC\uAC00 \uC801\uC6A9\uB429\uB2C8\uB2E4."
   icon: {fileID: 3777446627122020811, guid: d63f2af02984c14489fe51993f9f9563, type: 3}
   cardType: 1
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: SwordofFate
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Fantasy_015
   cardName: "\uC6B4\uBA85\uC758 \uAC80"
   tileShape:
   - {x: 0, y: 0}
@@ -22,6 +23,8 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: dff420804cca72e499ae5b081ea2c81f, type: 2}
   description: "\uB370\uBBF8\uC9C0 12\n\uC11C\uC0AC 3 : +5 "
+  tooltipText: "\uC11C\uC0AC N: \uC774 \uCE74\uB4DC\uAC00 N\uBC88\uC9F8 \uC774\uC0C1\uC73C\uB85C
+    \uBC1C\uB3D9\uB418\uBA74 \uD6A8\uACFC\uAC00 \uC801\uC6A9\uB429\uB2C8\uB2E4."
   icon: {fileID: 383099649029892881, guid: 326707879ee8e994ca70b43d500ec232, type: 3}
   cardType: 0
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

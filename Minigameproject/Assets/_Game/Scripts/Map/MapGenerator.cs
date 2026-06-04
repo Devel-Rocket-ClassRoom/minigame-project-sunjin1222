@@ -9,6 +9,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int visibleNodeCount = 5;
 
     [Header("Enemy Pools")]
+    public EnemyData[] episode1NormalEnemyPool;
     public EnemyData[] normalEnemyPool;
     public EnemyData[] eliteEnemyPool;
     public EnemyData[] bossEnemyPool;
@@ -33,13 +34,90 @@ public class MapGenerator : MonoBehaviour
         };
 
         new MapNodeSelector(visibleNodeCount).AddRandomNodes(mapData, jsonData.nodes);
+        EnemyData[] selectedNormalEnemyPool =
+            episodeNumber == 1 &&
+            episode1NormalEnemyPool != null &&
+            episode1NormalEnemyPool.Length > 0
+                ? episode1NormalEnemyPool
+                : normalEnemyPool;
+
         new MapEncounterAssigner(
-            normalEnemyPool,
+            selectedNormalEnemyPool,
             eliteEnemyPool,
             bossEnemyPool,
             eventPool
         ).Assign(mapData);
 
         return mapData;
+    }
+
+    public bool IsEnemyValidForNode(MapNodeData node)
+    {
+        if (node == null || node.enemyData == null)
+            return false;
+
+        return node.nodeType switch
+        {
+            MapNodeType.NormalBattle => node.enemyData.enemyType == EnemyType.Normal,
+            MapNodeType.EliteBattle => node.enemyData.enemyType == EnemyType.Elite,
+            MapNodeType.Boss => node.enemyData.enemyType == EnemyType.Boss,
+            _ => true
+        };
+    }
+
+    public EnemyData GetRandomEnemyForNode(MapNodeData node)
+    {
+        if (node == null)
+            return null;
+
+        EnemyData[] enemyPool = GetEnemyPoolForNode(node);
+        EnemyType? expectedType = GetExpectedEnemyType(node.nodeType);
+
+        if (enemyPool == null || enemyPool.Length == 0 || !expectedType.HasValue)
+            return null;
+
+        EnemyData[] candidates = System.Array.FindAll(
+            enemyPool,
+            enemy => enemy != null && enemy.enemyType == expectedType.Value);
+
+        if (candidates.Length == 0)
+            return null;
+
+        return candidates[Random.Range(0, candidates.Length)];
+    }
+
+    private EnemyData[] GetEnemyPoolForNode(MapNodeData node)
+    {
+        if (node.nodeType == MapNodeType.NormalBattle)
+        {
+            int episodeNumber = RunData.currentMap != null
+                ? RunData.currentMap.episodeNumber
+                : RunData.currentFloor;
+
+            return episodeNumber == 1 &&
+                episode1NormalEnemyPool != null &&
+                episode1NormalEnemyPool.Length > 0
+                    ? episode1NormalEnemyPool
+                    : normalEnemyPool;
+        }
+
+        if (node.nodeType == MapNodeType.EliteBattle)
+            return eliteEnemyPool;
+
+        if (node.nodeType == MapNodeType.Boss)
+            return bossEnemyPool;
+
+        return null;
+    }
+
+    private EnemyType? GetExpectedEnemyType(MapNodeType nodeType)
+    {
+        return nodeType switch
+        {
+            MapNodeType.NormalBattle => EnemyType.Normal,
+            MapNodeType.EliteBattle => EnemyType.Elite,
+            MapNodeType.Boss => EnemyType.Boss,
+            _ => null
+        };
     }
 }

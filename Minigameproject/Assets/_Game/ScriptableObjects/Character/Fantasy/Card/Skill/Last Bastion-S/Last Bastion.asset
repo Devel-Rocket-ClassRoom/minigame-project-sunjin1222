@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: Last Bastion
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Fantasy_020
   cardName: "\uCD5C\uD6C4\uC758 \uBC29\uC5B4\uC120"
   tileShape:
   - {x: 0, y: 0}
@@ -23,6 +24,8 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 85cca1f30ba3dff4a908ba9aafa6a592, type: 2}
   description: "\uBC29\uC5B4\uB3C4 18\n\uC11C\uC0AC 5 : +10"
+  tooltipText: "\uC11C\uC0AC N: \uC774 \uCE74\uB4DC\uAC00 N\uBC88\uC9F8 \uC774\uC0C1\uC73C\uB85C
+    \uBC1C\uB3D9\uB418\uBA74 \uD6A8\uACFC\uAC00 \uC801\uC6A9\uB429\uB2C8\uB2E4."
   icon: {fileID: 3501438936947059227, guid: 8cfe9f1ebc466d54e9d95a54bf7caf14, type: 3}
   cardType: 1
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

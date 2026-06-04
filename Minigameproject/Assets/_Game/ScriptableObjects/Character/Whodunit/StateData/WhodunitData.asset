@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40c3764f2007ca40a7348af80b9fc34, type: 3}
   m_Name: WhodunitData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterId: Whodunit001
   characterName: "\uCD94\uB9AC\uC791\uAC00"
   maxHp: 69
   description: "\"\uC9C4\uC2E4\uC740 \uC228\uACA8\uC838 \uC788\uC5C8\uB358 \uAC8C
@@ -19,19 +20,19 @@ MonoBehaviour:
   image: {fileID: 3698660180644308013, guid: 2dbc733081f2c2f4081e619af72330d3, type: 3}
   battleSprite: {fileID: -6718478805127269227, guid: d708b4b15d7b8b94297a471fe23ecbaa, type: 3}
   startDeck:
+  - {fileID: 11400000, guid: 6b54a35543947094d9c8ec06aee34260, type: 2}
+  - {fileID: 11400000, guid: 6b54a35543947094d9c8ec06aee34260, type: 2}
+  - {fileID: 11400000, guid: 6b54a35543947094d9c8ec06aee34260, type: 2}
+  - {fileID: 11400000, guid: 9639501f1507aca42ad823304e76c089, type: 2}
   - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
-  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
-  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
-  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
-  - {fileID: 11400000, guid: 2bb1fbe7a4ff4c343b1f4c1b96b379e1, type: 2}
-  - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
-  - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
-  - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
-  - {fileID: 11400000, guid: 7863aa39e2cdf674d8c10cd383644738, type: 2}
+  - {fileID: 11400000, guid: 36c7e38ceafce664e8ae7024dd697adf, type: 2}
+  - {fileID: 11400000, guid: 36c7e38ceafce664e8ae7024dd697adf, type: 2}
+  - {fileID: 11400000, guid: 9639501f1507aca42ad823304e76c089, type: 2}
+  - {fileID: 11400000, guid: 36c7e38ceafce664e8ae7024dd697adf, type: 2}
   - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
   - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
   - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
-  - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
+  - {fileID: 11400000, guid: 36c7e38ceafce664e8ae7024dd697adf, type: 2}
   - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
   - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}
   - {fileID: 11400000, guid: d35c6ce839c8c41469f799ee5ae982c0, type: 2}

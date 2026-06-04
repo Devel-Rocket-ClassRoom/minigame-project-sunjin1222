@@ -105,7 +105,7 @@ public class DeckManager : MonoBehaviour
     public void AddCardToDeck(CardData card)
     {
         RunData.AddCard(card);
-        RunData.AddedCard+=1;
+        RunData.AddedCard += 1;
         deck.Add(card);
         counter();
     }

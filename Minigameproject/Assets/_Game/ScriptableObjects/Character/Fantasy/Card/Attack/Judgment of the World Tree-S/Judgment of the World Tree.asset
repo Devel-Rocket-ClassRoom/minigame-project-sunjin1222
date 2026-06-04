@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: Judgment of the World Tree
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Fantasy_012
   cardName: "\uC138\uACC4\uC218\uC758 \uC2EC\uD310"
   tileShape:
   - {x: 0, y: 0}
@@ -23,6 +24,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 620308043dc52f64385a74dabb105086, type: 2}
   - {fileID: 11400000, guid: 2dc0de6a80dc2ba4a8c6a36a0638cf78, type: 2}
   description: "\uB370\uBBF8\uC9C0 10\n\uC11C\uC0AC 3 : +5\n\uC11C\uC0AC 4 : +10"
+  tooltipText: "\uC11C\uC0AC N: \uC774 \uCE74\uB4DC\uAC00 N\uBC88\uC9F8 \uC774\uC0C1\uC73C\uB85C
+    \uBC1C\uB3D9\uB418\uBA74 \uD6A8\uACFC\uAC00 \uC801\uC6A9\uB429\uB2C8\uB2E4."
   icon: {fileID: 26396730917044322, guid: fbc3c8769e8d5a74982f313b3e889178, type: 3}
   cardType: 0
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

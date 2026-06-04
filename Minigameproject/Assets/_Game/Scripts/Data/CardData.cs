@@ -16,6 +16,7 @@ public class CardData : ScriptableObject
     public Vector2Int tileOrigin;
     public EffectSO[] effects;
     [TextArea] public string description;
+    [TextArea] public string tooltipText;
     public Sprite icon;
     
     public CardType cardType;

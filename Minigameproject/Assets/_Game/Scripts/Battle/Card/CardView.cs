@@ -24,7 +24,11 @@ public class CardView : MonoBehaviour, IPointerClickHandler
         cardData = data;
         onClickCallback = onClick;
 
-        if (data == null) return;
+        if (data == null)
+        {
+            UpdateTooltip(null);
+            return;
+        }
 
         if (cardName != null) cardName.text = data.cardName;
         if (cardDescription != null) cardDescription.text = data.description;
@@ -43,6 +47,8 @@ public class CardView : MonoBehaviour, IPointerClickHandler
             }
             BuildShapePreview(data);
         }
+
+        UpdateTooltip(data);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -96,5 +102,22 @@ public class CardView : MonoBehaviour, IPointerClickHandler
                 -startY - offset.y * miniTileSize
             );
         }
+    }
+
+    private void UpdateTooltip(CardData data)
+    {
+        TooltipTrigger tooltipTrigger = GetComponent<TooltipTrigger>();
+
+        if (CardTooltipBuilder.TryBuild(data,out string title, out string body))
+        {
+            if (tooltipTrigger == null)
+                tooltipTrigger = gameObject.AddComponent<TooltipTrigger>();
+
+            tooltipTrigger.SetTooltip(title,body);
+            return;
+        }
+
+        if (tooltipTrigger != null)
+            Destroy(tooltipTrigger);
     }
 }

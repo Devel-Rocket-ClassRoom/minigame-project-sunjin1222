@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40c3764f2007ca40a7348af80b9fc34, type: 3}
   m_Name: FantasyData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterId: Fantasy001
   characterName: "\uD310\uD0C0\uC9C0 \uC791\uAC00"
   maxHp: 78
   description: "\u201C\uBC30\uCE58\uB41C \uCEF7\uC740 \uD750\uB984\uC774 \uB418\uACE0,\n\uC774\uC5B4\uC9C4

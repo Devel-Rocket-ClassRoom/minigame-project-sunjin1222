@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: BasicAttack
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Fantasy_001
   cardName: "\uACF5\uACA9"
   tileShape:
   - {x: 0, y: 0}

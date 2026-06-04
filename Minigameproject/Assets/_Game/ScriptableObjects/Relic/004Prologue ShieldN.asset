@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85d316f028c2d74c8061e91db5c35be, type: 3}
+  m_Name: 004Prologue ShieldN
+  m_EditorClassIdentifier: Assembly-CSharp::RelicData
+  relicId: Relic_004
+  relicName: "\uD504\uB864\uB85C\uADF8\uC758 \uBC29\uD328"
+  description: "\uCCAB\uD134\uC5D0\uB9CC \uBC29\uC5B4\uB3C4\uB97C 10 \uC5BB\uC2B5\uB2C8\uB2E4"
+  icon: {fileID: 3432582381386852895, guid: ec348d9f89053d84481c0ab74ed6832a, type: 3}
+  triggerType: 0
+  effectType: 0
+  amount: 10
+  conditionType: 0
+  conditionAmount: 50

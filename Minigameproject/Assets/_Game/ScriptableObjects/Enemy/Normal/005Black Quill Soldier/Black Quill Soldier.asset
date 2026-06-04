@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cef257310d4b344a8fdb49aa1fd6f3e, type: 3}
+  m_Name: Black Quill Soldier
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyId: Enemy_Normal_005
+  enemyName: "\uAC80\uC740 \uB9CC\uB144\uD544 \uC804\uC0AC"
+  enemyType: 0
+  maxHealth: 89
+  maxDamagePerTurn: 0
+  thorns: 0
+  description: 
+  patternMode: 0
+  attackIncreasePerPatternLoop: 10
+  periodicBuffInterval: 0
+  periodicBuffAmount: 0
+  patterns:
+  - actionType: 0
+    value: 17
+    firstLoopOnly: 0
+  - actionType: 1
+    value: 21
+    firstLoopOnly: 0
+  - actionType: 0
+    value: 13
+    firstLoopOnly: 0
+  - actionType: 0
+    value: 41
+    firstLoopOnly: 0
+  portrait: {fileID: 3146438564288516012, guid: 917d0e607fb9d3348ba959b127b1938b, type: 3}
+  prefab: {fileID: 1600796342847078890, guid: 3baf033f9260d0740864fad47167b9cf, type: 3}
