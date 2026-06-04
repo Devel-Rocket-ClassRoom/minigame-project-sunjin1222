@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: World Tree's Protection
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Fantasy_022
   cardName: "\uC138\uACC4\uC218\uC758 \uBCF4\uD638"
   tileShape:
   - {x: 0, y: 0}
@@ -22,6 +23,8 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: c0c78307853f908479a82345eb8abe42, type: 2}
   description: "\uBC29\uC5B4\uB3C4 30\n\uC11C\uC0AC 3 : -10"
+  tooltipText: "\uC11C\uC0AC N: \uC774 \uCE74\uB4DC\uAC00 N\uBC88\uC9F8 \uC774\uC0C1\uC73C\uB85C
+    \uBC1C\uB3D9\uB418\uBA74 \uD6A8\uACFC\uAC00 \uC801\uC6A9\uB429\uB2C8\uB2E4."
   icon: {fileID: 3799414482616589096, guid: c44be6ff7e66fef4eaf1b89e52f9af68, type: 3}
   cardType: 1
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

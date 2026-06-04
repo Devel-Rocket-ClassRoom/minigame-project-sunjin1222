@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
   m_Name: PowerStrike
   m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Fantasy_014
   cardName: "\uD30C\uC6CC \uC2A4\uD2B8\uB77C\uC774\uD06C"
   tileShape:
   - {x: 0, y: 0}

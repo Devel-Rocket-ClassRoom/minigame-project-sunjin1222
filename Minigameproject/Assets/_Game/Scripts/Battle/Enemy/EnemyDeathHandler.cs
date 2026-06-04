@@ -26,8 +26,8 @@ public class EnemyDeathHandler
         if (rewardPanel != null)
             rewardPanel.SetActive(true);
 
-        if (rewardManager != null && rewardManager.rewardbutton != null)
-            rewardManager.rewardbutton.SetActive(true);
+        if (rewardManager != null)
+            rewardManager.ShowRewardButtons();
 
         if (RunData.currentMap != null && RunData.selectedNodeId >= 0)
             RunData.selectedBattleWon = true;

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af4f1c9eee11f04c86559058e7b48e7, type: 3}
   m_Name: SageBlockEffect
   m_EditorClassIdentifier: Assembly-CSharp::SageBlockEffect
-  originblock: 30
+  originblock: 36
   requiredOrder: 3
   bonusblock: -10

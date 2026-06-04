@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cef257310d4b344a8fdb49aa1fd6f3e, type: 3}
+  m_Name: Ink Rat
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyId: Enemy_Normal_003
+  enemyName: "\uC789\uD06C\uC950"
+  enemyType: 0
+  maxHealth: 69
+  maxDamagePerTurn: 0
+  thorns: 0
+  description: 
+  patternMode: 0
+  attackIncreasePerPatternLoop: 6
+  periodicBuffInterval: 0
+  periodicBuffAmount: 0
+  patterns:
+  - actionType: 2
+    value: 6
+    firstLoopOnly: 1
+  - actionType: 0
+    value: 12
+    firstLoopOnly: 0
+  portrait: {fileID: 6099173483936694069, guid: c8b11ca352d29ae458631ea1cea1fecd, type: 3}
+  prefab: {fileID: 1600796342847078890, guid: 3baf033f9260d0740864fad47167b9cf, type: 3}

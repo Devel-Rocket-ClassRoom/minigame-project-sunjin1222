@@ -68,6 +68,14 @@ public class PlayerController : MonoBehaviour
         sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
     }
 
+    public bool IsHealthAtOrBelowPercent(int percent)
+    {
+        if (maxHealth <= 0)
+            return false;
+
+        return currentHealth * 100 <= maxHealth * percent;
+    }
+
     public void TakeDamage(int damage)
     {
         int remainingDamage = damage;

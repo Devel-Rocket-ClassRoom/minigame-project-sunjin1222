@@ -28,23 +28,62 @@ public class MapEncounterAssigner
 
     private void AssignEnemies(MapData mapData)
     {
+        List<EnemyData> eliteEnemyBag = BuildEnemyBag(eliteEnemyPool);
+
         foreach (MapNodeData node in mapData.nodes)
         {
             if (node.nodeType == MapNodeType.NormalBattle)
-                node.enemyData = GetRandomEnemy(normalEnemyPool);
+                node.enemyData = GetRandomEnemy(normalEnemyPool, EnemyType.Normal);
             else if (node.nodeType == MapNodeType.EliteBattle)
-                node.enemyData = GetRandomEnemy(eliteEnemyPool);
+                node.enemyData = GetRandomEnemyFromBag(eliteEnemyBag, eliteEnemyPool);
             else if (node.nodeType == MapNodeType.Boss)
-                node.enemyData = GetRandomEnemy(bossEnemyPool);
+                node.enemyData = GetRandomEnemy(bossEnemyPool, EnemyType.Boss);
         }
     }
 
-    private EnemyData GetRandomEnemy(EnemyData[] enemyPool)
+    private EnemyData GetRandomEnemy(EnemyData[] enemyPool, EnemyType enemyType)
+    {
+        List<EnemyData> candidates = BuildEnemyBag(enemyPool, enemyType);
+
+        if (candidates.Count == 0)
+            return null;
+
+        return candidates[Random.Range(0, candidates.Count)];
+    }
+
+    private List<EnemyData> BuildEnemyBag(EnemyData[] enemyPool, EnemyType? enemyType = null)
+    {
+        List<EnemyData> enemyBag = new List<EnemyData>();
+
+        if (enemyPool == null)
+            return enemyBag;
+
+        foreach (EnemyData enemy in enemyPool)
+        {
+            if (enemy != null &&
+                (!enemyType.HasValue || enemy.enemyType == enemyType.Value) &&
+                !enemyBag.Contains(enemy))
+                enemyBag.Add(enemy);
+        }
+
+        return enemyBag;
+    }
+
+    private EnemyData GetRandomEnemyFromBag(List<EnemyData> enemyBag, EnemyData[] enemyPool)
     {
         if (enemyPool == null || enemyPool.Length == 0)
             return null;
 
-        return enemyPool[Random.Range(0, enemyPool.Length)];
+        if (enemyBag.Count == 0)
+            enemyBag.AddRange(BuildEnemyBag(enemyPool));
+
+        if (enemyBag.Count == 0)
+            return null;
+
+        int randomIndex = Random.Range(0, enemyBag.Count);
+        EnemyData selectedEnemy = enemyBag[randomIndex];
+        enemyBag.RemoveAt(randomIndex);
+        return selectedEnemy;
     }
 
     private void AssignEvents(MapData mapData)

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cef257310d4b344a8fdb49aa1fd6f3e, type: 3}
+  m_Name: Typo Goblin
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyId: Enemy_Normal_004
+  enemyName: "\uC624\uD0C8\uC790 \uACE0\uBE14\uB9B0"
+  enemyType: 0
+  maxHealth: 73
+  maxDamagePerTurn: 0
+  thorns: 0
+  description: 
+  patternMode: 0
+  attackIncreasePerPatternLoop: 6
+  periodicBuffInterval: 0
+  periodicBuffAmount: 0
+  patterns:
+  - actionType: 0
+    value: 19
+    firstLoopOnly: 1
+  - actionType: 1
+    value: 19
+    firstLoopOnly: 0
+  - actionType: 0
+    value: 28
+    firstLoopOnly: 0
+  - actionType: 2
+    value: 10
+    firstLoopOnly: 0
+  portrait: {fileID: -3016492555505229726, guid: a19c7977c58c12545b5627f8f9a1cdae, type: 3}
+  prefab: {fileID: 1600796342847078890, guid: 3baf033f9260d0740864fad47167b9cf, type: 3}

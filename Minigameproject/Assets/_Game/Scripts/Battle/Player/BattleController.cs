@@ -9,6 +9,7 @@ public class BattleController : MonoBehaviour
     public PlayerController playerController;
     public DeckManager deckManager;
 
+    public EnemyHealthController enemyHealthController;
 
 
     public static bool IsTurnProcessing = false;
@@ -30,6 +31,12 @@ public class BattleController : MonoBehaviour
     {
         yield return null;
         RelicManager.ApplyRelics(RelicTriggerType.BattleStart, playerController, deckManager);
+        ApplyTurnStartRelics();
+    }
+
+    private void ApplyTurnStartRelics()
+    {
+        RelicManager.ApplyRelics(RelicTriggerType.TurnStart, playerController, deckManager);
     }
 
     public void OnResetClicked()
@@ -59,7 +66,6 @@ public class BattleController : MonoBehaviour
         IsTurnProcessing = true;
         boardCardActivator = new BoardCardActivator(boardManager, enemyController);
         turnCount++;
-        enemyController.ResetDamageTakenThisTurn();
 
         EffectContext context = new EffectContext
         {
@@ -67,15 +73,15 @@ public class BattleController : MonoBehaviour
             playerController = playerController,
             handManager = handManager,
             deckManager = deckManager,
-            sagaRequiredOrderReduction = BattleRelicResolver.GetSagaRequiredOrderReduction()
+            sagaRequiredOrderReduction = BattleRelicResolver.GetSagaRequiredOrderReduction(playerController)
         };
 
         handManager.DiscardAll();
 
         var cards = boardManager.GetActivationOrder();
-        bool shouldRepeatFirstTile = BattleRelicResolver.ShouldRepeatFirstTile(turnCount);
+        bool shouldRepeatFirstTile = BattleRelicResolver.ShouldRepeatFirstTile(turnCount, playerController);
         
-        BattleRelicResolver.ApplyEndTurnBoardRelics(boardManager, playerController);
+        BattleRelicResolver.ApplyEndTurnBoardRelics(boardManager, playerController, enemyController);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -108,6 +114,8 @@ public class BattleController : MonoBehaviour
             boardManager.RefreshCardPreviewTexts();
 
             deckManager.DrawCards(6);
+            ApplyTurnStartRelics();
+            enemyController.ResetDamageTakenThisTurn();
         }
 
         IsTurnProcessing = false;

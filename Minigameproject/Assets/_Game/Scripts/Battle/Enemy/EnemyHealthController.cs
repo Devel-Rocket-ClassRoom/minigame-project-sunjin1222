@@ -42,12 +42,12 @@ public class EnemyHealthController
         UpdateDamageLimitUI();
     }
 
-    public void TakeDamage(int damage)
+    public int TakeDamage(int damage)
     {
         if (enemyUI == null)
         {
             Debug.LogError("[EnemyHealthController] enemyUI가 null입니다.");
-            return;
+            return 0;
         }
 
         if (Block > 0)
@@ -65,7 +65,9 @@ public class EnemyHealthController
             damageTakenThisTurn += damage;
         }
 
-        CurrentHealth -= damage;
+        int actualDamage = Mathf.Max(0, damage);
+
+        CurrentHealth -= actualDamage;
         if (CurrentHealth < 0)
             CurrentHealth = 0;
 
@@ -77,6 +79,8 @@ public class EnemyHealthController
 
         if (CurrentHealth <= 0)
             onDied?.Invoke();
+
+        return actualDamage;
     }
 
     public void GainBlock(int amount)
@@ -95,6 +99,11 @@ public class EnemyHealthController
     {
         Block = 0;
         UpdateArmorUI();
+    }
+
+    public void RefreshDamageLimitUI()
+    {
+        UpdateDamageLimitUI();
     }
 
     private void UpdateArmorUI()

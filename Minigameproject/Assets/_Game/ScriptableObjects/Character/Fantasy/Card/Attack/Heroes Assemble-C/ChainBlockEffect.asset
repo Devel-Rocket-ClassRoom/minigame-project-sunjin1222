@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ChainBlockEffect
   m_EditorClassIdentifier: Assembly-CSharp::ChainBlockEffect
   originBlock: 0
-  bonusPerAdjacentCard: 4
+  bonusPerAdjacentCard: 5

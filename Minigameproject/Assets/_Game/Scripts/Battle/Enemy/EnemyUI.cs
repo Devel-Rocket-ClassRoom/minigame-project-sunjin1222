@@ -9,6 +9,7 @@ public class EnemyUI : MonoBehaviour
     public TextMeshProUGUI intentText;
     public Image intentIcon;
     public TextMeshProUGUI damageLimitText;
+    public TextMeshProUGUI thornsText;
 
     private Canvas worldCanvas;
     private Camera mainCamera;
@@ -51,6 +52,12 @@ public class EnemyUI : MonoBehaviour
             case EnemyActionType.Buff:
                 intentText.text = $"힘 + {pattern.value}";
                 break;
+            case EnemyActionType.ThornsBuff:
+                intentText.text = $"가시 + {pattern.value}";
+                break;
+            case EnemyActionType.Charge:
+                intentText.text = "힘 모으는 중";
+                break;
         }
     }
 
@@ -61,6 +68,9 @@ public class EnemyUI : MonoBehaviour
 
     public void UpdateDamageLimit(int maxDamagePerTurn, int damageTakenThisTurn)
     {
+        if (damageLimitText == null && maxDamagePerTurn > 0)
+            damageLimitText = CreateRuntimeStatusText("DamageLimitText", -55f);
+
         if (damageLimitText == null)
             return;
 
@@ -71,6 +81,46 @@ public class EnemyUI : MonoBehaviour
             return;
 
         int remainingDamage = Mathf.Max(0, maxDamagePerTurn - damageTakenThisTurn);
-        damageLimitText.text = $"한도 {remainingDamage}/{maxDamagePerTurn}";
+        damageLimitText.text = $"피해한도\n{remainingDamage}/{maxDamagePerTurn}";
+    }
+
+    public void UpdateThorns(int thorns)
+    {
+        if (thornsText == null && thorns > 0)
+            thornsText = CreateRuntimeStatusText("ThornsText", -95f);
+
+        if (thornsText == null)
+            return;
+
+        bool hasThorns = thorns > 0;
+        thornsText.gameObject.SetActive(hasThorns);
+
+        if (hasThorns)
+            thornsText.text = $"반사 {thorns}";
+    }
+
+    private TextMeshProUGUI CreateRuntimeStatusText(string objectName, float yOffset)
+    {
+        if (intentText == null)
+            return null;
+
+        GameObject textObject = new GameObject(objectName, typeof(RectTransform), typeof(TextMeshProUGUI));
+        textObject.transform.SetParent(intentText.transform.parent, false);
+
+        RectTransform rectTransform = textObject.GetComponent<RectTransform>();
+        rectTransform.anchorMin = intentText.rectTransform.anchorMin;
+        rectTransform.anchorMax = intentText.rectTransform.anchorMax;
+        rectTransform.pivot = intentText.rectTransform.pivot;
+        rectTransform.anchoredPosition = intentText.rectTransform.anchoredPosition + new Vector2(0f, yOffset);
+        rectTransform.sizeDelta = new Vector2(160f, 45f);
+
+        TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
+        text.font = intentText.font;
+        text.fontSize = Mathf.Max(18f, intentText.fontSize * 0.75f);
+        text.color = intentText.color;
+        text.alignment = TextAlignmentOptions.Center;
+        text.raycastTarget = false;
+
+        return text;
     }
 }

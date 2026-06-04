@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     private EnemyPatternRunner patternRunner = new EnemyPatternRunner();
     private EnemyHealthController healthController;
     private EnemyDeathHandler deathHandler;
+    private int currentThorns;
     private bool isDead;
 
     public void Initialize(EnemyData data)
@@ -44,6 +45,8 @@ public class EnemyController : MonoBehaviour
             Die);
         healthController.Initialize(enemyData);
         patternRunner.Initialize(enemyData);
+        currentThorns = enemyData != null ? Mathf.Max(0, enemyData.thorns) : 0;
+        enemyUI.UpdateThorns(currentThorns);
         isDead = false;
 
         if (patternRunner.HasAvailablePattern)
@@ -84,6 +87,15 @@ public class EnemyController : MonoBehaviour
                     patternRunner.AddAttackBonus(pattern.value);
                     Debug.Log($"{enemyData.enemyName} 힘 증가! 공격력 +{pattern.value}");
                     break;
+
+                case EnemyActionType.ThornsBuff:
+                    AddThorns(pattern.value);
+                    Debug.Log($"{enemyData.enemyName} 가시 증가! 반사 피해 +{pattern.value} (현재 {currentThorns})");
+                    break;
+
+                case EnemyActionType.Charge:
+                    Debug.Log($"{enemyData.enemyName} 힘 모으는 중");
+                    break;
             }
 
             patternRunner.AdvanceAfterTurn();
@@ -97,12 +109,36 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        healthController?.TakeDamage(damage);
+        if (healthController == null)
+            return;
+
+        int actualDamage = healthController.TakeDamage(damage);
+
+        if (!isDead && actualDamage > 0 && currentThorns > 0)
+            ReflectThornsDamage();
     }
 
     public void GainBlock(int amount)
     {
         healthController?.GainBlock(amount);
+    }
+
+    public void AddThorns(int amount)
+    {
+        currentThorns = Mathf.Max(0, currentThorns + amount);
+        enemyUI.UpdateThorns(currentThorns);
+    }
+
+    private void ReflectThornsDamage()
+    {
+        if (playerController == null)
+        {
+            Debug.LogError("[EnemyController] playerController가 null이라 가시 반사 피해를 줄 수 없습니다.");
+            return;
+        }
+
+        playerController.TakeDamage(currentThorns);
+        Debug.Log($"{enemyData.enemyName} 가시 반사! {currentThorns} 데미지");
     }
 
     private void UpdateIntent()
@@ -115,6 +151,11 @@ public class EnemyController : MonoBehaviour
     public void ResetDamageTakenThisTurn()
     {
         healthController?.ResetDamageTakenThisTurn();
+    }
+
+    public void RefreshDamageLimitUI()
+    {
+        healthController?.RefreshDamageLimitUI();
     }
 
     private void Die()

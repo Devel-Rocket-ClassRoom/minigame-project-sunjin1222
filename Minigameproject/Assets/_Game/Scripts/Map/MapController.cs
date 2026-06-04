@@ -17,6 +17,7 @@ public class MapController : MonoBehaviour
     private BigMapEpisodeView bigMapView;
     private EventPanelController eventPanelController;
     private RestPanelController restPanelController;
+    private MapDeckViewController mapDeckViewController;
 
     public TMP_Text HralText;
 
@@ -30,6 +31,7 @@ public class MapController : MonoBehaviour
 
         BindEventPanel();
         BindRestPanel();
+        BindMapDeckView();
         SetupBigMapView();
 
         if (RunData.currentMap == null)
@@ -298,6 +300,12 @@ public class MapController : MonoBehaviour
         restPanelController.Initialize();
     }
 
+    private void BindMapDeckView()
+    {
+        mapDeckViewController = new MapDeckViewController();
+        mapDeckViewController.Initialize();
+    }
+
     private void BindEventPanel()
     {
         eventPanelController = new EventPanelController(
@@ -400,6 +408,8 @@ public class MapController : MonoBehaviour
 
     private void StartBattle(MapNodeData selectedNode)
     {
+        EnsureEnemyMatchesNodeType(selectedNode);
+
         if (selectedNode.enemyData == null)
         {
             Debug.LogError($"{selectedNode.zoneName} 구역에 적 데이터가 없습니다.");
@@ -410,6 +420,22 @@ public class MapController : MonoBehaviour
         RunData.selectedEnemy = selectedNode.enemyData;
 
         SceneManager.LoadScene("BattleScene");
+    }
+
+    private void EnsureEnemyMatchesNodeType(MapNodeData selectedNode)
+    {
+        if (mapGenerator == null ||
+            selectedNode == null ||
+            mapGenerator.IsEnemyValidForNode(selectedNode))
+            return;
+
+        EnemyData replacementEnemy = mapGenerator.GetRandomEnemyForNode(selectedNode);
+
+        Debug.LogWarning(
+            $"[MapController] {selectedNode.nodeType} 노드에 맞지 않는 적 '{selectedNode.enemyData?.enemyName}'이 배정되어 교체합니다.");
+
+        if (replacementEnemy != null)
+            selectedNode.enemyData = replacementEnemy;
     }
 
     private MapNodeData FindNodeById(int nodeId)

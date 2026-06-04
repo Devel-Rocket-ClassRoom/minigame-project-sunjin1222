@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ChainDamageEffect
   m_EditorClassIdentifier: Assembly-CSharp::ChainDamageEffect
   originDamage: 0
-  bonusPerAdjacentCard: 3
+  bonusPerAdjacentCard: 4
