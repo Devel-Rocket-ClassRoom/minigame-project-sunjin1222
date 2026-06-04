@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterData", menuName = "Game/Character Data")]
 public class CharacterData : ScriptableObject
 {
+    public string characterId;
     public string characterName;
     public int maxHp = 50;
     [TextArea] public string description;

@@ -25,6 +25,8 @@ public class BoardManager : MonoBehaviour
     public GameObject[] gridCells;
 
     private List<GameObject> placedTileObjects = new List<GameObject>();
+    private BoardActivationHighlighter activationHighlighter;
+    private BoardPreviewTextUpdater previewTextUpdater;
 
     public void RegisterPlacedTile(GameObject tile)
     {
@@ -60,6 +62,8 @@ public class BoardManager : MonoBehaviour
 
     private void Awake()
     {
+        activationHighlighter = new BoardActivationHighlighter(placedTileObjects);
+        previewTextUpdater = new BoardPreviewTextUpdater(this, placedTileObjects);
         cardOrigin = new int[Width * Height];
         for (int i = 0; i < cardOrigin.Length; i++)
             cardOrigin[i] = -1;
@@ -254,127 +258,37 @@ public class BoardManager : MonoBehaviour
 
     public void ShowActivationHighlight(int originIndex)
     {
-        HideActivationHighlight();
-
-        if (originIndex < 0)
-            return;
-
-        foreach (GameObject tileObject in placedTileObjects)
-        {
-            if (tileObject == null)
-                continue;
-
-            PlacedTile tile = tileObject.GetComponent<PlacedTile>();
-
-            if (tile != null && tile.OriginIndex == originIndex)
-                tile.SetActivationHighlight(true);
-        }
+        EnsureActivationHighlighter();
+        activationHighlighter.Show(originIndex);
     }
 
     public void HideActivationHighlight()
     {
-        foreach (GameObject tileObject in placedTileObjects)
-        {
-            if (tileObject == null)
-                continue;
+        EnsureActivationHighlighter();
+        activationHighlighter.Hide();
+    }
 
-            PlacedTile tile = tileObject.GetComponent<PlacedTile>();
-
-            if (tile != null)
-                tile.SetActivationHighlight(false);
-        }
+    private void EnsureActivationHighlighter()
+    {
+        if (activationHighlighter == null)
+            activationHighlighter = new BoardActivationHighlighter(placedTileObjects);
     }
 
     public void RefreshCardPreviewTexts()
     {
-        placedTileObjects.RemoveAll(tile => tile == null);
-
-        List<BoardCardEntry> entries = GetActivationOrder();
-
-        foreach (GameObject tileObject in placedTileObjects)
-        {
-            PlacedTile tile = tileObject.GetComponent<PlacedTile>();
-
-            if (tile != null)
-            {
-                tile.SetPreviewText("", "");
-            }
-        }
-
-        for (int i = 0; i < entries.Count; i++)
-        {
-            BoardCardEntry entry = entries[i];
-
-            EffectContext context = new EffectContext
-            {
-                activationOrder = i + 1,
-                adjacentCardCount = CountAdjacentCards(entry.originIndex),
-                sagaRequiredOrderReduction = GetSagaRequiredOrderReduction()
-            };
-
-            EffectPreviewResult result = new EffectPreviewResult();
-
-            if (entry.card.effects != null)
-            {
-                foreach (EffectSO effect in entry.card.effects)
-                {
-                    if (effect != null)
-                    {
-                        effect.Preview(context, result);
-                    }
-                }
-            }
-
-            string valueText = BuildPreviewText(result);
-
-            foreach (GameObject tileObject in placedTileObjects)
-            {
-                PlacedTile tile = tileObject.GetComponent<PlacedTile>();
-
-                if (tile != null && tile.OriginIndex == entry.originIndex)
-                {
-                    tile.SetPreviewText($"{i + 1}", valueText);
-                    break;
-                }
-            }
-        }
+        EnsurePreviewTextUpdater();
+        previewTextUpdater.Refresh();
     }
+
     public void UnregisterPlacedTile(GameObject tile)
     {
         placedTileObjects.Remove(tile);
     }
 
-    private string BuildPreviewText(EffectPreviewResult result)
+    private void EnsurePreviewTextUpdater()
     {
-        if (result.damage > 0 && result.block > 0)
-            return $"피해 {result.damage}\n방어 {result.block}";
-
-        if (result.damage > 0)
-            return $"피해 {result.damage}";
-
-        if (result.block > 0)
-            return $"방어 {result.block}";
-
-        return "";
-    }
-
-    private int GetSagaRequiredOrderReduction()
-    {
-        if (RunData.currentRelics == null)
-            return 0;
-
-        int reduction = 0;
-
-        foreach (RelicData relic in RunData.currentRelics)
-        {
-            if (relic == null)
-                continue;
-
-            if (relic.effectType == RelicEffectType.ReduceSagaRequiredOrder)
-                reduction += Mathf.Max(0, relic.amount);
-        }
-
-        return reduction;
+        if (previewTextUpdater == null)
+            previewTextUpdater = new BoardPreviewTextUpdater(this, placedTileObjects);
     }
 
 }

@@ -14,24 +14,13 @@ public class EnemyController : MonoBehaviour
     public GameObject aemorOB;
     public TextMeshProUGUI Armor;
 
+    public int currentHealth => healthController != null ? healthController.CurrentHealth : 0;
+    public int block => healthController != null ? healthController.Block : 0;
 
-    public int currentHealth;
-    private int patternIndex = 0;
-    private int patternLoopCount = 0;
-    private int attackBonus = 0;
-    private int turnCount = 0;
-    private int randomActionCount = 0;
-    private int currentRandomPatternIndex = -1;
-    private EnemyPattern currentPattern;
-    private readonly EnemyPattern periodicBuffPattern = new EnemyPattern
-    {
-        actionType = EnemyActionType.Buff
-    };
-    private bool hasAvailablePattern = true;
+    private EnemyPatternRunner patternRunner = new EnemyPatternRunner();
+    private EnemyHealthController healthController;
+    private EnemyDeathHandler deathHandler;
     private bool isDead;
-
-    public int block;
-    private int damageTakenThisTurn;
 
     public void Initialize(EnemyData data)
     {
@@ -42,24 +31,22 @@ public class EnemyController : MonoBehaviour
             enemyAnimator = GetComponentInChildren<EnemyAnimator>();
 
         enemyData = data;
-        currentHealth = enemyData.maxHealth;
-        patternIndex = 0;
-        patternLoopCount = 0;
-        attackBonus = 0;
-        turnCount = 0;
-        randomActionCount = 0;
-        currentRandomPatternIndex = -1;
-        damageTakenThisTurn = 0;
-        hasAvailablePattern = enemyData.patterns != null && enemyData.patterns.Length > 0;
+        deathHandler = new EnemyDeathHandler(
+            gameObject,
+            playerController,
+            panul,
+            rewardManager);
+        healthController = new EnemyHealthController(
+            enemyUI,
+            enemyAnimator,
+            aemorOB,
+            Armor,
+            Die);
+        healthController.Initialize(enemyData);
+        patternRunner.Initialize(enemyData);
         isDead = false;
 
-        if (hasAvailablePattern)
-            hasAvailablePattern = PrepareInitialPattern();
-
-        enemyUI.UpdateUI(currentHealth, enemyData.maxHealth);
-        UpdateDamageLimitUI();
-
-        if (hasAvailablePattern)
+        if (patternRunner.HasAvailablePattern)
             UpdateIntent();
         else
             enemyUI.ClearIntent();
@@ -69,7 +56,7 @@ public class EnemyController : MonoBehaviour
     {
         if (!isDead)
         {
-            if (!hasAvailablePattern || enemyData.patterns == null || enemyData.patterns.Length == 0) return;
+            if (!patternRunner.HasAvailablePattern) return;
 
             if (playerController == null)
             {
@@ -77,12 +64,12 @@ public class EnemyController : MonoBehaviour
                 return;
             }
 
-            EnemyPattern pattern = currentPattern;
+            EnemyPattern pattern = patternRunner.CurrentPattern;
 
             switch (pattern.actionType)
             {
                 case EnemyActionType.Attack:
-                    int damage = GetAttackDamage(pattern);
+                    int damage = patternRunner.GetAttackDamage(pattern);
                     if (enemyAnimator != null) enemyAnimator.PlayAttack();
                     playerController.TakeDamage(damage);
                     Debug.Log($"{enemyData.enemyName} 공격! {damage} 데미지");
@@ -94,17 +81,14 @@ public class EnemyController : MonoBehaviour
                     break;
 
                 case EnemyActionType.Buff:
-                    attackBonus += pattern.value;
+                    patternRunner.AddAttackBonus(pattern.value);
                     Debug.Log($"{enemyData.enemyName} 힘 증가! 공격력 +{pattern.value}");
                     break;
             }
 
-            turnCount++;
-            hasAvailablePattern = enemyData.patternMode == EnemyPatternMode.PeriodicBuffRandom
-                ? MoveToNextRandomPattern()
-                : MoveToNextSequentialPattern();
+            patternRunner.AdvanceAfterTurn();
 
-            if (hasAvailablePattern)
+            if (patternRunner.HasAvailablePattern)
                 UpdateIntent();
             else
                 enemyUI.ClearIntent();
@@ -113,217 +97,36 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (enemyUI == null)
-        {
-            Debug.LogError("[EnemyController] enemyUI가 null입니다.");
-            return;
-        }
-
-
-
-        if (block > 0)
-        {
-            int blockedDamage = Mathf.Min(block, damage);
-            block -= blockedDamage;
-            damage -= blockedDamage;
-            aemorOB.SetActive(true);
-            Armor.text = block.ToString();
-            if (block <= 0)
-                aemorOB.SetActive(false);
-        }
-
-        if (damage > 0 && enemyData.maxDamagePerTurn > 0)
-        {
-            int remainingDamage = Mathf.Max(0, enemyData.maxDamagePerTurn - damageTakenThisTurn);
-            damage = Mathf.Min(damage, remainingDamage);
-            damageTakenThisTurn += damage;
-        }
-
-        currentHealth -= damage;
-        if (currentHealth < 0) currentHealth = 0;
-
-        enemyUI.UpdateUI(currentHealth, enemyData.maxHealth);
-        UpdateDamageLimitUI();
-
-        if (enemyAnimator != null) enemyAnimator.PlayHit();
-
-        if (currentHealth <= 0)
-            Die();
+        healthController?.TakeDamage(damage);
     }
 
     public void GainBlock(int amount)
     {
-        block += amount;
-        if (block > 0)
-        {
-            aemorOB.SetActive(true);
-            Armor.text = block.ToString();
-        }
-        else
-        {
-            aemorOB.SetActive(false);
-        }
+        healthController?.GainBlock(amount);
     }
 
     private void UpdateIntent()
     {
-        if (enemyData.patterns == null || enemyData.patterns.Length == 0) return;
-        enemyUI.UpdateIntent(currentPattern, GetAttackDamage(currentPattern));
+        if (!patternRunner.HasAvailablePattern) return;
+        EnemyPattern pattern = patternRunner.CurrentPattern;
+        enemyUI.UpdateIntent(pattern, patternRunner.GetAttackDamage(pattern));
     }
 
     public void ResetDamageTakenThisTurn()
     {
-        damageTakenThisTurn = 0;
-        UpdateDamageLimitUI();
-    }
-
-    private void UpdateDamageLimitUI()
-    {
-        if (enemyUI != null)
-            enemyUI.UpdateDamageLimit(enemyData != null ? enemyData.maxDamagePerTurn : 0, damageTakenThisTurn);
-    }
-
-    private int GetAttackDamage(EnemyPattern pattern)
-    {
-        if (pattern.actionType != EnemyActionType.Attack)
-            return pattern.value;
-
-        return pattern.value +
-            attackBonus +
-            patternLoopCount * enemyData.attackIncreasePerPatternLoop;
-    }
-
-    private bool PrepareInitialPattern()
-    {
-        if (enemyData.patternMode == EnemyPatternMode.PeriodicBuffRandom)
-            return SelectRandomPatternForTurn(1);
-
-        currentPattern = enemyData.patterns[patternIndex];
-        return true;
-    }
-
-    private bool MoveToNextSequentialPattern()
-    {
-        for (int i = 0; i < enemyData.patterns.Length; i++)
-        {
-            patternIndex = (patternIndex + 1) % enemyData.patterns.Length;
-
-            if (patternIndex == 0)
-                patternLoopCount++;
-
-            if (!enemyData.patterns[patternIndex].firstLoopOnly || patternLoopCount == 0)
-            {
-                currentPattern = enemyData.patterns[patternIndex];
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool MoveToNextRandomPattern()
-    {
-        if (currentRandomPatternIndex >= 0)
-        {
-            randomActionCount++;
-
-            if (randomActionCount % enemyData.patterns.Length == 0)
-                patternLoopCount++;
-        }
-
-        return SelectRandomPatternForTurn(turnCount + 1);
-    }
-
-    private bool SelectRandomPatternForTurn(int turnNumber)
-    {
-        if (enemyData.periodicBuffInterval > 0 &&
-            turnNumber % enemyData.periodicBuffInterval == 0)
-        {
-            periodicBuffPattern.value = enemyData.periodicBuffAmount;
-            currentPattern = periodicBuffPattern;
-            currentRandomPatternIndex = -1;
-            return true;
-        }
-
-        bool allowImmediateRepeat = false;
-        int candidateCount = CountRandomPatternCandidates(allowImmediateRepeat);
-
-        if (candidateCount == 0)
-        {
-            allowImmediateRepeat = true;
-            candidateCount = CountRandomPatternCandidates(allowImmediateRepeat);
-        }
-
-        if (candidateCount == 0)
-            return false;
-
-        int selectedCandidate = Random.Range(0, candidateCount);
-
-        for (int i = 0; i < enemyData.patterns.Length; i++)
-        {
-            if (!IsRandomPatternCandidate(i, allowImmediateRepeat))
-                continue;
-
-            if (selectedCandidate > 0)
-            {
-                selectedCandidate--;
-                continue;
-            }
-
-            currentRandomPatternIndex = i;
-            currentPattern = enemyData.patterns[i];
-            return true;
-        }
-
-        return false;
-    }
-
-    private int CountRandomPatternCandidates(bool allowImmediateRepeat)
-    {
-        int count = 0;
-
-        for (int i = 0; i < enemyData.patterns.Length; i++)
-        {
-            if (IsRandomPatternCandidate(i, allowImmediateRepeat))
-                count++;
-        }
-
-        return count;
-    }
-
-    private bool IsRandomPatternCandidate(int index, bool allowImmediateRepeat)
-    {
-        EnemyPattern pattern = enemyData.patterns[index];
-
-        if (pattern.firstLoopOnly && patternLoopCount > 0)
-            return false;
-
-        if (!allowImmediateRepeat && index == currentRandomPatternIndex)
-            return false;
-
-        return true;
+        healthController?.ResetDamageTakenThisTurn();
     }
 
     private void Die()
     {
+        if (isDead)
+            return;
+
         isDead = true;
-        RelicManager.ApplyRelics(RelicTriggerType.BattleVictory, playerController, null);
-        panul.SetActive(true);
-        rewardManager.rewardbutton.SetActive(true);
-
-        if (RunData.currentMap != null && RunData.selectedNodeId >= 0)
-        {
-            RunData.selectedBattleWon = true;
-        }
-
-        BattleController bc = FindObjectOfType<BattleController>();
-        if (bc != null) bc.Didie();
-
-        gameObject.SetActive(false);
+        deathHandler.HandleDeath();
     }
     public void ResetBlock()
     {
-        block = 0;
-        aemorOB.SetActive(false);
+        healthController?.ResetBlock();
     }
 }

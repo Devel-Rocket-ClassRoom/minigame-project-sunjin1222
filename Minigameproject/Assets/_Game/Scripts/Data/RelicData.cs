@@ -20,6 +20,7 @@ public enum RelicEffectType
 [CreateAssetMenu(fileName = "RelicData", menuName = "Game/Relic Data")]
 public class RelicData : ScriptableObject
 {
+    public string relicId;
     public string relicName;
     [TextArea] public string description;
     public Sprite icon;
