@@ -15,9 +15,9 @@ public class MapView : MonoBehaviour
 
     private MapNode startButton;
 
-    private const float HorizontalSpacing = 290f;
+    private const float HorizontalSpacing = 400f;
     private const float CandidateY = 280f;
-    private const float StartButtonY = 20f;
+    private const float StartButtonY = -20f;
 
     public void Draw(
         MapData mapData,
@@ -53,7 +53,7 @@ public class MapView : MonoBehaviour
             nodeView.Setup(node, onSelected);
 
             RectTransform rect = nodeView.GetComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(300f, 210f);
+            rect.sizeDelta = new Vector2(400f, 310f);
             rect.anchoredPosition = new Vector2(
                 node.column * HorizontalSpacing,
                 CandidateY

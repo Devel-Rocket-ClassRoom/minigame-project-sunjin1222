@@ -34,4 +34,4 @@ MonoBehaviour:
     value: 3
     firstLoopOnly: 0
   portrait: {fileID: 6051745787690034102, guid: ed2cfe851787ea84a9ef9d836d58e01d, type: 3}
-  prefab: {fileID: 1600796342847078890, guid: 490bb6d2c59da1345b58db2e806ff962, type: 3}
+  prefab: {fileID: 1600796342847078890, guid: a0ac5dc3cff757a4da65ee30cb010341, type: 3}

@@ -26,8 +26,7 @@ MonoBehaviour:
     filterByCardType: 1
     rewardCardType: 0
     cardOptionCount: 1
-    rewardCards:
-    - {fileID: 11400000, guid: 425df213637eaa1448dab8a33e7bb4af, type: 2}
+    rewardCards: []
     rewardRelics: []
   - choiceText: "[\uC6A9\uAE30\uB97C \uC6D0\uD55C\uB2E4]\uBB34\uC791\uC704 \uC2A4\uD0AC\uCE74\uB4DC
       1\uC7A5\uD68D"
@@ -37,8 +36,7 @@ MonoBehaviour:
     filterByCardType: 1
     rewardCardType: 1
     cardOptionCount: 1
-    rewardCards:
-    - {fileID: 11400000, guid: 425df213637eaa1448dab8a33e7bb4af, type: 2}
+    rewardCards: []
     rewardRelics: []
   minFloor: 1
   maxFloor: 0

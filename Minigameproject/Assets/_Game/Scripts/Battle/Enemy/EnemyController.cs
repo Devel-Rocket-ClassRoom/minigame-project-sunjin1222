@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
     private int currentThorns;
     private bool isDead;
 
+    public GameObject gameClearPanel;
+
     public void Initialize(EnemyData data)
     {
         if (enemyUI == null)
@@ -32,11 +34,16 @@ public class EnemyController : MonoBehaviour
             enemyAnimator = GetComponentInChildren<EnemyAnimator>();
 
         enemyData = data;
+        if (enemyAnimator != null)
+            enemyAnimator.SetSprite(enemyData != null ? enemyData.portrait : null);
+
         deathHandler = new EnemyDeathHandler(
-            gameObject,
-            playerController,
-            panul,
-            rewardManager);
+          gameObject,
+          playerController,
+          panul,
+          rewardManager,
+          gameClearPanel,
+          IsBossBattle());
         healthController = new EnemyHealthController(
             enemyUI,
             enemyAnimator,
@@ -53,6 +60,12 @@ public class EnemyController : MonoBehaviour
             UpdateIntent();
         else
             enemyUI.ClearIntent();
+    }
+
+    private bool IsBossBattle()
+    {
+        return enemyData != null && enemyData.enemyType == EnemyType.Boss ||
+            RunData.IsSelectedNodeType(MapNodeType.Boss);
     }
 
     public void DoTurn()

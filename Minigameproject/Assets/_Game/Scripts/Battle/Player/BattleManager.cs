@@ -9,6 +9,7 @@ public class BattleManager : MonoBehaviour
     public PlayerController playerController;
     public RewardManager rewardManager;
     public GameObject panul;
+    public GameObject gameClearPanel;
 
     public static EnemyController CurrentEnemy { get; private set; }
 
@@ -54,6 +55,7 @@ public class BattleManager : MonoBehaviour
         controller.playerController = playerController;
         controller.rewardManager = rewardManager;
         controller.panul = panul;
+        controller.gameClearPanel = gameClearPanel;
 
         CurrentEnemy = controller;
         controller.Initialize(data);

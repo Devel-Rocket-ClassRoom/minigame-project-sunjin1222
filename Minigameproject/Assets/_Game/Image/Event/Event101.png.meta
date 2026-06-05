@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 7b4b07c0dd3e89e4eaecc66385449fb0
+guid: 6a9d653a0d576c540a490f1df61131a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -993369598884944946
-    second: Elite_Fallen Paladin_0
-  - first:
-      213: 7719945099306393214
-    second: Elite_Fallen Paladin_1
+      213: 2674749960476766153
+    second: 101_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Elite_Fallen Paladin_0
+      name: 101_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 219
-        width: 1024
-        height: 1317
+        y: 0
+        width: 1402
+        height: 1122
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec36ac7ec97d632f0800000000000000
-      internalID: -993369598884944946
+      spriteID: 9cf2539eaee9e1520800000000000000
+      internalID: 2674749960476766153
       vertices: []
       indices: 
       edges: []
@@ -141,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ed51b80a762693e49b07b208e382d0b8
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -151,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Elite_Fallen Paladin_0: -993369598884944946
-      Elite_Fallen Paladin_1: 7719945099306393214
+      101_0: 2674749960476766153
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

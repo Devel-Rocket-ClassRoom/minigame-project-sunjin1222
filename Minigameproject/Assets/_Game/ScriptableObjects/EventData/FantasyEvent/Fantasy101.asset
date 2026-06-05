@@ -17,7 +17,7 @@ MonoBehaviour:
   description: "\uAC80\uC740 \uB2E4\uB9AC\uB97C \uC9C0\uD0A4\uB358 \uC790\uB4E4\uC758
     \uAE43\uBC1C\uC774\uB2E4.\n\uBD88\uAE38\uD55C \uAE30\uC6B4\uC774 \uC544\uC9C1
     \uCC9C\uC5D0 \uB0A8\uC544 \uC788\uB2E4."
-  illustration: {fileID: 0}
+  illustration: {fileID: 2674749960476766153, guid: 6a9d653a0d576c540a490f1df61131a9, type: 3}
   choices:
   - choiceText: "[\uAE43\uBC1C\uC744 \uBD88\uD0DC\uC6B4\uB2E4] \uCCB4\uB825 -8, \uBB34\uC791\uC704
       \uC720\uBB3C 1\uAC1C \uD68D\uB4DD"
@@ -29,19 +29,24 @@ MonoBehaviour:
     cardOptionCount: 0
     rewardCards: []
     rewardRelics:
-    - {fileID: 11400000, guid: 9757ece2e4d148b0819f360e0d9fd717, type: 2}
-    - {fileID: 11400000, guid: e4f7a0fb2b6746c0a60cf57968c9e7a1, type: 2}
-    - {fileID: 11400000, guid: 3ae8fd97a95f45c5bba52ed7963ab471, type: 2}
     - {fileID: 11400000, guid: 48af766061ab1934492808ede69ebb82, type: 2}
     - {fileID: 11400000, guid: 8c0c0197455d4aa69695740df2e82b79, type: 2}
+    - {fileID: 11400000, guid: 3ae8fd97a95f45c5bba52ed7963ab471, type: 2}
+    - {fileID: 11400000, guid: d1fc7b6742caa8b468f18c153c62458b, type: 2}
+    - {fileID: 11400000, guid: b96038031f4baa14a9458e672c8785b8, type: 2}
+    - {fileID: 11400000, guid: f342d1a13b8ed604c8e8bb15040c646e, type: 2}
+    - {fileID: 11400000, guid: 45600bb54f208da469ce03a73e6dc3c5, type: 2}
+    - {fileID: 11400000, guid: e7c074ea99d38a947b84f84ba81d39d5, type: 2}
+    - {fileID: 11400000, guid: c68c1a7b108085140a3fe477d85abede, type: 2}
+    - {fileID: 11400000, guid: 68a55b696078747448b3075315170846, type: 2}
   - choiceText: "[\uAE43\uBC1C\uC744 \uC870\uC0AC\uD55C\uB2E4] \uACF5\uACA9 \uCE74\uB4DC
-      3\uC7A5 \uC911 1\uC7A5 \uD68D\uB4DD"
+      5\uC7A5 \uC911 1\uC7A5 \uD68D\uB4DD"
     hpChange: 0
     rewardType: 0
     useCharacterCardPool: 1
     filterByCardType: 1
     rewardCardType: 0
-    cardOptionCount: 3
+    cardOptionCount: 5
     rewardCards: []
     rewardRelics: []
   - choiceText: "[\uAC74\uB4DC\uB9AC\uC9C0 \uC54A\uB294\uB2E4]"

@@ -40,11 +40,16 @@ MonoBehaviour:
     cardOptionCount: 0
     rewardCards: []
     rewardRelics:
-    - {fileID: 11400000, guid: 9757ece2e4d148b0819f360e0d9fd717, type: 2}
-    - {fileID: 11400000, guid: e4f7a0fb2b6746c0a60cf57968c9e7a1, type: 2}
-    - {fileID: 11400000, guid: 3ae8fd97a95f45c5bba52ed7963ab471, type: 2}
     - {fileID: 11400000, guid: 48af766061ab1934492808ede69ebb82, type: 2}
     - {fileID: 11400000, guid: 8c0c0197455d4aa69695740df2e82b79, type: 2}
+    - {fileID: 11400000, guid: 3ae8fd97a95f45c5bba52ed7963ab471, type: 2}
+    - {fileID: 11400000, guid: d1fc7b6742caa8b468f18c153c62458b, type: 2}
+    - {fileID: 11400000, guid: b96038031f4baa14a9458e672c8785b8, type: 2}
+    - {fileID: 11400000, guid: f342d1a13b8ed604c8e8bb15040c646e, type: 2}
+    - {fileID: 11400000, guid: 45600bb54f208da469ce03a73e6dc3c5, type: 2}
+    - {fileID: 11400000, guid: e7c074ea99d38a947b84f84ba81d39d5, type: 2}
+    - {fileID: 11400000, guid: c68c1a7b108085140a3fe477d85abede, type: 2}
+    - {fileID: 11400000, guid: 68a55b696078747448b3075315170846, type: 2}
   minFloor: 1
   maxFloor: 0
   weight: 1
