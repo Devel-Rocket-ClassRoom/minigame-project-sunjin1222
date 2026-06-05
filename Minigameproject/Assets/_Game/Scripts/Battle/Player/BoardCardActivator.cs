@@ -29,6 +29,7 @@ public class BoardCardActivator
         if (entry.card.effects == null || entry.card.effects.Length == 0)
             yield break;
 
+        context.currentCard = entry.card;
         boardManager.ShowActivationHighlight(entry.originIndex);
         yield return new WaitForSeconds(0.15f);
 
@@ -45,5 +46,6 @@ public class BoardCardActivator
         }
 
         boardManager.HideActivationHighlight();
+        context.currentCard = null;
     }
 }

@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyId: Enemy_Normal_006
   enemyName: "\uC789\uD06C \uC218\uBB38\uC7A5"
   enemyType: 0
-  maxHealth: 93
-  maxDamagePerTurn: 30
+  maxHealth: 87
+  maxDamagePerTurn: 35
   thorns: 0
   description: 
   patternMode: 1

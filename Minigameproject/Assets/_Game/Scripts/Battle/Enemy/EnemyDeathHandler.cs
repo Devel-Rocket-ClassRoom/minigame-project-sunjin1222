@@ -27,6 +27,10 @@ public class EnemyDeathHandler
 
     public void HandleDeath()
     {
+        BattleController battleController = Object.FindFirstObjectByType<BattleController>();
+        if (battleController != null)
+            battleController.Didie();
+
         RelicManager.ApplyRelics(RelicTriggerType.BattleVictory, playerController, null);
 
         if (isBossBattle || RunData.IsSelectedNodeType(MapNodeType.Boss))
@@ -51,10 +55,6 @@ public class EnemyDeathHandler
 
         if (RunData.currentMap != null && RunData.selectedNodeId >= 0)
             RunData.selectedBattleWon = true;
-
-        BattleController battleController = Object.FindFirstObjectByType<BattleController>();
-        if (battleController != null)
-            battleController.Didie();
 
         if (enemyObject != null)
             enemyObject.SetActive(false);

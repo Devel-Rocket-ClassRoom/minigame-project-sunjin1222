@@ -16,8 +16,8 @@ MonoBehaviour:
   enemyName: "\uAC80\uC740 \uC789\uD06C\uC758 \uC655"
   enemyType: 2
   maxHealth: 200
-  maxDamagePerTurn: 30
-  thorns: 4
+  maxDamagePerTurn: 40
+  thorns: 3
   description: 
   patternMode: 1
   attackIncreasePerPatternLoop: 0
@@ -25,13 +25,13 @@ MonoBehaviour:
   periodicBuffAmount: 10
   patterns:
   - actionType: 0
-    value: 30
+    value: 31
     firstLoopOnly: 0
   - actionType: 3
     value: 3
     firstLoopOnly: 0
   - actionType: 0
-    value: 60
+    value: 40
     firstLoopOnly: 0
   - actionType: 1
     value: 40

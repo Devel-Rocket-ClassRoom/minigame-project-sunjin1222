@@ -9,6 +9,8 @@ public class GameSceneManager : MonoBehaviour
 
     public TextMeshProUGUI HP;
 
+    public GameObject end;
+
     private void Start()
     {
         RefreshMapHud();
@@ -40,7 +42,16 @@ public class GameSceneManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void OnendPanal()
+    {
+        end.SetActive(true);
+    } 
 
+
+    public void ClendPanal()
+    {
+        end.SetActive(false);
+    } 
 
 
 }

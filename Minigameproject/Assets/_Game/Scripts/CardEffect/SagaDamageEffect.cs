@@ -18,7 +18,7 @@ public class SagaDamageEffect : EffectSO
         {
             finalDamage += bonusDamage;
         }
-        context.enemyController.TakeDamage(finalDamage);
+        context.enemyController.TakeDamage(finalDamage, context.IsCurrentCardAttack);
     }
     public override void Preview(EffectContext context, EffectPreviewResult result)
     {

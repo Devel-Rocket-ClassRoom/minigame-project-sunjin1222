@@ -17,9 +17,9 @@ MonoBehaviour:
   enemyType: 1
   maxHealth: 140
   maxDamagePerTurn: 0
-  thorns: 8
+  thorns: 4
   description: 
-  patternMode: 1
+  patternMode: 0
   attackIncreasePerPatternLoop: 0
   periodicBuffInterval: 0
   periodicBuffAmount: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     value: 17
     firstLoopOnly: 0
   - actionType: 3
-    value: 5
+    value: 3
     firstLoopOnly: 0
   portrait: {fileID: 1436753597982048788, guid: b0ac2948d52fe114e8caf0ef0f6f04bf, type: 3}
   prefab: {fileID: 1600796342847078890, guid: aa4a8a54c33793348a6dafa49dd84dc7, type: 3}
