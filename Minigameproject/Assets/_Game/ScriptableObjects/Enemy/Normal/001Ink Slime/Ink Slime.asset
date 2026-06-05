@@ -30,5 +30,5 @@ MonoBehaviour:
   - actionType: 0
     value: 36
     firstLoopOnly: 0
-  portrait: {fileID: 2979194778711039414, guid: 2aeb46ae7ffbf4b449f051a209ca206a, type: 3}
+  portrait: {fileID: -9209180246770894698, guid: c716c565ada292e49b0c0bd6e599d053, type: 3}
   prefab: {fileID: 1600796342847078890, guid: 588c2cf30355d804c9a02df430d9042b, type: 3}

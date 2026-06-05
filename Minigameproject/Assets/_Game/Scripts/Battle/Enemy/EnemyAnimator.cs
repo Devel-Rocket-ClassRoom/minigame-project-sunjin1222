@@ -80,6 +80,15 @@ public class EnemyAnimator : MonoBehaviour
         StartCoroutine(IdleAnimation());
     }
 
+    public void SetSprite(Sprite sprite)
+    {
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null && sprite != null)
+            spriteRenderer.sprite = sprite;
+    }
+
     public void PlayHit() => StartCoroutine(HitAnimation());
     public void PlayAttack() => StartCoroutine(AttackAnimation());
 }
