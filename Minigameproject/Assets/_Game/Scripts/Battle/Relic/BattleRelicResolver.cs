@@ -96,7 +96,7 @@ public static class BattleRelicResolver
                     continue;
 
                 int damageAmount = unusedCellCount * Mathf.Max(1, relic.amount);
-                enemyController.TakeDamage(damageAmount);
+                enemyController.TakeDamage(damageAmount, false, false);
 
                 Debug.Log($"[RelicManager] {relic.relicName} 발동: 피해 {damageAmount}");
             }

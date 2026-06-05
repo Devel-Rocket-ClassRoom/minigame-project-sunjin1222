@@ -15,7 +15,7 @@ public class ChainDamageEffect : EffectSO
         int finalDamage = originDamage + context.adjacentCardCount * bonusPerAdjacentCard;
 
 
-        context.enemyController.TakeDamage(finalDamage);
+        context.enemyController.TakeDamage(finalDamage, context.IsCurrentCardAttack);
     }
     public override void Preview(EffectContext context, EffectPreviewResult result)
     {

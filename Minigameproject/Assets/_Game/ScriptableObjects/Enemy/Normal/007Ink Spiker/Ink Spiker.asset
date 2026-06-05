@@ -17,7 +17,7 @@ MonoBehaviour:
   enemyType: 0
   maxHealth: 81
   maxDamagePerTurn: 0
-  thorns: 5
+  thorns: 2
   description: 
   patternMode: 0
   attackIncreasePerPatternLoop: 7

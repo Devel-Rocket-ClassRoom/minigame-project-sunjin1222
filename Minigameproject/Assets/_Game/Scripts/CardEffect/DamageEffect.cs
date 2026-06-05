@@ -10,7 +10,7 @@ public class DamageEffect : EffectSO
 
     public override void Apply(EffectContext context)
     {
-        context.enemyController.TakeDamage(damage);
+        context.enemyController.TakeDamage(damage, context.IsCurrentCardAttack);
     }
     public override void Preview(EffectContext context, EffectPreviewResult result)
     {

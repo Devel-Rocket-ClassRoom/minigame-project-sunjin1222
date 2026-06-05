@@ -120,14 +120,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(
+        int damage,
+        bool reflectThornsOnDamageAttempt = false,
+        bool canReflectThorns = true)
     {
         if (healthController == null)
             return;
 
         int actualDamage = healthController.TakeDamage(damage);
+        bool shouldReflectThorns = reflectThornsOnDamageAttempt ? damage > 0 : actualDamage > 0;
 
-        if (!isDead && actualDamage > 0 && currentThorns > 0)
+        if (canReflectThorns && !isDead && shouldReflectThorns && currentThorns > 0)
             ReflectThornsDamage();
     }
 

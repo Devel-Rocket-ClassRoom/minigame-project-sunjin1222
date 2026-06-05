@@ -8,6 +8,9 @@ public class EffectContext
     public HandManager handManager;
     public DeckManager deckManager;
     public List<CardData> activatedCards = new List<CardData>();
+    public CardData currentCard;
+
+    public bool IsCurrentCardAttack => currentCard != null && currentCard.cardType == CardType.Attack;
 
     public int activationOrder;
 
