@@ -5040,6 +5040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapView
   nodePrefab: {fileID: 4962507459634302391, guid: f17ca7f988c18e0498d95a9af79f953c, type: 3}
   nodeContainer: {fileID: 1810000001}
+  fixedButtonContainer: {fileID: 0}
 --- !u!114 &1517625445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5102,6 +5103,9 @@ MonoBehaviour:
   content: {fileID: 1810000001}
   horizontalLimit: 800
   verticalLimit: 2000
+  minScale: 1
+  maxScale: 2.5
+  zoomStep: 0.15
 --- !u!114 &1517625447
 MonoBehaviour:
   m_ObjectHideFlags: 0
