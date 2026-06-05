@@ -7,6 +7,7 @@ public class MapView : MonoBehaviour
 {
     public MapNode nodePrefab;
     public RectTransform nodeContainer;
+    public RectTransform fixedButtonContainer;
 
     private readonly Dictionary<int, MapNode> nodeViews =
         new Dictionary<int, MapNode>();
@@ -17,7 +18,7 @@ public class MapView : MonoBehaviour
 
     private const float HorizontalSpacing = 400f;
     private const float CandidateY = 280f;
-    private const float StartButtonY = -20f;
+    private const float StartButtonY = -400f;
 
     public void Draw(
         MapData mapData,
@@ -66,10 +67,15 @@ public class MapView : MonoBehaviour
 
     private void CreateStartButton(MapData mapData, Action onStart)
     {
-        startButton = Instantiate(nodePrefab, nodeContainer);
+        RectTransform parent = fixedButtonContainer != null
+            ? fixedButtonContainer
+            : nodeContainer.parent as RectTransform;
+
+        startButton = Instantiate(nodePrefab, parent != null ? parent : nodeContainer);
         RectTransform rect = startButton.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(380f, 120f);
         rect.anchoredPosition = new Vector2(0f, StartButtonY);
+        rect.localScale = Vector3.one;
         createdObjects.Add(startButton.gameObject);
 
         UpdateStartButton(mapData, onStart);
