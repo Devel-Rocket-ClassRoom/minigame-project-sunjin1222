@@ -325,6 +325,7 @@ MonoBehaviour:
   enemyAnimator: {fileID: 0}
   aemorOB: {fileID: 1548264166738479997}
   Armor: {fileID: 5714188578483156157}
+  gameClearPanel: {fileID: 0}
 --- !u!114 &1878026248818095622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +343,7 @@ MonoBehaviour:
   intentText: {fileID: 4427538713151000396}
   intentIcon: {fileID: 13534608111850198}
   damageLimitText: {fileID: 0}
+  thornsText: {fileID: 0}
 --- !u!1 &3020791386379506713
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,8 +698,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 50
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f9d1f310cd7fce418a147c9df8a81cf, type: 2}
+  m_sharedMaterial: {fileID: 4193523290634724964, guid: 8f9d1f310cd7fce418a147c9df8a81cf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

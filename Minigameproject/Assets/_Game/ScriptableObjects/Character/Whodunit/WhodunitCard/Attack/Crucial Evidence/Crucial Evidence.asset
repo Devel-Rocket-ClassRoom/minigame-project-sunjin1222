@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Crucial Evidence
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Whodunit_004
+  cardName: "\uACB0\uC815\uC801 \uB2E8\uC11C"
+  tileShape:
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 0, y: 2}
+  - {x: 1, y: 2}
+  tileOrigin: {x: 1, y: 1}
+  effects:
+  - {fileID: 11400000, guid: c05f9cb5018e4604f97a35140db5079a, type: 2}
+  description: "\uB370\uBBF8\uC9C0 10\n\uCD94\uB9AC 3 : \uB370\uBBF8\uC9C0 13"
+  tooltipText: "\uCD94\uB9AC N : \uC99D\uAC70 N\uC744 \uC18C\uBE44\uD558\uACE0 \uCD94\uAC00
+    \uD6A8\uACFC\uB97C \uBC1C\uB3D9\uD569\uB2C8\uB2E4. "
+  icon: {fileID: 1767854847757952555, guid: fbfd6d1f6c363504b89ed865790fee21, type: 3}
+  cardType: 0
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 6856548126514726630, guid: 8ee0e9ddb6b28f444b05b128826ee6d2, type: 3}

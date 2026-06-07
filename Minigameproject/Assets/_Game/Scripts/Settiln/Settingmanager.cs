@@ -70,11 +70,17 @@ public class Settingmanager : MonoBehaviour
 
     public void OnOpenSetting()
     {
-        settingPanel.SetActive(true);
+        gameObject.SetActive(true);
+
+        if (settingPanel != null)
+            settingPanel.SetActive(true);
     }
 
     public void OnCloseSetting()
     {
-        settingPanel.SetActive(false);
+        if (settingPanel != null)
+            settingPanel.SetActive(false);
+
+        gameObject.SetActive(false);
     }
 }

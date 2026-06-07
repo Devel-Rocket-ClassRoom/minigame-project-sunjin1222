@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Chain of Reasoning
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Whodunit_012
+  cardName: "\uB17C\uB9AC\uC804\uAC1C"
+  tileShape:
+  - {x: 0, y: 0}
+  - {x: 1, y: 1}
+  - {x: 1, y: 0}
+  - {x: 1, y: 2}
+  tileOrigin: {x: 1, y: 1}
+  effects:
+  - {fileID: 11400000, guid: b1e0550badc4f914884dc881a0fdf4f6, type: 2}
+  description: "\uBC29\uC5B4\uB3C4 12\n\uC758\uC2EC 5 : +10"
+  tooltipText: "\uC758\uC2EC N : \uC99D\uAC70\uAC00 N\uC774\uC0C1\uC774\uBA74 \uCD94\uAC00\uD6A8\uACFC\uB97C
+    \uBC1C\uB3D9\uD569\uB2C8\uB2E4."
+  icon: {fileID: -1950928342193282137, guid: b3eee9942531ad14a9e2a7451f0db4fa, type: 3}
+  cardType: 1
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: 2d3bedb718d9c3443b3bc17b67369481, type: 3}

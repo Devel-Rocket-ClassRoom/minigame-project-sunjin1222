@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Check Alibi
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Whodunit_013
+  cardName: "\uC54C\uB9AC\uBC14\uC774 \uAC80\uD1A0"
+  tileShape:
+  - {x: 1, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  tileOrigin: {x: 0, y: 1}
+  effects:
+  - {fileID: 11400000, guid: 376594d3e118dd548b30d74da6d7caa7, type: 2}
+  - {fileID: 11400000, guid: 38f74368ea0813049ac51caa075d113c, type: 2}
+  description: "\uBC29\uC5B4\uB3C4 10\n\uC99D\uAC70 3"
+  tooltipText: "\uC99D\uAC70 N : N\uB9CC\uD07C \uC99D\uAC70\uB97C \uD68D\uB4DD \uD569\uB2C8\uB2E4."
+  icon: {fileID: -2248152828127362720, guid: c3a61bf79ea1a0147a701b185d98c51b, type: 3}
+  cardType: 1
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: 02eea27223e30d143b37306198f2459c, type: 3}

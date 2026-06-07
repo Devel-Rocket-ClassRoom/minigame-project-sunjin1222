@@ -7,6 +7,7 @@ public class EffectContext
     public PlayerController playerController;
     public HandManager handManager;
     public DeckManager deckManager;
+    public BattleController battleController;
     public List<CardData> activatedCards = new List<CardData>();
     public CardData currentCard;
 

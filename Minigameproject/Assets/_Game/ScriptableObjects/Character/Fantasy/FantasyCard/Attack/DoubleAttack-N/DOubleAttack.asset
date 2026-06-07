@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: DOubleAttack
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Fantasy_005
+  cardName: "\uB354\uBE14\uC5B4\uD0DD"
+  tileShape:
+  - {x: 1, y: 1}
+  - {x: 0, y: 1}
+  - {x: 1, y: 0}
+  - {x: 2, y: 1}
+  - {x: 1, y: 2}
+  tileOrigin: {x: 1, y: 1}
+  effects:
+  - {fileID: 11400000, guid: 1f40eef8de95e854e8a0d0edeaea5599, type: 2}
+  - {fileID: 11400000, guid: 1f40eef8de95e854e8a0d0edeaea5599, type: 2}
+  description: "\uB370\uBBF8\uC9C0 13\n\uB370\uBBF8\uC9C0 13"
+  tooltipText: 
+  icon: {fileID: 7175362348688200318, guid: 069ac9b268771154babe1a255b8d083e, type: 3}
+  cardType: 0
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 6856548126514726630, guid: 0b71518f28c9d384aa3a91369c8b7a77, type: 3}

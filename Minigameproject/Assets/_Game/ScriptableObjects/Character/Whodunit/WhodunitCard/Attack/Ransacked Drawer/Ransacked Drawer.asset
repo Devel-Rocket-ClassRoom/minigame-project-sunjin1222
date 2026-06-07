@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Ransacked Drawer
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Whodunit_010
+  cardName: "\uB4A4\uC9D1\uD78C \uC11C\uB78D"
+  tileShape:
+  - {x: 0, y: 0}
+  - {x: 1, y: 0}
+  - {x: 2, y: 0}
+  - {x: 0, y: 1}
+  - {x: 2, y: 1}
+  tileOrigin: {x: 1, y: 0}
+  effects:
+  - {fileID: 11400000, guid: dc5e042397a0cf54a85c28044009622b, type: 2}
+  description: "\uB370\uBBF8\uC9C0 12\n\uCD94\uB9AC 3 : 12"
+  tooltipText: "\uCD94\uB9AC N : \uC99D\uAC70 N\uC744 \uC18C\uBE44\uD558\uACE0 \uCD94\uAC00
+    \uD6A8\uACFC\uB97C \uBC1C\uB3D9\uD569\uB2C8\uB2E4. "
+  icon: {fileID: -597976121778223858, guid: 2af3a209bd7d7d041a19743f9b58bd15, type: 3}
+  cardType: 0
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: 7ed33b2099a0c90459b8f4afcabe8f99, type: 3}

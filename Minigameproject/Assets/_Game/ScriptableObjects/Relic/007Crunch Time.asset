@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RelicData
   relicId: Relic_007
   relicName: "\uB9C8\uAC10\uC9C1\uC804"
-  description: "\uCCB4\uB825\uC774 50% \uC774\uD558\uB77C\uBA74, \uCCAB \uBC88\uC9F8
+  description: "\uCCB4\uB825\uC774 10% \uC774\uD558\uB77C\uBA74, \uCCAB \uBC88\uC9F8
     \uD0C0\uC77C\uC774 \uD55C \uBC88 \uB354 \uBC1C\uB3D9\uD569\uB2C8\uB2E4."
   icon: {fileID: 4307378007268850688, guid: cb4a61dc7deff804a8ec79fe84e1e5ce, type: 3}
   triggerType: 2
   effectType: 3
   amount: 1
   conditionType: 1
-  conditionAmount: 50
+  conditionAmount: 10

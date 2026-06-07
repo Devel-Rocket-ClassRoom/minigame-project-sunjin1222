@@ -6,11 +6,13 @@ public class BoardPreviewTextUpdater
 {
     private readonly BoardManager boardManager;
     private readonly List<GameObject> placedTileObjects;
+    private readonly BattleController battleController;
 
-    public BoardPreviewTextUpdater(BoardManager board, List<GameObject> tiles)
+    public BoardPreviewTextUpdater(BoardManager board, List<GameObject> tiles, BattleController battle)
     {
         boardManager = board;
         placedTileObjects = tiles;
+        battleController = battle;
     }
 
     public void Refresh()
@@ -26,6 +28,7 @@ public class BoardPreviewTextUpdater
 
             EffectContext context = new EffectContext
             {
+                battleController = battleController,
                 activationOrder = i + 1,
                 adjacentCardCount = boardManager.CountAdjacentCards(entry.originIndex),
                 sagaRequiredOrderReduction = BattleRelicResolver.GetSagaRequiredOrderReduction()

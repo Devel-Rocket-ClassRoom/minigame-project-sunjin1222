@@ -16,9 +16,16 @@ public class MapView : MonoBehaviour
 
     private MapNode startButton;
 
-    private const float HorizontalSpacing = 400f;
-    private const float CandidateY = 280f;
     private const float StartButtonY = -400f;
+
+    private static readonly Vector2[] nodeSlots =
+    {
+  new Vector2(-507f, 30f),
+new Vector2(-161f, -120f),
+new Vector2(-73f, 166f),
+new Vector2(291f, -65f),
+new Vector2(442f, 194f),
+    };
 
     public void Draw(
         MapData mapData,
@@ -48,17 +55,23 @@ public class MapView : MonoBehaviour
         MapData mapData,
         Action<MapNodeData> onSelected)
     {
+        int index = 0;
+
         foreach (MapNodeData node in mapData.nodes)
         {
             MapNode nodeView = Instantiate(nodePrefab, nodeContainer);
+            nodeView.gameObject.SetActive(true);
             nodeView.Setup(node, onSelected);
 
             RectTransform rect = nodeView.GetComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(400f, 310f);
-            rect.anchoredPosition = new Vector2(
-                node.column * HorizontalSpacing,
-                CandidateY
-            );
+            rect.sizeDelta = new Vector2(200f, 110f);
+
+            if (index < nodeSlots.Length)
+                rect.anchoredPosition = nodeSlots[index];
+            else
+                rect.anchoredPosition = Vector2.zero;
+
+            index++;
 
             nodeViews.Add(node.id, nodeView);
             createdObjects.Add(nodeView.gameObject);
@@ -72,6 +85,7 @@ public class MapView : MonoBehaviour
             : nodeContainer.parent as RectTransform;
 
         startButton = Instantiate(nodePrefab, parent != null ? parent : nodeContainer);
+        startButton.gameObject.SetActive(true);
         RectTransform rect = startButton.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(380f, 120f);
         rect.anchoredPosition = new Vector2(0f, StartButtonY);

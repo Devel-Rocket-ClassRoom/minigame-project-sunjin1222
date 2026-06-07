@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Dying Message
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Whodunit_015
+  cardName: "\uB2E4\uC789 \uBA54\uC138\uC9C0"
+  tileShape:
+  - {x: 0, y: 0}
+  tileOrigin: {x: 0, y: 0}
+  effects:
+  - {fileID: 11400000, guid: 73378c387cfe04647895386fb4d228f4, type: 2}
+  - {fileID: 11400000, guid: 7d4e57ff6be90df47a71ac904c6acf1b, type: 2}
+  description: "\uBC29\uC5B4\uB3C4 3\n\uC99D\uAC70 1"
+  tooltipText: "\uC99D\uAC70 N : N\uB9CC\uD07C \uC99D\uAC70\uB97C \uD68D\uB4DD \uD569\uB2C8\uB2E4."
+  icon: {fileID: -3418561574362882399, guid: 552ba312a5d5c3f41acc5a38a062b9d0, type: 3}
+  cardType: 1
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: 0b59cd974957fd042891a15f04f9d077, type: 3}

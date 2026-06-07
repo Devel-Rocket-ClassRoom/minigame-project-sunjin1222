@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Gathered Shields-C
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Fantasy_018
+  cardName: "\uC9D1\uACB0\uD55C \uBC29\uD328"
+  tileShape:
+  - {x: 0, y: 0}
+  tileOrigin: {x: 0, y: 0}
+  effects:
+  - {fileID: 11400000, guid: a359591a5eb6e1a43b3e0190a39c5137, type: 2}
+  description: "\uBC29\uC5B4\uB3C4 1\n\uCCB4\uC778 : \uBC29\uC5B4\uB3C4 3"
+  tooltipText: "\uCCB4\uC778: \uC778\uC811\uD55C \uCE74\uB4DC 1\uC7A5\uB2F9 \uCCB4\uC778
+    \uC218\uCE58\uAC00 1\uD68C \uC801\uC6A9\uB429\uB2C8\uB2E4."
+  icon: {fileID: -6959991265777618047, guid: ab0d164386204ac4bbad5309e9a25362, type: 3}
+  cardType: 1
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: 56ea7e1b158a15f478f10e7e2bf53847, type: 3}

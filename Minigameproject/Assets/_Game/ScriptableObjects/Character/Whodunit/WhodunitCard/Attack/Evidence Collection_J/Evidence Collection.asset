@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Evidence Collection
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Whodunit_006
+  cardName: "\uC99D\uAC70 \uC218\uC9D1"
+  tileShape:
+  - {x: 0, y: 0}
+  - {x: 1, y: 0}
+  tileOrigin: {x: 0, y: 0}
+  effects:
+  - {fileID: 11400000, guid: 2384b5da2806204458d983a62068b420, type: 2}
+  - {fileID: 11400000, guid: 825967d232f77354ea873b6ee6fb78a4, type: 2}
+  description: "\uB370\uBBF8\uC9C0 4\n\uC99D\uAC70 2 "
+  tooltipText: "\uC99D\uAC70 N : N\uB9CC\uD07C \uC99D\uAC70\uB97C \uD68D\uB4DD \uD569\uB2C8\uB2E4."
+  icon: {fileID: -2112487740573502474, guid: 6124db05ca9d5a3498569b6292fca972, type: 3}
+  cardType: 0
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: d5c06c1f85cb52940b6b89a362dd6579, type: 3}

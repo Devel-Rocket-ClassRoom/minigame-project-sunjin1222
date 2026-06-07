@@ -23,6 +23,7 @@ public class BoardManager : MonoBehaviour
     private CardData[] placedCards = new CardData[Width * Height];
     private int[] cardOrigin;
     public GameObject[] gridCells;
+    private BattleController battleController;
 
     private List<GameObject> placedTileObjects = new List<GameObject>();
     private BoardActivationHighlighter activationHighlighter;
@@ -63,10 +64,17 @@ public class BoardManager : MonoBehaviour
     private void Awake()
     {
         activationHighlighter = new BoardActivationHighlighter(placedTileObjects);
-        previewTextUpdater = new BoardPreviewTextUpdater(this, placedTileObjects);
+        previewTextUpdater = new BoardPreviewTextUpdater(this, placedTileObjects, battleController);
         cardOrigin = new int[Width * Height];
         for (int i = 0; i < cardOrigin.Length; i++)
             cardOrigin[i] = -1;
+    }
+
+    public void SetBattleController(BattleController battle)
+    {
+        battleController = battle;
+        previewTextUpdater = new BoardPreviewTextUpdater(this, placedTileObjects, battleController);
+        RefreshCardPreviewTexts();
     }
 
     public bool CanPlace(CardData card, int startIndex)
@@ -288,7 +296,7 @@ public class BoardManager : MonoBehaviour
     private void EnsurePreviewTextUpdater()
     {
         if (previewTextUpdater == null)
-            previewTextUpdater = new BoardPreviewTextUpdater(this, placedTileObjects);
+            previewTextUpdater = new BoardPreviewTextUpdater(this, placedTileObjects, battleController);
     }
 
 }
