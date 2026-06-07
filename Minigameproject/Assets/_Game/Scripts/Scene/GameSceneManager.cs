@@ -37,6 +37,22 @@ public class GameSceneManager : MonoBehaviour
         SceneManager.LoadScene("TitleScene");
     }
 
+    public void SaveRun()
+    {
+        RunSaveSystem.Save();
+    }
+
+    public void LoadSavedRun()
+    {
+        if (RunSaveSystem.Load())
+            SceneManager.LoadScene("MapScene");
+    }
+
+    public void DeleteSavedRun()
+    {
+        RunSaveSystem.Delete();
+    }
+
     public void QuitGame()
     {
         Application.Quit();

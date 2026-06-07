@@ -12,12 +12,17 @@ public class TitleManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI Play;
     public Image characterImage;
 
     public GameObject gameModePanel;
     public GameObject characterPanel;
     public GameObject storyPanel;
+    public GameObject startimage;
+    public GameObject Backimage;
+    public GameObject startPanal;
     public Button storyStartButton;
+    public Button continueButton;
 
     public Image relicImage;
     public TextMeshProUGUI relicText;
@@ -31,6 +36,7 @@ public class TitleManager : MonoBehaviour
             characterData = defaultCharacter;
 
         RefreshStoryStartButton();
+        RefreshContinueButton();
     }
 
     public void OnFantasyWriter()
@@ -70,18 +76,30 @@ public class TitleManager : MonoBehaviour
         if (relicText != null)
             relicText.text = startingRelic != null ? $"{startingRelic.relicName}\n{startingRelic.description}" : "";
 
+        if (Play != null)
+            Play.text = selectedCharacter.Playdescription;
+
         RunData.SetCharacter(selectedCharacter);
         RefreshStoryStartButton();
     }
 
     public void OnGameMode()
     {
+        startPanal.SetActive(false);
         gameModePanel.SetActive(true);
+        startimage.SetActive(false);
+        Backimage.SetActive(true);
+
     }
+
     public void OnBackGameMode()
     {
+        startPanal.SetActive(true);
         gameModePanel.SetActive(false);
+        startimage.SetActive(true);
+        Backimage.SetActive(false);
     }
+
     public void OnCharacter()
     {
         gameModePanel.SetActive(false);
@@ -92,11 +110,11 @@ public class TitleManager : MonoBehaviour
 
         SelectCharacter(characterData);
     }
+
     public void OnBackOnCharacter()
     {
         gameModePanel.SetActive(true);
         characterPanel.SetActive(false);
-
     }
 
     public void OnStory()
@@ -135,10 +153,30 @@ public class TitleManager : MonoBehaviour
         SceneManager.LoadScene(mapSceneName);
     }
 
+    public void ContinueSavedStory()
+    {
+        if (!RunSaveSystem.Load())
+            return;
+
+        SceneManager.LoadScene(mapSceneName);
+    }
+
+    public void DeleteSavedStory()
+    {
+        RunSaveSystem.Delete();
+        RefreshContinueButton();
+    }
+
     private void RefreshStoryStartButton()
     {
         if (storyStartButton != null)
             storyStartButton.interactable = RunData.currentCharacter != null;
+    }
+
+    private void RefreshContinueButton()
+    {
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(RunSaveSystem.HasSave());
     }
 
     private RelicData GetFirstStartingRelic(CharacterData selectedCharacter)

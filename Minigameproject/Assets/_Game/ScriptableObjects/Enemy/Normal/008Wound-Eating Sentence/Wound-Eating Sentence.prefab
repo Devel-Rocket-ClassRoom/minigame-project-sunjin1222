@@ -325,6 +325,7 @@ MonoBehaviour:
   enemyAnimator: {fileID: 0}
   aemorOB: {fileID: 923362134685043519}
   Armor: {fileID: 6476547234144669614}
+  gameClearPanel: {fileID: 0}
 --- !u!114 &1878026248818095622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,7 +478,7 @@ MonoBehaviour:
   m_margin: {x: 24.299572, y: -26.03849, z: -76.71152, w: -31.77946}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3421441849065716839
@@ -1164,7 +1165,7 @@ MonoBehaviour:
   m_margin: {x: 24.299572, y: -26.03849, z: -76.71152, w: -31.77946}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6908905769468274094
@@ -1591,7 +1592,7 @@ MonoBehaviour:
   m_margin: {x: 52.154026, y: -26.03849, z: -3.7128334, w: -26.039284}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7817028406786222573

@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 public class MapDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IScrollHandler
 {
     public RectTransform content;
-    public float horizontalLimit = 180f;
-    public float verticalLimit = 650f;
+    public float horizontalLimit =400f;
+    public float verticalLimit = 400f;
     public float minScale = 1f;
     public float maxScale = 2.5f;
     public float zoomStep = 0.15f;

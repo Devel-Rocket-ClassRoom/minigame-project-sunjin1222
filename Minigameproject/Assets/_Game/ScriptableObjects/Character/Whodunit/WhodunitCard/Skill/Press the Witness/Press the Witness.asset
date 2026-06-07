@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Press the Witness
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Whodunit_018
+  cardName: "\uC9C4\uC220\uC555\uBC15"
+  tileShape:
+  - {x: 2, y: 0}
+  - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 0, y: 1}
+  tileOrigin: {x: 1, y: 0}
+  effects:
+  - {fileID: 11400000, guid: cba9b005f59c3f5448feb5fd4858053b, type: 2}
+  description: "\uBC29\uC5B4\uB3C4 8\n\uCD94\uB9AC 2 : +10 "
+  tooltipText: "\uCD94\uB9AC N : \uC99D\uAC70 N\uC744 \uC18C\uBE44\uD558\uACE0 \uCD94\uAC00
+    \uD6A8\uACFC\uB97C \uBC1C\uB3D9\uD569\uB2C8\uB2E4. "
+  icon: {fileID: 7699577613875897262, guid: fa597eb0b41f9a74bb7689a3bc298767, type: 3}
+  cardType: 1
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 6856548126514726630, guid: fa007ee0d4052714390b28cf916e74de, type: 3}

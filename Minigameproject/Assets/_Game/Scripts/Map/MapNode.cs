@@ -31,18 +31,28 @@ public class MapNode : MonoBehaviour
     private Action<MapNodeData> onSelected;
     private Action onAction;
 
+    [SerializeField] private Image iconImage;
+
+    [SerializeField] private Sprite normalBattleSprite;
+    [SerializeField] private Sprite eliteBattleSprite;
+    [SerializeField] private Sprite restSprite;
+    [SerializeField] private Sprite BossSprite;
+    [SerializeField] private Sprite eventSprite;
+
+  
+
     public void Setup(MapNodeData data, Action<MapNodeData> selectedCallback)
     {
         nodeData = data;
         onSelected = selectedCallback;
         onAction = null;
 
-        nodeText.fontSize = 45f;
+        nodeText.fontSize = 20f;
         nodeText.text = BuildLabel(nodeData);
 
         button.onClick.RemoveListener(OnButtonClicked);
         button.onClick.AddListener(OnButtonClicked);
-
+    
         switch (nodeData.state)
         {
             case MapNodeState.Locked:
@@ -65,6 +75,37 @@ public class MapNode : MonoBehaviour
                 button.interactable = false;
                 break;
         }
+        SetIcon(nodeData.nodeType);
+    }
+
+    private void SetIcon(MapNodeType type)
+    {
+        if (iconImage == null)
+            return;
+
+        Sprite sprite = null;
+
+        switch (type)
+        {
+            case MapNodeType.NormalBattle:
+                sprite = normalBattleSprite;
+                break;
+            case MapNodeType.EliteBattle:
+                sprite = eliteBattleSprite;
+                break;
+            case MapNodeType.Rest:
+                sprite = restSprite;
+                break;
+            case MapNodeType.Boss:
+                sprite = BossSprite;
+                break;
+            case MapNodeType.Event:
+                sprite = eventSprite;
+                break;
+        }
+
+        iconImage.sprite = sprite;
+        iconImage.gameObject.SetActive(sprite != null);
     }
 
     public void SetupAction(string label, bool interactable, Action action)
@@ -78,6 +119,9 @@ public class MapNode : MonoBehaviour
         button.interactable = interactable;
         button.onClick.RemoveListener(OnButtonClicked);
         button.onClick.AddListener(OnButtonClicked);
+
+        if (iconImage != null)
+            iconImage.gameObject.SetActive(false);
     }
 
     private void OnButtonClicked()

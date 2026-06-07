@@ -17,6 +17,9 @@ MonoBehaviour:
   maxHp: 78
   description: "\u201C\uBC30\uCE58\uB41C \uCEF7\uC740 \uD750\uB984\uC774 \uB418\uACE0,\n\uC774\uC5B4\uC9C4
     \uC11C\uC0AC\uB294 \uC124\uD654\uAC00 \uB41C\uB2E4.\u201D"
+  Playdescription: "\uD2B9\uC131\n\uCCB4\uC778:\uC778\uC811\uD55C \uCE74\uB4DC \uC218\uC5D0
+    \uB530\uB77C \uAC15\uD654\n\uC11C\uC0AC:\uBC1C\uB3D9 \uC21C\uC11C\uAC00 \uB4A4\uC77C\uC218\uB85D
+    \uAC15\uD654 "
   image: {fileID: -8785202333333658234, guid: 2853cda2de4b25948a86746278d26fe0, type: 3}
   battleSprite: {fileID: 9084827194716846906, guid: 61e9e56191aa57747bc4e10e69794590, type: 3}
   startDeck:

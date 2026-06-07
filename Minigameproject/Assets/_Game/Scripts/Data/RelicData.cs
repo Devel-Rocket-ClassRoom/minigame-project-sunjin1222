@@ -13,6 +13,7 @@ public enum RelicEffectType
     GainBlock,
     DrawCards,
     Heal,
+    GainEvidence,
     RepeatFirstTileEveryTurns,
     ReduceSagaRequiredOrder,
     GainBlockPerUnusedBoardCell,

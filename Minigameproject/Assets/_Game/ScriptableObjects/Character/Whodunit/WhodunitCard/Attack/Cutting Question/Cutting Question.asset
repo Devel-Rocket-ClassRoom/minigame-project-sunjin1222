@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88c8025ee334b34a826a605272cbe44, type: 3}
+  m_Name: Cutting Question
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardId: card_Whodunit_005
+  cardName: "\uB0A0\uCE74\uB85C\uC6B4 \uC9C8\uBB38"
+  tileShape:
+  - {x: 0, y: 0}
+  tileOrigin: {x: 0, y: 0}
+  effects:
+  - {fileID: 11400000, guid: a40e81cf64cda3e4da2660890d4bf951, type: 2}
+  - {fileID: 11400000, guid: 8edc10c9318fd4a4498dc1ed478eadb4, type: 2}
+  description: "\uB370\uBBF8\uC9C0 3\n\uC99D\uAC70 2"
+  tooltipText: "\uC99D\uAC70 N : N\uB9CC\uD07C \uC99D\uAC70\uB97C \uD68D\uB4DD \uD569\uB2C8\uB2E4."
+  icon: {fileID: -2652066848199037736, guid: 7c6c23db2a07e9e43868b5f782625596, type: 3}
+  cardType: 0
+  tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
+  floatingPreviewTileSize: 60
+  boardPreviewPrefab: {fileID: 1100, guid: 33d753c178d0cce45bec716b4e39a3a4, type: 3}

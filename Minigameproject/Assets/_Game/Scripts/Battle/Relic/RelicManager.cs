@@ -5,7 +5,8 @@ public static class RelicManager
     public static void ApplyRelics(
         RelicTriggerType triggerType,
         PlayerController playerController,
-        DeckManager deckManager)
+        DeckManager deckManager,
+        BattleController battleController = null)
     {
         if (RunData.currentRelics == null || RunData.currentRelics.Count == 0)
             return;
@@ -18,7 +19,7 @@ public static class RelicManager
             if (!CanApplyRelic(relic, playerController))
                 continue;
 
-            ApplyRelic(relic, playerController, deckManager);
+            ApplyRelic(relic, playerController, deckManager, battleController);
         }
     }
 
@@ -45,7 +46,8 @@ public static class RelicManager
     private static void ApplyRelic(
         RelicData relic,
         PlayerController playerController,
-        DeckManager deckManager)
+        DeckManager deckManager,
+        BattleController battleController)
     {
         switch (relic.effectType)
         {
@@ -62,6 +64,11 @@ public static class RelicManager
             case RelicEffectType.Heal:
                 if (playerController != null)
                     playerController.Heal(relic.amount);
+                break;
+
+            case RelicEffectType.GainEvidence:
+                if (battleController != null)
+                    battleController.AddEvidence(relic.amount);
                 break;
 
             default:

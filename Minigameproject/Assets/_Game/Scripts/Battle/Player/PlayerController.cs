@@ -108,6 +108,23 @@ public class PlayerController : MonoBehaviour
             Die();
     }
 
+    public void LoseHealth(int amount)
+    {
+        currentHealth -= amount;
+        if (currentHealth < 0) currentHealth = 0;
+
+        RunData.currentHp = currentHealth;
+
+        slider.value = currentHealth;
+        sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
+
+        if (playerAnimator != null)
+            playerAnimator.PlayHit();
+
+        if (currentHealth <= 0)
+            Die();
+    }
+
     public void ResetBlock()
     {
         block = 0;
