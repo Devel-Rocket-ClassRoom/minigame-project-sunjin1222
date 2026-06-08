@@ -18,12 +18,12 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  - {x: 1, y: 0}
+  - {x: 1, y: 1}
   tileOrigin: {x: 0, y: 1}
   effects:
   - {fileID: 11400000, guid: 2128fbe52659a4743a85df74d1a0b46e, type: 2}
   - {fileID: 11400000, guid: 751d15c6a2e394f4e85adb4663b1c567, type: 2}
-  description: "\uC99D\uAC70 3\n\uBC29\uC5B4\uB3C4 10\n\uC758\uC2EC 6 : \uB370\uBBF8\uC9C08"
+  description: "\uC99D\uAC70 2\n\uBC29\uC5B4\uB3C4 10\n\uC758\uC2EC 6 : \uB370\uBBF8\uC9C08"
   tooltipText: "\uC99D\uAC70 N : N\uB9CC\uD07C \uC99D\uAC70\uB97C \uD68D\uB4DD \uD569\uB2C8\uB2E4.\n\uC758\uC2EC
     N : \uC99D\uAC70\uAC00 N\uC774\uC0C1\uC774\uBA74 \uCD94\uAC00\uD6A8\uACFC\uB97C
     \uBC1C\uB3D9\uD569\uB2C8\uB2E4."

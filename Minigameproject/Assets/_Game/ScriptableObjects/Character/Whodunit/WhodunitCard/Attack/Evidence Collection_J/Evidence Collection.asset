@@ -21,7 +21,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 2384b5da2806204458d983a62068b420, type: 2}
   - {fileID: 11400000, guid: 825967d232f77354ea873b6ee6fb78a4, type: 2}
-  description: "\uB370\uBBF8\uC9C0 4\n\uC99D\uAC70 2 "
+  description: "\uB370\uBBF8\uC9C0 4\n\uC99D\uAC70 2"
   tooltipText: "\uC99D\uAC70 N : N\uB9CC\uD07C \uC99D\uAC70\uB97C \uD68D\uB4DD \uD569\uB2C8\uB2E4."
   icon: {fileID: -2112487740573502474, guid: 6124db05ca9d5a3498569b6292fca972, type: 3}
   cardType: 0

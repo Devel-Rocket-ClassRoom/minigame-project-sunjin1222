@@ -22,7 +22,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 376594d3e118dd548b30d74da6d7caa7, type: 2}
   - {fileID: 11400000, guid: 38f74368ea0813049ac51caa075d113c, type: 2}
-  description: "\uBC29\uC5B4\uB3C4 10\n\uC99D\uAC70 3"
+  description: "\uBC29\uC5B4\uB3C4 10\n\uC99D\uAC70 2"
   tooltipText: "\uC99D\uAC70 N : N\uB9CC\uD07C \uC99D\uAC70\uB97C \uD68D\uB4DD \uD569\uB2C8\uB2E4."
   icon: {fileID: -2248152828127362720, guid: c3a61bf79ea1a0147a701b185d98c51b, type: 3}
   cardType: 1

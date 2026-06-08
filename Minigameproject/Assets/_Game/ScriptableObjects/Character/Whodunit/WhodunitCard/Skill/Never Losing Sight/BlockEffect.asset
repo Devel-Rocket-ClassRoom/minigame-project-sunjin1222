@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113e9c6849ca0fd46942450dc40e4020, type: 3}
   m_Name: BlockEffect
   m_EditorClassIdentifier: Assembly-CSharp::BlockEffect
-  block: 7
+  block: 3

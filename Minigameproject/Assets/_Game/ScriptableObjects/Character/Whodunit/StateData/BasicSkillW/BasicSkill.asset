@@ -26,4 +26,4 @@ MonoBehaviour:
   cardType: 1
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
   floatingPreviewTileSize: 60
-  boardPreviewPrefab: {fileID: 1100, guid: 9a6d3b85ed619af4eb8e804009a17194, type: 3}
+  boardPreviewPrefab: {fileID: 1100, guid: 0e257cb2749c6fd4aa5a225b7a0e4847, type: 3}

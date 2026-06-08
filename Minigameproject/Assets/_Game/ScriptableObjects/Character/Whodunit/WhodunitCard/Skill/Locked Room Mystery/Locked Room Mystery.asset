@@ -22,10 +22,9 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 140b2ed8e9758ce40aac1c700c2b1e36, type: 2}
   - {fileID: 11400000, guid: e88a2e2daa3efad419b0f5bb61a083bc, type: 2}
-  description: "\uC99D\uAC702 \n\uBC29\uC5B4\uB3C48 \n\uC758\uC2EC 4: +6"
-  tooltipText: "\uCCB4\uC778: \uC778\uC811\uD55C \uCE74\uB4DC 1\uC7A5\uB2F9 \uCCB4\uC778
-    \uC218\uCE58\uAC00 1\uD68C \uC801\uC6A9\uB429\uB2C8\uB2E4.\n\uC758\uC2EC N :
-    \uC99D\uAC70\uAC00 N\uC774\uC0C1\uC774\uBA74 \uCD94\uAC00\uD6A8\uACFC\uB97C \uBC1C\uB3D9\uD569\uB2C8\uB2E4."
+  description: "\uC99D\uAC701\n\uBC29\uC5B4\uB3C48 \n\uC758\uC2EC 4: +6"
+  tooltipText: "\uC758\uC2EC N : \uC99D\uAC70\uAC00 N\uC774\uC0C1\uC774\uBA74 \uCD94\uAC00\uD6A8\uACFC\uB97C
+    \uBC1C\uB3D9\uD569\uB2C8\uB2E4."
   icon: {fileID: -2135752646869038428, guid: be056d2e24a0dc64194bd9d4a5fde94a, type: 3}
   cardType: 1
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}

@@ -24,11 +24,11 @@ MonoBehaviour:
   tileOrigin: {x: 1, y: 1}
   effects:
   - {fileID: 11400000, guid: b42486a018761b04abd434aa0e7f30c0, type: 2}
-  description: "\uCD94\uB9ACALL : \uB370\uBBF8\uC9C0 +10"
+  description: "\uCD94\uB9ACALL : \uB370\uBBF8\uC9C0 +7"
   tooltipText: "\uCD94\uB9AC ALL : \uC99D\uAC70\uB97C \uBAA8\uB450 \uC18C\uBE44\uD558\uACE0
     \uCD94\uAC00 \uD6A8\uACFC\uB97C \uBC1C\uB3D9\uD569\uB2C8\uB2E4. "
   icon: {fileID: 5837209746869641873, guid: 2925886b1c7c3ee4ebf777b98b15e373, type: 3}
   cardType: 0
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
   floatingPreviewTileSize: 60
-  boardPreviewPrefab: {fileID: 6856548126514726630, guid: fb2341857383ae54783ff091f3043015, type: 3}
+  boardPreviewPrefab: {fileID: 6856548126514726630, guid: 79fdc7f846ba9ac40a0edd9a8d323ef7, type: 3}
