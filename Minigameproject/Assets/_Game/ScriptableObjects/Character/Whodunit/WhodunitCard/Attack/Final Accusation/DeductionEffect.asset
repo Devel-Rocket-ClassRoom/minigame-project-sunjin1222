@@ -18,5 +18,5 @@ MonoBehaviour:
   evidenceCost: 0
   bonusDamage: 0
   bonusBlock: 0
-  damagePerEvidence: 10
+  damagePerEvidence: 7
   blockPerEvidence: 0

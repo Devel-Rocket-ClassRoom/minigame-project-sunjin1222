@@ -19,11 +19,11 @@ MonoBehaviour:
   - {x: 1, y: 0}
   tileOrigin: {x: 0, y: 0}
   effects:
-  - {fileID: 11400000, guid: 9f2f24cb06aa0b34db120dc622c7a138, type: 2}
+  - {fileID: 11400000, guid: 3180e52034ba6d145a6179b0ec860f5e, type: 2}
   description: "\uB370\uBBF8\uC9C0 5"
   tooltipText: 
   icon: {fileID: 5397808152957510439, guid: ac7e62d0e8ee1b54eae5f758def0282c, type: 3}
   cardType: 0
   tileBlockPrefab: {fileID: 1100, guid: 8b05aa37e9cc4af9b4daa5761552638e, type: 3}
   floatingPreviewTileSize: 60
-  boardPreviewPrefab: {fileID: 1100, guid: fa68c9ced3485a347995603f50ffe741, type: 3}
+  boardPreviewPrefab: {fileID: 1100, guid: 6d8fb8488b01ff84399360e99c15fc46, type: 3}
