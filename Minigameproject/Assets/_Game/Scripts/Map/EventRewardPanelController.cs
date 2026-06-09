@@ -6,48 +6,29 @@ using UnityEngine.UI;
 
 public class EventRewardPanelController : MonoBehaviour
 {
-    private GameObject cardRewardArea;
-    private Transform cardContent;
-    private GameObject cardTemplate;
-    private GameObject relicRewardArea;
-    private Image relicImage;
-    private TMP_Text relicName;
-    private TMP_Text relicDescription;
-    private Button confirmButton;
+    public GameObject cardRewardArea;
+    public Transform cardContent;
+    public CardView cardTemplate;
+    public GameObject relicRewardArea;
+    public Image relicImage;
+    public TMP_Text relicName;
+    public TMP_Text relicDescription;
+    public Button confirmButton;
     private CardData pendingCard;
     private RelicData pendingRelic;
     private RectTransform selectedCardRect;
     private Action<CardData, RelicData> confirmedCallback;
     private bool initialized;
 
+    public Button ConfirmButton => confirmButton;
+
     public void Initialize()
     {
         if (initialized)
             return;
 
-        cardRewardArea = FindChild(transform, "CardRewardArea")?.gameObject;
-        relicRewardArea = FindChild(transform, "RelicRewardArea")?.gameObject;
-
-        if (cardRewardArea != null)
-        {
-            cardContent = FindChild(cardRewardArea.transform, "Panel");
-            CardView templateView = cardContent?.GetComponentInChildren<CardView>(true);
-
-            if (templateView != null)
-            {
-                cardTemplate = templateView.gameObject;
-                cardTemplate.SetActive(false);
-            }
-        }
-
-        if (relicRewardArea != null)
-        {
-            relicImage = FindChild(relicRewardArea.transform, "Relicimage")?.GetComponent<Image>();
-            relicName = FindChild(relicRewardArea.transform, "RelicName")?.GetComponent<TMP_Text>();
-            relicDescription = FindChild(relicRewardArea.transform, "RelicDe")?.GetComponent<TMP_Text>();
-        }
-
-        confirmButton = FindButton("ConfirmButton");
+        if (cardTemplate != null)
+            cardTemplate.gameObject.SetActive(false);
 
         if (confirmButton != null)
             confirmButton.onClick.AddListener(ConfirmReward);
@@ -129,7 +110,7 @@ public class EventRewardPanelController : MonoBehaviour
 
     private void CreateCard(CardData card)
     {
-        GameObject cardObject = Instantiate(cardTemplate, cardContent);
+        GameObject cardObject = Instantiate(cardTemplate.gameObject, cardContent);
         cardObject.SetActive(true);
 
         CardDragHandler dragHandler = cardObject.GetComponent<CardDragHandler>();
@@ -179,7 +160,7 @@ public class EventRewardPanelController : MonoBehaviour
         {
             GameObject child = cardContent.GetChild(i).gameObject;
 
-            if (child != cardTemplate)
+            if (cardTemplate == null || child != cardTemplate.gameObject)
                 Destroy(child);
         }
     }
@@ -192,25 +173,4 @@ public class EventRewardPanelController : MonoBehaviour
         selectedCardRect = null;
     }
 
-    private Transform FindChild(Transform parent, string childName)
-    {
-        foreach (Transform child in parent.GetComponentsInChildren<Transform>(true))
-        {
-            if (string.Equals(child.name.Trim(), childName, StringComparison.Ordinal))
-                return child;
-        }
-
-        return null;
-    }
-
-    private Button FindButton(string buttonName)
-    {
-        foreach (Button button in GetComponentsInChildren<Button>(true))
-        {
-            if (string.Equals(button.name.Trim(), buttonName, StringComparison.Ordinal))
-                return button;
-        }
-
-        return null;
-    }
 }

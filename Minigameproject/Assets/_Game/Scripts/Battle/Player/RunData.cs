@@ -9,6 +9,7 @@ public static class RunData
     public static List<CardData> pendingRewardCards = new List<CardData>();
     public static List<RelicData> currentRelics = new List<RelicData>();
     public static event Action RelicsChanged;
+    public static event Action HealthChanged;
     public static HashSet<string> seenQuestIds = new HashSet<string>();
     public static HashSet<string> clearedQuestIds = new HashSet<string>();
     public static HashSet<string> seenEventIds = new HashSet<string>();
@@ -34,18 +35,31 @@ public static class RunData
         currentCharacter = character;
     }
 
+    public static void SetCurrentHp(int hp)
+    {
+        currentHp = Mathf.Clamp(hp, 0, maxHp);
+        HealthChanged?.Invoke();
+    }
+
+    public static void SetMaxHp(int hp)
+    {
+        maxHp = Mathf.Max(1, hp);
+        currentHp = Mathf.Clamp(currentHp, 0, maxHp);
+        HealthChanged?.Invoke();
+    }
+
     public static void Init(bool resetRunState = true)
     {
         if (currentCharacter == null)
         {
             Debug.LogWarning("[RunData] 현재 캐릭터가 없어 시작 덱을 만들 수 없습니다.");
             currentDeck = new List<CardData>();
-            maxHp = 50;
+            SetMaxHp(50);
         }
         else
         {
             currentDeck = new List<CardData>(currentCharacter.startDeck);
-            maxHp = currentCharacter.maxHp;
+            SetMaxHp(currentCharacter.maxHp);
         }
 
         if (resetRunState)
@@ -59,7 +73,7 @@ public static class RunData
                     AddRelic(relic);
             }
 
-            currentHp = maxHp;
+            SetCurrentHp(maxHp);
             currentFloor = 1;
             highestUnlockedEpisode = 1;
             currentMap = null;
@@ -74,7 +88,7 @@ public static class RunData
         }
         else
         {
-            currentHp = Mathf.Min(currentHp, maxHp);
+            SetCurrentHp(currentHp);
             AddedCard = pendingRewardCards.Count;
         }
     }
@@ -199,6 +213,7 @@ public static class RunData
         clearedEpisodeNumbers.Clear();
         currentHp = 50;
         maxHp = 50;
+        HealthChanged?.Invoke();
         currentFloor = 1;
         highestUnlockedEpisode = 1;
         AddedCard = 0;

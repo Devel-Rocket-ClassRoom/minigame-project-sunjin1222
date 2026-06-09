@@ -2561,11 +2561,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504953568}
   m_CullTransparentMesh: 1
---- !u!1 &524969464 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1427466381741376155, guid: 6ccda8d363a1c574f822b9b4f0658fe2, type: 3}
-  m_PrefabInstance: {fileID: 6930146151505895565}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &524969465 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8228641964624301126, guid: 6ccda8d363a1c574f822b9b4f0658fe2, type: 3}
@@ -4628,6 +4623,8 @@ MonoBehaviour:
   reDrow: {fileID: 504953570}
   evidenceText: {fileID: 0}
   characterUISlot: {fileID: 0}
+  characterBattleUIs:
+  - {fileID: 1662539928833797332}
 --- !u!114 &1177024337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4658,8 +4655,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e7c074ea99d38a947b84f84ba81d39d5, type: 2}
   - {fileID: 11400000, guid: c68c1a7b108085140a3fe477d85abede, type: 2}
   - {fileID: 11400000, guid: 68a55b696078747448b3075315170846, type: 2}
-  rewardPanel: {fileID: 61531289}
-  rewardContent: {fileID: 1241181086}
+  rewardPanel: {fileID: 1835164616}
+  rewardContent: {fileID: 1835164617}
   cardRewardPrefab: {fileID: 1640195858}
   relicRewardPrefab: {fileID: 1205183901}
   rewardSlots:
@@ -4667,12 +4664,13 @@ MonoBehaviour:
   - {fileID: 1684768129}
   - {fileID: 931203486}
   deckManager: {fileID: 1177024330}
-  rewardbutton: {fileID: 524969464}
+  rewardbutton: {fileID: 6930146151505895566}
   relicRewardButton: {fileID: 9205290104348228596}
-  relicRewardArea: {fileID: 1835164616}
+  relicRewardArea: {fileID: 1205183897}
   relicRewardIcon: {fileID: 1049858663}
   relicRewardName: {fileID: 291361392}
   relicRewardDescription: {fileID: 2087635866}
+  relicRewardConfirmButton: {fileID: 1719984778}
 --- !u!114 &1177024338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4726,6 +4724,7 @@ MonoBehaviour:
   playerController: {fileID: 1351601481}
   panul: {fileID: 546152007}
   rewardManager: {fileID: 1177024337}
+  battleController: {fileID: 0}
   enemyAnimator: {fileID: 0}
   aemorOB: {fileID: 0}
   Armor: {fileID: 0}
@@ -7773,8 +7772,8 @@ RectTransform:
   m_Children:
   - {fileID: 1662539928833797331}
   - {fileID: 984157930}
-  - {fileID: 1072763925}
   - {fileID: 1991445182}
+  - {fileID: 1072763925}
   - {fileID: 1393605216}
   - {fileID: 175683035}
   - {fileID: 546152008}
@@ -10729,6 +10728,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5647035660371605721, guid: 1e1af56390e56074fa264d8233327949, type: 3}
   m_PrefabInstance: {fileID: 1662539928833797330}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1662539928833797332 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1178461837662701034, guid: 1e1af56390e56074fa264d8233327949, type: 3}
+  m_PrefabInstance: {fileID: 1662539928833797330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4dbd05de7d9b0c4aac4eee085bc5657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterBattleUI
 --- !u!1001 &1971064110393094229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10828,8 +10838,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3165473671745983084, guid: d1632a9b2f0f59b4caaf5e15d60396a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1971064110393094232}
   m_SourcePrefab: {fileID: 100100000, guid: d1632a9b2f0f59b4caaf5e15d60396a8, type: 3}
+--- !u!114 &1971064110393094230 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7675203389063016893, guid: d1632a9b2f0f59b4caaf5e15d60396a8, type: 3}
+  m_PrefabInstance: {fileID: 1971064110393094229}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &1971064110393094231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3165473671745983084, guid: d1632a9b2f0f59b4caaf5e15d60396a8, type: 3}
+  m_PrefabInstance: {fileID: 1971064110393094229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1971064110393094232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971064110393094231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae1a8a6400656a48bada909aa056873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TooltipUI
+  titleText: {fileID: 0}
+  bodyText: {fileID: 1971064110393094230}
+  singleText: {fileID: 0}
 --- !u!1001 &6043357137775074465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10928,6 +10972,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card Reward
       objectReference: {fileID: 0}
+    - target: {fileID: 1427466381741376155, guid: 6ccda8d363a1c574f822b9b4f0658fe2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7440920183045314220, guid: 6ccda8d363a1c574f822b9b4f0658fe2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11017,6 +11065,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ccda8d363a1c574f822b9b4f0658fe2, type: 3}
+--- !u!1 &6930146151505895566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1427466381741376155, guid: 6ccda8d363a1c574f822b9b4f0658fe2, type: 3}
+  m_PrefabInstance: {fileID: 6930146151505895565}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8477960039994247902
 PrefabInstance:
   m_ObjectHideFlags: 0

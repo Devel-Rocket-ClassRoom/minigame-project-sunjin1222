@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 // EP 후보 선택, 실행 순서, 전투 복귀 결과를 관리한다.
 public class MapController : MonoBehaviour
@@ -10,11 +11,32 @@ public class MapController : MonoBehaviour
     public MapView mapView;
     public MapDragHandler mapDragHandler;
     public GameObject eventPanel;
+    public EventRewardPanelController eventRewardPanelController;
 
     public GameSceneManager gameSceneManager;
 
+    [Header("Deck View")]
+    public GameObject deckPanel;
+    public Transform deckContent;
+    public CardView deckCardTemplate;
+    public TMP_Text deckTitle;
+    public TMP_Text deckEmptyText;
+    public Button deckCloseButton;
+    public Button deckButton;
+
+    [Header("Rest View")]
+    public GameObject restPanel;
+    public Button restHealButton;
+    public Button restRemoveCardButton;
+    public GameObject cardRemovePanel;
+    public Transform cardRemoveContent;
+    public CardView cardRemoveTemplate;
+    public Button cardRemoveConfirmButton;
+
+    [Header("Big Map")]
+    public BigMapEpisodeView bigMapView;
+
     private MapData currentMap;
-    private BigMapEpisodeView bigMapView;
     private EventPanelController eventPanelController;
     private RestPanelController restPanelController;
     private MapDeckViewController mapDeckViewController;
@@ -59,20 +81,17 @@ public class MapController : MonoBehaviour
             mapDragHandler.FocusOn(Vector2.zero);
     }
 
+    public void TestEventButtonClick()
+    {
+        Debug.Log("이벤트 버튼 눌림");
+    }
     private void SetupBigMapView()
     {
-        GameObject bigMap = GameObject.Find("BigMap");
-
-        if (bigMap == null)
+        if (bigMapView == null)
         {
-            Debug.LogWarning("[MapController] BigMap 오브젝트를 찾지 못했습니다.");
+            Debug.LogWarning("[MapController] BigMapEpisodeView가 연결되지 않았습니다.");
             return;
         }
-
-        bigMapView = bigMap.GetComponent<BigMapEpisodeView>();
-
-        if (bigMapView == null)
-            bigMapView = bigMap.AddComponent<BigMapEpisodeView>();
 
         bigMapView.Initialize(OpenEpisode);
     }
@@ -296,13 +315,27 @@ public class MapController : MonoBehaviour
         restPanelController = new RestPanelController(
             gameSceneManager,
             HralText,
+            restPanel,
+            restHealButton,
+            restRemoveCardButton,
+            cardRemovePanel,
+            cardRemoveContent,
+            cardRemoveTemplate,
+            cardRemoveConfirmButton,
             CompleteRest);
         restPanelController.Initialize();
     }
 
     private void BindMapDeckView()
     {
-        mapDeckViewController = new MapDeckViewController();
+        mapDeckViewController = new MapDeckViewController(
+            deckPanel,
+            deckContent,
+            deckCardTemplate,
+            deckTitle,
+            deckEmptyText,
+            deckCloseButton,
+            deckButton);
         mapDeckViewController.Initialize();
     }
 
@@ -311,6 +344,7 @@ public class MapController : MonoBehaviour
         eventPanelController = new EventPanelController(
             eventPanel,
             gameSceneManager,
+            eventRewardPanelController,
             CompleteEvent);
         eventPanelController.Initialize();
     }
@@ -451,9 +485,7 @@ public class MapController : MonoBehaviour
 
     private void RefreshHud()
     {
-        GameSceneManager sceneManager = FindFirstObjectByType<GameSceneManager>();
-
-        if (sceneManager != null)
-            sceneManager.RefreshMapHud();
+        if (gameSceneManager != null)
+            gameSceneManager.RefreshMapHud();
     }
 }

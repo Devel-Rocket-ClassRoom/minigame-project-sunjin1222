@@ -23,6 +23,8 @@ public class BattleManager : MonoBehaviour
 
         if (playerController == null)
             Debug.LogError("[BattleManager] playerController가 인스펙터에 연결되지 않았습니다!");
+        else
+            playerController.battleController = battleController;
 
         EnemyData enemyToSpawn = RunData.selectedEnemy != null
             ? RunData.selectedEnemy
@@ -54,6 +56,7 @@ public class BattleManager : MonoBehaviour
      
         controller.playerController = playerController;
         controller.rewardManager = rewardManager;
+        controller.battleController = battleController;
         controller.panul = panul;
         controller.gameClearPanel = gameClearPanel;
 

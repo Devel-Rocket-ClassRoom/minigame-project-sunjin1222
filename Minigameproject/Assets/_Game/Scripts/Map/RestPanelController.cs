@@ -9,11 +9,13 @@ public class RestPanelController
     private readonly TMP_Text healAmountText;
     private readonly Action<MapNodeData> onRestCompleted;
 
-    private GameObject restPanel;
-    private GameObject cardRemovePanel;
-    private Transform cardRemoveContent;
-    private GameObject cardRemoveTemplate;
-    private Button cardRemoveConfirmButton;
+    private readonly GameObject restPanel;
+    private readonly Button healButton;
+    private readonly Button removeCardButton;
+    private readonly GameObject cardRemovePanel;
+    private readonly Transform cardRemoveContent;
+    private readonly GameObject cardRemoveTemplate;
+    private readonly Button cardRemoveConfirmButton;
     private MapNodeData activeRestNode;
     private CardData selectedRemoveCard;
     private RectTransform selectedRemoveCardRect;
@@ -21,29 +23,34 @@ public class RestPanelController
     public RestPanelController(
         GameSceneManager sceneManager,
         TMP_Text healText,
+        GameObject restPanel,
+        Button healButton,
+        Button removeCardButton,
+        GameObject cardRemovePanel,
+        Transform cardRemoveContent,
+        CardView cardRemoveTemplate,
+        Button cardRemoveConfirmButton,
         Action<MapNodeData> restCompleted)
     {
         gameSceneManager = sceneManager;
         healAmountText = healText;
+        this.restPanel = restPanel;
+        this.healButton = healButton;
+        this.removeCardButton = removeCardButton;
+        this.cardRemovePanel = cardRemovePanel;
+        this.cardRemoveContent = cardRemoveContent;
+        this.cardRemoveTemplate = cardRemoveTemplate != null ? cardRemoveTemplate.gameObject : null;
+        this.cardRemoveConfirmButton = cardRemoveConfirmButton;
         onRestCompleted = restCompleted;
     }
 
     public void Initialize()
     {
-        restPanel = FindSceneObject("RestPanel");
-        cardRemovePanel = FindSceneObject("CardRemovePanel");
+        if (healButton != null)
+            healButton.onClick.AddListener(ChooseRestHeal);
 
-        if (restPanel != null)
-        {
-            Button healButton = FindButton(restPanel, "HealButton");
-            Button removeCardButton = FindButton(restPanel, "RemoveCardButton");
-
-            if (healButton != null)
-                healButton.onClick.AddListener(ChooseRestHeal);
-
-            if (removeCardButton != null)
-                removeCardButton.onClick.AddListener(ShowCardRemovePanel);
-        }
+        if (removeCardButton != null)
+            removeCardButton.onClick.AddListener(ShowCardRemovePanel);
 
         BindCardRemovePanel();
         Hide();
@@ -79,28 +86,15 @@ public class RestPanelController
 
     private void BindCardRemovePanel()
     {
-        if (cardRemovePanel == null)
+        if (cardRemovePanel == null || cardRemoveContent == null)
             return;
 
-        Transform content = FindChild(cardRemovePanel.transform, "Content");
-
-        if (content == null)
-            return;
-
-        cardRemoveContent = content;
-        CardView templateView = content.GetComponentInChildren<CardView>(true);
-
-        if (templateView != null)
-        {
-            cardRemoveTemplate = templateView.gameObject;
+        if (cardRemoveTemplate != null)
             cardRemoveTemplate.SetActive(false);
-        }
-
-        cardRemoveConfirmButton = FindButton(cardRemovePanel, "ConfirmButton");
 
         if (cardRemoveConfirmButton == null)
         {
-            Debug.LogError("[RestPanelController] CardRemovePanel 아래 ConfirmButton을 찾지 못했습니다.");
+            Debug.LogError("[RestPanelController] CardRemovePanel의 ConfirmButton이 연결되지 않았습니다.");
             return;
         }
 
@@ -114,10 +108,7 @@ public class RestPanelController
             return;
 
         int healAmount = Mathf.CeilToInt(RunData.maxHp * 0.3f);
-        RunData.currentHp = Mathf.Min(RunData.maxHp, RunData.currentHp + healAmount);
-
-        if (gameSceneManager != null)
-            gameSceneManager.RefreshMapHud();
+        RunData.SetCurrentHp(RunData.currentHp + healAmount);
 
         Complete(activeRestNode);
     }
@@ -218,41 +209,5 @@ public class RestPanelController
         Hide();
         activeRestNode = null;
         onRestCompleted?.Invoke(restNode);
-    }
-
-    private GameObject FindSceneObject(string objectName)
-    {
-        foreach (Transform transform in UnityEngine.Object.FindObjectsByType<Transform>(
-            FindObjectsInactive.Include,
-            FindObjectsSortMode.None))
-        {
-            if (transform.gameObject.scene.IsValid() &&
-                string.Equals(transform.name.Trim(), objectName, StringComparison.Ordinal))
-                return transform.gameObject;
-        }
-
-        return null;
-    }
-
-    private Transform FindChild(Transform parent, string childName)
-    {
-        foreach (Transform child in parent.GetComponentsInChildren<Transform>(true))
-        {
-            if (string.Equals(child.name.Trim(), childName, StringComparison.Ordinal))
-                return child;
-        }
-
-        return null;
-    }
-
-    private Button FindButton(GameObject parent, string buttonName)
-    {
-        foreach (Button button in parent.GetComponentsInChildren<Button>(true))
-        {
-            if (string.Equals(button.name.Trim(), buttonName, StringComparison.Ordinal))
-                return button;
-        }
-
-        return null;
     }
 }

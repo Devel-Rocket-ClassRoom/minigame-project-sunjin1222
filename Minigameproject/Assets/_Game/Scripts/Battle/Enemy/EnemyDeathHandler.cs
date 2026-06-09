@@ -7,6 +7,7 @@ public class EnemyDeathHandler
     private readonly GameObject rewardPanel;
     private readonly RewardManager rewardManager;
     private readonly GameObject gameClearPanel;
+    private readonly BattleController battleController;
     private readonly bool isBossBattle;
 
     public EnemyDeathHandler(
@@ -15,6 +16,7 @@ public class EnemyDeathHandler
      GameObject panel,
      RewardManager rewards,
      GameObject clearPanel,
+     BattleController battle,
      bool bossBattle)
     {
         enemyObject = owner;
@@ -22,12 +24,12 @@ public class EnemyDeathHandler
         rewardPanel = panel;
         rewardManager = rewards;
         gameClearPanel = clearPanel;
+        battleController = battle;
         isBossBattle = bossBattle;
     }
 
     public void HandleDeath()
     {
-        BattleController battleController = Object.FindFirstObjectByType<BattleController>();
         if (battleController != null)
             battleController.Didie();
 

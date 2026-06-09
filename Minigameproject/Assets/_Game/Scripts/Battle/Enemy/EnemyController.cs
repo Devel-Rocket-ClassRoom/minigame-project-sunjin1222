@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     public PlayerController playerController;
     public GameObject panul;
     public RewardManager rewardManager;
+    public BattleController battleController;
     public EnemyAnimator enemyAnimator;
 
     private EnemyData enemyData;
@@ -43,6 +44,7 @@ public class EnemyController : MonoBehaviour
           panul,
           rewardManager,
           gameClearPanel,
+          battleController,
           IsBossBattle());
         healthController = new EnemyHealthController(
             enemyUI,

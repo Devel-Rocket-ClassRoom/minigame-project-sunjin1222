@@ -11,6 +11,16 @@ public class GameSceneManager : MonoBehaviour
 
     public GameObject end;
 
+    private void OnEnable()
+    {
+        RunData.HealthChanged += RefreshMapHud;
+    }
+
+    private void OnDisable()
+    {
+        RunData.HealthChanged -= RefreshMapHud;
+    }
+
     private void Start()
     {
         RefreshMapHud();
@@ -18,10 +28,15 @@ public class GameSceneManager : MonoBehaviour
 
     public void RefreshMapHud()
     {
-        HP.text = $"{RunData.currentHp}/{RunData.maxHp}";
-        floor.text = RunData.currentMap != null
-            ? $"용사의 연대기\nEP.{RunData.currentMap.episodeNumber}"
-            : "용사의 연대기\nEP.1";
+        if (HP != null)
+            HP.text = $"{RunData.currentHp}/{RunData.maxHp}";
+
+        if (floor != null)
+        {
+            floor.text = RunData.currentMap != null
+                ? $"용사의 연대기\nEP.{RunData.currentMap.episodeNumber}"
+                : "용사의 연대기\nEP.1";
+        }
     }
     public void LoadBattleScene()
     {

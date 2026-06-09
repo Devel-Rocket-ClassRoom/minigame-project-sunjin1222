@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI Armor;
 
     public PlayerAnimator playerAnimator;
+    public BattleController battleController;
     private SpriteRenderer spriteRenderer;
 
     private void Start()
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
     public void Heal(int amount)
     {
         currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
-        RunData.currentHp = currentHealth;
+        RunData.SetCurrentHp(currentHealth);
 
         slider.value = currentHealth;
         sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
@@ -96,7 +97,7 @@ public class PlayerController : MonoBehaviour
       
 
         // RunData에 HP 반영
-        RunData.currentHp = currentHealth;
+        RunData.SetCurrentHp(currentHealth);
 
         slider.value = currentHealth;
         sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour
         currentHealth -= amount;
         if (currentHealth < 0) currentHealth = 0;
 
-        RunData.currentHp = currentHealth;
+        RunData.SetCurrentHp(currentHealth);
 
         slider.value = currentHealth;
         sliderHealth.text = $"HP: {currentHealth}/{maxHealth}";
@@ -133,8 +134,9 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        BattleController bc = FindObjectOfType<BattleController>();
-        if (bc != null) bc.Didie();
+        if (battleController != null)
+            battleController.Didie();
+
         RunData.Clear();
         gameover.SetActive(true);
     }

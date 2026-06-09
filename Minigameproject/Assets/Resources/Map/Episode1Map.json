@@ -3,28 +3,28 @@
   "episodeTitle": "모험의 시작",
   "nodes": [
     {
-      "id": 0,
-      "floor": 1,
-      "zoneName": "마을 훈련장",
-      "nodeType": "NormalBattle",
-      "riskLevel": 1,
-      "rewardHint": ""
+        "id": 0,
+        "floor": 1,
+        "zoneName": "마을 훈련장",
+        "nodeType": "NormalBattle",
+        "riskLevel": 1,
+        "rewardHint": ""
     },
     {
-      "id": 1,
-      "floor": 1,
-      "zoneName": "숲길 입구",
-      "nodeType": "NormalBattle",
-      "riskLevel": 1,
-      "rewardHint": ""
+        "id": 1,
+        "floor": 1,
+        "zoneName": "숲길 입구",
+        "nodeType": "NormalBattle",
+        "riskLevel": 1,
+        "rewardHint": ""
     },
     {
-      "id": 2,
-      "floor": 1,
-      "zoneName": "오래된 늑대굴",
-      "nodeType": "NormalBattle",
-      "riskLevel": 1,
-      "rewardHint": ""
+        "id": 2,
+        "floor": 1,
+        "zoneName": "오래된 늑대굴",
+        "nodeType": "NormalBattle",
+        "riskLevel": 1,
+        "rewardHint": ""
     },
     {
       "id": 3,
