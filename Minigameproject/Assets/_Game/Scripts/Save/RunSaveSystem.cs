@@ -94,8 +94,8 @@ public static class RunSaveSystem
         RunData.seenEventIds = new HashSet<string>(saveData.seenEventIds ?? new List<string>());
         RunData.clearedEpisodeNumbers = new HashSet<int>(saveData.clearedEpisodeNumbers ?? new List<int>());
 
-        RunData.currentHp = saveData.currentHp;
-        RunData.maxHp = saveData.maxHp;
+        RunData.SetMaxHp(saveData.maxHp);
+        RunData.SetCurrentHp(saveData.currentHp);
         RunData.currentFloor = saveData.currentFloor;
         RunData.highestUnlockedEpisode = saveData.highestUnlockedEpisode;
         RunData.AddedCard = saveData.addedCard;

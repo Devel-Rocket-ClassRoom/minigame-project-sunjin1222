@@ -89,6 +89,8 @@ public class BoardPreviewTextUpdater
         if (result.block > 0)
             return $"방어 {result.block}";
 
+  
+
         return "";
     }
 

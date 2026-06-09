@@ -18,7 +18,6 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private CardPlacementPreview placementPreview;
     private int currentPreviewId;
 
-    // 2026-05-26: Preserve placed-card state so a failed board move can restore its original slot.
     private bool isMovingPlacedCard;
     private int originalBoardIndex = -1;
 
@@ -37,7 +36,6 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         cardData = data;
     }
 
-    // 2026-05-26: Placed cards reuse the hand drag flow without being added back to the hand.
     public void SetupPlacedCardMove(CardData data, BoardManager board, HandManager hand, int originIndex)
     {
         cardData = data;
@@ -125,8 +123,6 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             CancelDrag();
         }
     }
-
-    // 2026-05-26: A board card dropped in an invalid location returns to its previous placement.
     private void CancelDrag()
     {
         if (isMovingPlacedCard)

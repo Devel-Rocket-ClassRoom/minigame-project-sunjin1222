@@ -11,9 +11,9 @@ public class TooltipUI : MonoBehaviour
     private RectTransform rectTransform;
     private RectTransform canvasRectTransform;
     private Canvas canvas;
-    private TextMeshProUGUI titleText;
-    private TextMeshProUGUI bodyText;
-    private TextMeshProUGUI singleText;
+    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private TextMeshProUGUI bodyText;
+    [SerializeField] private TextMeshProUGUI singleText;
     private Object owner;
 
     public static void Show(Object tooltipOwner, RectTransform anchor, string title, string body)
@@ -51,9 +51,6 @@ public class TooltipUI : MonoBehaviour
         Canvas targetCanvas = null;
         if (anchor != null)
             targetCanvas = anchor.GetComponentInParent<Canvas>();
-
-        if (targetCanvas == null)
-            targetCanvas = FindFirstObjectByType<Canvas>();
 
         if (targetCanvas == null)
             return null;
@@ -100,12 +97,8 @@ public class TooltipUI : MonoBehaviour
         rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
         rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
 
-        titleText = FindText("TooltipTitle");
-        bodyText = FindText("TooltipBody");
-        singleText = FindText("TooltipText");
-
         if (singleText == null && titleText == null && bodyText == null)
-            singleText = GetComponentInChildren<TextMeshProUGUI>(true);
+            Debug.LogWarning("[TooltipUI] Tooltip text fields are not connected.");
     }
 
     private void BuildRuntimeTooltip(Canvas targetCanvas)
@@ -140,17 +133,6 @@ public class TooltipUI : MonoBehaviour
 
         titleText = CreateText("Title", 18f, FontStyles.Bold);
         bodyText = CreateText("Body", 15f, FontStyles.Normal);
-    }
-
-    private TextMeshProUGUI FindText(string objectName)
-    {
-        foreach (TextMeshProUGUI text in GetComponentsInChildren<TextMeshProUGUI>(true))
-        {
-            if (text.name == objectName)
-                return text;
-        }
-
-        return null;
     }
 
     private void SetText(string title, string body)

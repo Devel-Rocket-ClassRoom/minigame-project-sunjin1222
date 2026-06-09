@@ -19,15 +19,14 @@ public class RewardManager : MonoBehaviour
     public Image relicRewardIcon;
     public TMP_Text relicRewardName;
     public TMP_Text relicRewardDescription;
+    public Button relicRewardConfirmButton;
 
     private bool eliteRelicRewardGiven;
     private RelicData pendingEliteRelic;
-    private Button relicRewardConfirmButton;
     private readonly List<GameObject> spawnedRewardObjects = new List<GameObject>();
 
     private void Start()
     {
-        BindRewardPanels();
         BindCardRewardButton();
         BindRelicRewardUI();
         ShowReward();
@@ -204,50 +203,20 @@ public class RewardManager : MonoBehaviour
 
     private void BindRelicRewardUI()
     {
-        if (relicRewardArea == null || !string.Equals(relicRewardArea.name.Trim(), "RelicRewardPanel", System.StringComparison.Ordinal))
-            relicRewardArea = FindSceneObject("RelicRewardPanel");
-
         if (relicRewardArea == null)
-            relicRewardArea = FindSceneObject("RelicRewardArea");
-
-        if (relicRewardArea == null)
-            relicRewardArea = CreateRelicRewardArea();
-
-        if (relicRewardArea != null)
         {
-            if (relicRewardIcon == null)
-                relicRewardIcon = FindChild(relicRewardArea.transform, "Relicimage")?.GetComponent<Image>();
-
-            if (relicRewardName == null)
-                relicRewardName = FindChild(relicRewardArea.transform, "RelicName")?.GetComponent<TMP_Text>();
-
-            if (relicRewardDescription == null)
-                relicRewardDescription = FindChild(relicRewardArea.transform, "RelicDe")?.GetComponent<TMP_Text>();
-
-            if (relicRewardConfirmButton == null)
-                relicRewardConfirmButton = FindButtonInChildren(relicRewardArea.transform, "ConfirmButton");
-
-            if (relicRewardConfirmButton == null)
-                relicRewardConfirmButton = relicRewardArea.GetComponentInChildren<Button>(true);
-
-            if (relicRewardConfirmButton != null)
-            {
-                relicRewardConfirmButton.onClick.RemoveListener(OnConfirmEliteRelicReward);
-                relicRewardConfirmButton.onClick.AddListener(OnConfirmEliteRelicReward);
-            }
+            Debug.LogWarning("[RewardManager] relicRewardArea가 연결되지 않았습니다.");
+            return;
         }
 
         if (relicRewardButton == null)
-            relicRewardButton = FindSceneObject("RelicRewardButton");
+            Debug.LogWarning("[RewardManager] relicRewardButton이 연결되지 않았습니다.");
 
-        if (relicRewardButton == null)
-            relicRewardButton = FindSceneObject("EliteRelicRewardButton");
-
-        if (relicRewardButton != null && !relicRewardButton.scene.IsValid())
-            relicRewardButton = CreateRelicRewardButton(relicRewardButton);
-
-        if (relicRewardButton == null)
-            relicRewardButton = CreateRelicRewardButton();
+        if (relicRewardConfirmButton != null)
+        {
+            relicRewardConfirmButton.onClick.RemoveListener(OnConfirmEliteRelicReward);
+            relicRewardConfirmButton.onClick.AddListener(OnConfirmEliteRelicReward);
+        }
 
         Button button = relicRewardButton != null ? relicRewardButton.GetComponent<Button>() : null;
         if (button != null)
@@ -265,17 +234,6 @@ public class RewardManager : MonoBehaviour
 
         button.onClick.RemoveListener(OnShowReward);
         button.onClick.AddListener(OnShowReward);
-    }
-
-    private void BindRewardPanels()
-    {
-        GameObject cardPanel = FindSceneObject("RewardPanel");
-        if (cardPanel != null)
-            rewardPanel = cardPanel;
-
-        GameObject relicPanel = FindSceneObject("RelicRewardPanel");
-        if (relicPanel != null)
-            relicRewardArea = relicPanel;
     }
 
     private void HideCardRewardUI()
@@ -650,37 +608,4 @@ public class RewardManager : MonoBehaviour
         return availableRelics[Random.Range(0, availableRelics.Count)];
     }
 
-    private GameObject FindSceneObject(string objectName)
-    {
-        foreach (Transform transform in FindObjectsByType<Transform>(
-            FindObjectsInactive.Include,
-            FindObjectsSortMode.None))
-        {
-            if (transform.gameObject.scene.IsValid() &&
-                string.Equals(transform.name.Trim(), objectName, System.StringComparison.Ordinal))
-                return transform.gameObject;
-        }
-
-        return null;
-    }
-
-    private Transform FindChild(Transform parent, string childName)
-    {
-        if (parent == null)
-            return null;
-
-        foreach (Transform child in parent.GetComponentsInChildren<Transform>(true))
-        {
-            if (string.Equals(child.name.Trim(), childName, System.StringComparison.Ordinal))
-                return child;
-        }
-
-        return null;
-    }
-
-    private Button FindButtonInChildren(Transform parent, string childName)
-    {
-        Transform child = FindChild(parent, childName);
-        return child != null ? child.GetComponent<Button>() : null;
-    }
 }

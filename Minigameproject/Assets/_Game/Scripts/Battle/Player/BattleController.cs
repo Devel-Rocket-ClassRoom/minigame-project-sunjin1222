@@ -16,6 +16,7 @@ public class BattleController : MonoBehaviour
     public TextMeshProUGUI reDrow;
     public TextMeshProUGUI evidenceText;
     public Transform characterUISlot;
+    public CharacterBattleUI[] characterBattleUIs;
 
     public EnemyHealthController enemyHealthController;
 
@@ -143,9 +144,10 @@ public class BattleController : MonoBehaviour
         if (RunData.currentCharacter == null)
             return;
 
-        CharacterBattleUI[] battleUIs = FindSceneCharacterBattleUIs();
+        if (characterBattleUIs == null)
+            return;
 
-        foreach (CharacterBattleUI battleUI in battleUIs)
+        foreach (CharacterBattleUI battleUI in characterBattleUIs)
         {
             if (battleUI == null)
                 continue;
@@ -156,25 +158,6 @@ public class BattleController : MonoBehaviour
             if (shouldShow)
                 battleUI.Bind(this);
         }
-    }
-
-    private CharacterBattleUI[] FindSceneCharacterBattleUIs()
-    {
-        List<CharacterBattleUI> result = new List<CharacterBattleUI>();
-        Canvas[] canvases = FindObjectsByType<Canvas>(FindObjectsSortMode.None);
-
-        foreach (Canvas canvas in canvases)
-        {
-            if (canvas == null)
-                continue;
-
-            result.AddRange(canvas.GetComponentsInChildren<CharacterBattleUI>(true));
-        }
-
-        if (playerController != null)
-            result.AddRange(playerController.GetComponentsInChildren<CharacterBattleUI>(true));
-
-        return result.ToArray();
     }
 
     public void OnClickEndTurnButton()

@@ -15,15 +15,17 @@ public class EventPanelController
     private TMP_Text eventDescriptionText;
     private Image eventImage;
     private Button[] eventChoiceButtons = Array.Empty<Button>();
-    private EventRewardPanelController rewardPanelController;
+    private readonly EventRewardPanelController rewardPanelController;
 
     public EventPanelController(
         GameObject panel,
         GameSceneManager sceneManager,
+        EventRewardPanelController rewardPanel,
         Action<MapNodeData> eventCompleted)
     {
         eventPanel = panel;
         gameSceneManager = sceneManager;
+        rewardPanelController = rewardPanel;
         onEventCompleted = eventCompleted;
     }
 
@@ -38,6 +40,7 @@ public class EventPanelController
     public void Show(MapNodeData eventNode)
     {
         EventData eventData = eventNode.eventData;
+        
 
         if (eventPanel == null)
         {
@@ -112,7 +115,20 @@ public class EventPanelController
         if (eventPanel == null)
             return;
 
-        eventChoiceButtons = eventPanel.GetComponentsInChildren<Button>(true);
+        List<Button> choiceButtons = new List<Button>();
+
+        foreach (Button button in eventPanel.GetComponentsInChildren<Button>(true))
+        {
+            if (rewardPanelController != null && button == rewardPanelController.ConfirmButton)
+                continue;
+
+            if (button.onClick.GetPersistentEventCount() > 0)
+                continue;
+
+            choiceButtons.Add(button);
+        }
+
+        eventChoiceButtons = choiceButtons.ToArray();
 
         foreach (TMP_Text text in eventPanel.GetComponentsInChildren<TMP_Text>(true))
         {
@@ -134,17 +150,8 @@ public class EventPanelController
 
     private void BindRewardPanel()
     {
-        GameObject rewardPanel = FindSceneObject("EventRewardPanel");
-
-        if (rewardPanel == null)
-            return;
-
-        rewardPanelController = rewardPanel.GetComponent<EventRewardPanelController>();
-
-        if (rewardPanelController == null)
-            rewardPanelController = rewardPanel.AddComponent<EventRewardPanelController>();
-
-        rewardPanelController.Initialize();
+        if (rewardPanelController != null)
+            rewardPanelController.Initialize();
     }
 
     private void ChooseEventChoice(int choiceIndex)
@@ -152,16 +159,15 @@ public class EventPanelController
         if (activeEventNode == null || activeEventNode.eventData == null)
             return;
 
+        Debug.Log($"이벤트 선택지 눌림: {choiceIndex}");
+
         EventChoiceData[] choices = activeEventNode.eventData.choices;
 
         if (choices == null || choiceIndex < 0 || choiceIndex >= choices.Length)
             return;
 
         EventChoiceData choice = choices[choiceIndex];
-        RunData.currentHp = Mathf.Clamp(RunData.currentHp + choice.hpChange, 0, RunData.maxHp);
-
-        if (gameSceneManager != null)
-            gameSceneManager.RefreshMapHud();
+        RunData.SetCurrentHp(RunData.currentHp + choice.hpChange);
 
         List<CardData> rewardCards = choice.GetRandomRewardCards();
         RelicData rewardRelic = choice.GetRandomRewardRelic();
@@ -231,19 +237,5 @@ public class EventPanelController
         rewardPanelController?.Hide();
         activeEventNode = null;
         onEventCompleted?.Invoke(eventNode);
-    }
-
-    private GameObject FindSceneObject(string objectName)
-    {
-        foreach (Transform transform in UnityEngine.Object.FindObjectsByType<Transform>(
-            FindObjectsInactive.Include,
-            FindObjectsSortMode.None))
-        {
-            if (transform.gameObject.scene.IsValid() &&
-                string.Equals(transform.name.Trim(), objectName, StringComparison.Ordinal))
-                return transform.gameObject;
-        }
-
-        return null;
     }
 }
