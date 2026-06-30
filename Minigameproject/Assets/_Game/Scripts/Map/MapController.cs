@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System;
 using TMPro;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
 // EP 후보 선택, 실행 순서, 전투 복귀 결과를 관리한다.
 public class MapController : MonoBehaviour
@@ -56,14 +57,27 @@ public class MapController : MonoBehaviour
         BindMapDeckView();
         SetupBigMapView();
 
-        if (RunData.currentMap == null)
+        if (RunData.currentMap == null ||
+            RunData.currentMap.episodeNumber <= 0 ||
+            RunData.currentMap.nodes == null ||
+            RunData.currentMap.nodes.Count == 0)
         {
+            RunData.currentMap = null;
             ShowBigMap();
             return;
         }
 
         currentMap = RunData.currentMap;
         HideBigMap();
+
+        if (RunData.selectedNodeId >= 0 && !RunData.selectedBattleWon)
+        {
+            currentMap.executionIndex =
+                Mathf.Max(0, currentMap.executionIndex - 1);
+
+            RunData.selectedNodeId = -1;
+            RunData.selectedEnemy = null;
+        }
 
         bool hasCompletedBattle = ApplyCompletedBattleResult();
 
@@ -72,7 +86,12 @@ public class MapController : MonoBehaviour
             CompleteEpisodeIfFinished();
         }
 
-        if (AdvanceEpisodeIfCompleted())
+        bool advancedEpisode = AdvanceEpisodeIfCompleted();
+
+        if (hasCompletedBattle || advancedEpisode)
+            RunSaveSystem.SaveToFirebaseAsync().Forget();
+
+        if (advancedEpisode)
             return;
 
         DrawEpisodePlan();
@@ -113,6 +132,7 @@ public class MapController : MonoBehaviour
 
         HideBigMap();
         DrawEpisodePlan();
+        RunSaveSystem.SaveToFirebaseAsync().Forget();
 
         if (mapDragHandler != null)
             mapDragHandler.FocusOn(Vector2.zero);
@@ -165,8 +185,10 @@ public class MapController : MonoBehaviour
         }
 
         UpdateSelectionOrders();
+        RunData.currentMap = currentMap;
         mapView.Refresh(currentMap, OnCandidateSelected, AdvanceSelectedRoute);
         RefreshHud();
+        RunSaveSystem.SaveToFirebaseAsync().Forget();
     }
 
     private void UpdateSelectionOrders()
@@ -366,7 +388,10 @@ public class MapController : MonoBehaviour
         MarkNodeCleared(restNode);
 
         CompleteEpisodeIfFinished();
-        if (AdvanceEpisodeIfCompleted())
+        bool advancedEpisode = AdvanceEpisodeIfCompleted();
+        RunSaveSystem.SaveToFirebaseAsync().Forget();
+
+        if (advancedEpisode)
             return;
 
         DrawEpisodePlan();
@@ -389,7 +414,10 @@ public class MapController : MonoBehaviour
         MarkNodeCleared(eventNode);
 
         CompleteEpisodeIfFinished();
-        if (AdvanceEpisodeIfCompleted())
+        bool advancedEpisode = AdvanceEpisodeIfCompleted();
+        RunSaveSystem.SaveToFirebaseAsync().Forget();
+
+        if (advancedEpisode)
             return;
 
         DrawEpisodePlan();
@@ -440,7 +468,7 @@ public class MapController : MonoBehaviour
         return true;
     }
 
-    private void StartBattle(MapNodeData selectedNode)
+    private async void StartBattle(MapNodeData selectedNode)
     {
         EnsureEnemyMatchesNodeType(selectedNode);
 
@@ -452,6 +480,9 @@ public class MapController : MonoBehaviour
 
         RunData.selectedNodeId = selectedNode.id;
         RunData.selectedEnemy = selectedNode.enemyData;
+
+        if (!await RunSaveSystem.SaveToFirebaseAsync())
+            return;
 
         SceneManager.LoadScene("BattleScene");
     }

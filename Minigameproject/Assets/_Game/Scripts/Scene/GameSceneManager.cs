@@ -1,9 +1,13 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cysharp.Threading.Tasks;
+
 
 public class GameSceneManager : MonoBehaviour
 {
+
+
 
     public TextMeshProUGUI floor;
 
@@ -52,21 +56,34 @@ public class GameSceneManager : MonoBehaviour
         SceneManager.LoadScene("TitleScene");
     }
 
-    public void SaveRun()
+    public async void SaveRun()
     {
-        RunSaveSystem.Save();
+        await RunSaveSystem.SaveToFirebaseAsync();
     }
 
-    public void LoadSavedRun()
+    public async void SaveAndLoadTitle()
     {
-        if (RunSaveSystem.Load())
+        if (await RunSaveSystem.SaveToFirebaseAsync())
+            SceneManager.LoadScene("TitleScene");
+    }
+
+    public async void LoadSavedRun()
+    {
+        if (await RunSaveSystem.LoadFromFirebaseAsync())
             SceneManager.LoadScene("MapScene");
     }
 
-    public void DeleteSavedRun()
+    public async void Logout()
     {
-        RunSaveSystem.Delete();
+        Authmanager.Instance.singout();
+        SceneManager.LoadScene("LoginScene");
     }
+
+    public async void DeleteSavedRun()
+    {
+        await RunSaveSystem.DeleteFromFirebaseAsync();
+    }
+
 
     public void QuitGame()
     {
@@ -76,13 +93,13 @@ public class GameSceneManager : MonoBehaviour
     public void OnendPanal()
     {
         end.SetActive(true);
-    } 
+    }
 
 
     public void ClendPanal()
     {
         end.SetActive(false);
-    } 
+    }
 
 
 }

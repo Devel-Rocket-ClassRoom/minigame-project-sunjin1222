@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,13 +31,28 @@ public class TitleManager : MonoBehaviour
 
     public string mapSceneName = "MapScene";
 
-    private void Start()
+    private async void Start()
     {
         if (characterData == null)
             characterData = defaultCharacter;
 
         RefreshStoryStartButton();
-        RefreshContinueButton();
+        await RefreshContinueButtonAsync();
+    }
+
+    private async UniTask RefreshContinueButtonAsync()
+    {
+        bool hasSave = false;
+
+        if (Authmanager.Instance != null &&
+            Authmanager.Instance.IsLogedIn)
+        {
+            hasSave = await FirebaseManager.HasSaveAsync(
+                Authmanager.Instance.UserId);
+        }
+
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(hasSave);
     }
 
     public void OnFantasyWriter()
@@ -142,7 +158,7 @@ public class TitleManager : MonoBehaviour
 
 
 
-    public void StartSelectedStory()
+    public async void StartSelectedStory()
     {
         if (RunData.currentCharacter == null)
         {
@@ -150,21 +166,24 @@ public class TitleManager : MonoBehaviour
         }
 
         RunData.Init();
-        SceneManager.LoadScene(mapSceneName);
-    }
-
-    public void ContinueSavedStory()
-    {
-        if (!RunSaveSystem.Load())
+        if (!await RunSaveSystem.SaveToFirebaseAsync())
             return;
 
         SceneManager.LoadScene(mapSceneName);
     }
 
-    public void DeleteSavedStory()
+    public async void ContinueSavedStory()
     {
-        RunSaveSystem.Delete();
-        RefreshContinueButton();
+        if (!await RunSaveSystem.LoadFromFirebaseAsync())
+            return;
+
+        SceneManager.LoadScene(mapSceneName);
+    }
+
+    public async void DeleteSavedStory()
+    {
+        await RunSaveSystem.DeleteFromFirebaseAsync();
+        await RefreshContinueButtonAsync();
     }
 
     private void RefreshStoryStartButton()
