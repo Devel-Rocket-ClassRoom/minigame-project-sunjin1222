@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+using Cysharp.Threading.Tasks;
+=======
+>>>>>>> origin/main
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,13 +34,36 @@ public class TitleManager : MonoBehaviour
 
     public string mapSceneName = "MapScene";
 
+<<<<<<< HEAD
+    private async void Start()
+=======
     private void Start()
+>>>>>>> origin/main
     {
         if (characterData == null)
             characterData = defaultCharacter;
 
         RefreshStoryStartButton();
+<<<<<<< HEAD
+        await RefreshContinueButtonAsync();
+    }
+
+    private async UniTask RefreshContinueButtonAsync()
+    {
+        bool hasSave = false;
+
+        if (Authmanager.Instance != null &&
+            Authmanager.Instance.IsLogedIn)
+        {
+            hasSave = await FirebaseManager.HasSaveAsync(
+                Authmanager.Instance.UserId);
+        }
+
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(hasSave);
+=======
         RefreshContinueButton();
+>>>>>>> origin/main
     }
 
     public void OnFantasyWriter()
@@ -142,7 +169,11 @@ public class TitleManager : MonoBehaviour
 
 
 
+<<<<<<< HEAD
+    public async void StartSelectedStory()
+=======
     public void StartSelectedStory()
+>>>>>>> origin/main
     {
         if (RunData.currentCharacter == null)
         {
@@ -150,21 +181,40 @@ public class TitleManager : MonoBehaviour
         }
 
         RunData.Init();
+<<<<<<< HEAD
+        if (!await RunSaveSystem.SaveToFirebaseAsync())
+=======
         SceneManager.LoadScene(mapSceneName);
     }
 
     public void ContinueSavedStory()
     {
         if (!RunSaveSystem.Load())
+>>>>>>> origin/main
             return;
 
         SceneManager.LoadScene(mapSceneName);
     }
 
+<<<<<<< HEAD
+    public async void ContinueSavedStory()
+    {
+        if (!await RunSaveSystem.LoadFromFirebaseAsync())
+            return;
+
+        SceneManager.LoadScene(mapSceneName);
+    }
+
+    public async void DeleteSavedStory()
+    {
+        await RunSaveSystem.DeleteFromFirebaseAsync();
+        await RefreshContinueButtonAsync();
+=======
     public void DeleteSavedStory()
     {
         RunSaveSystem.Delete();
         RefreshContinueButton();
+>>>>>>> origin/main
     }
 
     private void RefreshStoryStartButton()

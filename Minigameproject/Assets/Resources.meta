@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Minigameproject/Assets/Resources.meta
 guid: 0e77300e9998c71438c2793923d3d53d
+========
+guid: 3435b77692ddaa049b19e9002c50bf35
+>>>>>>>> origin/main:Minigameproject/Assets/Resources/Fonts.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

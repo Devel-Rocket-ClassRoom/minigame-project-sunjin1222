@@ -1,7 +1,15 @@
+<<<<<<< HEAD
+using Cysharp.Threading.Tasks;
+=======
+>>>>>>> origin/main
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/main
 public static class RunSaveSystem
 {
     private const string SaveFileName = "run_save.json";
@@ -42,6 +50,83 @@ public static class RunSaveSystem
         Debug.Log($"[RunSaveSystem] 불러오기 완료: {SavePath}");
         return true;
     }
+<<<<<<< HEAD
+    public static async UniTask<bool> SaveToFirebaseAsync()
+    {
+        if (Authmanager.Instance == null ||
+            !Authmanager.Instance.IsLogedIn)
+        {
+            Debug.LogWarning("로그인이 필요합니다.");
+            return false;
+        }
+
+        Save();
+
+        string json = File.ReadAllText(SavePath);
+
+        await FirebaseManager.SaveAsync(
+            Authmanager.Instance.UserId,
+            json
+        );
+
+        Debug.Log("[Save] Firebase 저장 완료");
+        return true;
+    }
+
+
+
+    public static async UniTask<bool> LoadFromFirebaseAsync()
+    {
+        if (Authmanager.Instance == null ||
+            !Authmanager.Instance.IsLogedIn)
+        {
+            Debug.LogWarning("로그인이 필요합니다.");
+            return false;
+        }
+
+        string json = await FirebaseManager.LoadAsync(
+            Authmanager.Instance.UserId
+        );
+
+        if (string.IsNullOrEmpty(json))
+        {
+            Debug.LogWarning("Firebase 세이브가 없습니다.");
+            return false;
+        }
+
+        File.WriteAllText(SavePath, json);
+        return Load();
+    }
+
+    public static async UniTask<bool> DeleteFromFirebaseAsync()
+    {
+        if (Authmanager.Instance == null ||
+            !Authmanager.Instance.IsLogedIn)
+        {
+            Debug.LogWarning("로그인이 필요합니다.");
+            return false;
+        }
+
+        try
+        {
+            await FirebaseManager.DeleteAsync(
+                Authmanager.Instance.UserId);
+
+            Delete();
+            RunData.Clear();
+
+            Debug.Log("[Save] 세이브 삭제 완료");
+            return true;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[Save] 삭제 실패: {ex.Message}");
+            return false;
+        }
+    }
+
+=======
+>>>>>>> origin/main
 
     public static void Delete()
     {
@@ -175,7 +260,14 @@ public static class RunSaveSystem
 
     private static SavedMapData SaveMap(MapData mapData)
     {
+<<<<<<< HEAD
+        if (mapData == null ||
+            mapData.episodeNumber <= 0 ||
+            mapData.nodes == null ||
+            mapData.nodes.Count == 0)
+=======
         if (mapData == null)
+>>>>>>> origin/main
             return null;
 
         SavedMapData savedMap = new SavedMapData
@@ -218,7 +310,14 @@ public static class RunSaveSystem
 
     private static MapData LoadMap(SavedMapData savedMap)
     {
+<<<<<<< HEAD
+        if (savedMap == null ||
+            savedMap.episodeNumber <= 0 ||
+            savedMap.nodes == null ||
+            savedMap.nodes.Count == 0)
+=======
         if (savedMap == null)
+>>>>>>> origin/main
             return null;
 
         MapData mapData = new MapData

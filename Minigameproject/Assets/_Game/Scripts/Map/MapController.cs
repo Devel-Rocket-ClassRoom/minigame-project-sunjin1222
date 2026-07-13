@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 using System;
 using TMPro;
 using UnityEngine.UI;
+<<<<<<< HEAD
+using Cysharp.Threading.Tasks;
+=======
+>>>>>>> origin/main
 
 // EP 후보 선택, 실행 순서, 전투 복귀 결과를 관리한다.
 public class MapController : MonoBehaviour
@@ -56,8 +60,17 @@ public class MapController : MonoBehaviour
         BindMapDeckView();
         SetupBigMapView();
 
+<<<<<<< HEAD
+        if (RunData.currentMap == null ||
+            RunData.currentMap.episodeNumber <= 0 ||
+            RunData.currentMap.nodes == null ||
+            RunData.currentMap.nodes.Count == 0)
+        {
+            RunData.currentMap = null;
+=======
         if (RunData.currentMap == null)
         {
+>>>>>>> origin/main
             ShowBigMap();
             return;
         }
@@ -65,6 +78,18 @@ public class MapController : MonoBehaviour
         currentMap = RunData.currentMap;
         HideBigMap();
 
+<<<<<<< HEAD
+        if (RunData.selectedNodeId >= 0 && !RunData.selectedBattleWon)
+        {
+            currentMap.executionIndex =
+                Mathf.Max(0, currentMap.executionIndex - 1);
+
+            RunData.selectedNodeId = -1;
+            RunData.selectedEnemy = null;
+        }
+
+=======
+>>>>>>> origin/main
         bool hasCompletedBattle = ApplyCompletedBattleResult();
 
         if (hasCompletedBattle && currentMap.planConfirmed)
@@ -72,7 +97,16 @@ public class MapController : MonoBehaviour
             CompleteEpisodeIfFinished();
         }
 
+<<<<<<< HEAD
+        bool advancedEpisode = AdvanceEpisodeIfCompleted();
+
+        if (hasCompletedBattle || advancedEpisode)
+            RunSaveSystem.SaveToFirebaseAsync().Forget();
+
+        if (advancedEpisode)
+=======
         if (AdvanceEpisodeIfCompleted())
+>>>>>>> origin/main
             return;
 
         DrawEpisodePlan();
@@ -113,6 +147,10 @@ public class MapController : MonoBehaviour
 
         HideBigMap();
         DrawEpisodePlan();
+<<<<<<< HEAD
+        RunSaveSystem.SaveToFirebaseAsync().Forget();
+=======
+>>>>>>> origin/main
 
         if (mapDragHandler != null)
             mapDragHandler.FocusOn(Vector2.zero);
@@ -165,8 +203,15 @@ public class MapController : MonoBehaviour
         }
 
         UpdateSelectionOrders();
+<<<<<<< HEAD
+        RunData.currentMap = currentMap;
         mapView.Refresh(currentMap, OnCandidateSelected, AdvanceSelectedRoute);
         RefreshHud();
+        RunSaveSystem.SaveToFirebaseAsync().Forget();
+=======
+        mapView.Refresh(currentMap, OnCandidateSelected, AdvanceSelectedRoute);
+        RefreshHud();
+>>>>>>> origin/main
     }
 
     private void UpdateSelectionOrders()
@@ -366,7 +411,14 @@ public class MapController : MonoBehaviour
         MarkNodeCleared(restNode);
 
         CompleteEpisodeIfFinished();
+<<<<<<< HEAD
+        bool advancedEpisode = AdvanceEpisodeIfCompleted();
+        RunSaveSystem.SaveToFirebaseAsync().Forget();
+
+        if (advancedEpisode)
+=======
         if (AdvanceEpisodeIfCompleted())
+>>>>>>> origin/main
             return;
 
         DrawEpisodePlan();
@@ -389,7 +441,14 @@ public class MapController : MonoBehaviour
         MarkNodeCleared(eventNode);
 
         CompleteEpisodeIfFinished();
+<<<<<<< HEAD
+        bool advancedEpisode = AdvanceEpisodeIfCompleted();
+        RunSaveSystem.SaveToFirebaseAsync().Forget();
+
+        if (advancedEpisode)
+=======
         if (AdvanceEpisodeIfCompleted())
+>>>>>>> origin/main
             return;
 
         DrawEpisodePlan();
@@ -440,7 +499,11 @@ public class MapController : MonoBehaviour
         return true;
     }
 
+<<<<<<< HEAD
+    private async void StartBattle(MapNodeData selectedNode)
+=======
     private void StartBattle(MapNodeData selectedNode)
+>>>>>>> origin/main
     {
         EnsureEnemyMatchesNodeType(selectedNode);
 
@@ -453,6 +516,12 @@ public class MapController : MonoBehaviour
         RunData.selectedNodeId = selectedNode.id;
         RunData.selectedEnemy = selectedNode.enemyData;
 
+<<<<<<< HEAD
+        if (!await RunSaveSystem.SaveToFirebaseAsync())
+            return;
+
+=======
+>>>>>>> origin/main
         SceneManager.LoadScene("BattleScene");
     }
 

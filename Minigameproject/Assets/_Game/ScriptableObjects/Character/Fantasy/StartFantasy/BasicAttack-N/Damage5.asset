@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d8ab1d7cda80d479adc8b2bf37ba0c, type: 3}
   m_Name: Damage5
   m_EditorClassIdentifier: Assembly-CSharp::DamageEffect
+<<<<<<< HEAD
+  damage: 1000
+=======
   damage: 5
+>>>>>>> origin/main
