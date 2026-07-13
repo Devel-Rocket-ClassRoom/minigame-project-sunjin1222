@@ -4,8 +4,12 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+<<<<<<< HEAD
     private int maxHealth;
     public int MaxHealth=>maxHealth;
+=======
+    public int maxHealth = 50;
+>>>>>>> origin/main
     private int currentHealth;
     public int block;
     public GameObject gameover;

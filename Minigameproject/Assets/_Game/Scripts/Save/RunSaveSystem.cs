@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 using Cysharp.Threading.Tasks;
+=======
+>>>>>>> origin/main
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
 public static class RunSaveSystem
 {
     private const string SaveFileName = "run_save.json";
@@ -44,6 +50,7 @@ public static class RunSaveSystem
         Debug.Log($"[RunSaveSystem] 불러오기 완료: {SavePath}");
         return true;
     }
+<<<<<<< HEAD
     public static async UniTask<bool> SaveToFirebaseAsync()
     {
         if (Authmanager.Instance == null ||
@@ -118,6 +125,8 @@ public static class RunSaveSystem
         }
     }
 
+=======
+>>>>>>> origin/main
 
     public static void Delete()
     {
@@ -251,10 +260,14 @@ public static class RunSaveSystem
 
     private static SavedMapData SaveMap(MapData mapData)
     {
+<<<<<<< HEAD
         if (mapData == null ||
             mapData.episodeNumber <= 0 ||
             mapData.nodes == null ||
             mapData.nodes.Count == 0)
+=======
+        if (mapData == null)
+>>>>>>> origin/main
             return null;
 
         SavedMapData savedMap = new SavedMapData
@@ -297,10 +310,14 @@ public static class RunSaveSystem
 
     private static MapData LoadMap(SavedMapData savedMap)
     {
+<<<<<<< HEAD
         if (savedMap == null ||
             savedMap.episodeNumber <= 0 ||
             savedMap.nodes == null ||
             savedMap.nodes.Count == 0)
+=======
+        if (savedMap == null)
+>>>>>>> origin/main
             return null;
 
         MapData mapData = new MapData

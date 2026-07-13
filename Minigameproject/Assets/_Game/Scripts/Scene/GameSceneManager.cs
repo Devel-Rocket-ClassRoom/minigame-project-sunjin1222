@@ -1,14 +1,20 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+<<<<<<< HEAD
 using Cysharp.Threading.Tasks;
 
+=======
+>>>>>>> origin/main
 
 public class GameSceneManager : MonoBehaviour
 {
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/main
     public TextMeshProUGUI floor;
 
     public TextMeshProUGUI HP;
@@ -56,6 +62,7 @@ public class GameSceneManager : MonoBehaviour
         SceneManager.LoadScene("TitleScene");
     }
 
+<<<<<<< HEAD
     public async void SaveRun()
     {
         await RunSaveSystem.SaveToFirebaseAsync();
@@ -85,6 +92,24 @@ public class GameSceneManager : MonoBehaviour
     }
 
 
+=======
+    public void SaveRun()
+    {
+        RunSaveSystem.Save();
+    }
+
+    public void LoadSavedRun()
+    {
+        if (RunSaveSystem.Load())
+            SceneManager.LoadScene("MapScene");
+    }
+
+    public void DeleteSavedRun()
+    {
+        RunSaveSystem.Delete();
+    }
+
+>>>>>>> origin/main
     public void QuitGame()
     {
         Application.Quit();
@@ -93,13 +118,21 @@ public class GameSceneManager : MonoBehaviour
     public void OnendPanal()
     {
         end.SetActive(true);
+<<<<<<< HEAD
     }
+=======
+    } 
+>>>>>>> origin/main
 
 
     public void ClendPanal()
     {
         end.SetActive(false);
+<<<<<<< HEAD
     }
+=======
+    } 
+>>>>>>> origin/main
 
 
 }
